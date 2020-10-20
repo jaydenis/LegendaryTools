@@ -139,6 +139,82 @@ namespace CustomSetBuilder
             }
         }
 
+        private void LoadTable(List<string> imageListTemp)
+        {
+            tableLayoutPanel1.Controls.Clear();
+            int x = 10;
+            int y = 10;
+            int h = 250;
+            int w = 180;
+            int rowNumber = 0;
+            int colNumber = 0;
+            int x_offset = 0;
+            int y_offset = 0;
+            int leftMargin = 10;
+            int topMargin = 10;
+
+            foreach (var item in imageListTemp)
+            {
+                if (rowNumber == 0)
+                    y = topMargin + y_offset;
+
+                if (rowNumber == 1)
+                    y = h + topMargin + (y_offset * 2);
+
+                if (rowNumber == 2)
+                {
+                    y = (h * 2) + topMargin + (y_offset * 3);
+                }
+
+                if (colNumber == 0)
+                    x = leftMargin + x_offset;
+
+                if (colNumber == 1)
+                    x = w + leftMargin + (x_offset * 2);
+
+                if (colNumber == 2)
+                {
+                    x = (w * 2) + leftMargin + (x_offset * 3);
+                }
+
+
+
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Location = new Point(x, y);
+                pictureBox.Image = new Bitmap(item);
+                pictureBox.Size = new Size(180, 250);
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.AllowDrop = true;
+                pictureBox.DragOver += PictureBox_DragOver;
+                pictureBox.MouseMove += PictureBox_MouseMove;
+                pictureBox.DragEnter += PictureBox_DragEnter;
+                pictureBox.DragDrop += PictureBox_DragDrop;
+                pictureBox.DoubleClick += PictureBox_DoubleClick;
+                pictureBox.Paint += PictureBox_Paint;
+                pictureBox.Tag = item;
+                boxes.Add(pictureBox);
+                tableLayoutPanel1.Controls.Add(pictureBox, colNumber, rowNumber);
+
+                // string xy = $"row ={rowNumber},col={colNumber} / y={y.ToString()}, x={x.ToString()}{System.Environment.NewLine}";
+                //richTextBox1.Text += xy;
+
+                if (colNumber == 2)
+                {
+                    colNumber = 0;
+                    rowNumber++;
+
+                    //xy = $"[row={rowNumber},col={colNumber} / y={y.ToString()}, x={x.ToString()}]{System.Environment.NewLine}";
+                    //richTextBox1.Text += xy;
+                }
+                else
+                {
+                    colNumber++;
+                }
+
+
+            }
+        }
+
         private void PictureBox_DoubleClick(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Image Files(*.jpg; *.png)|*.jpg; *.png";
@@ -491,6 +567,7 @@ namespace CustomSetBuilder
                     var imgNode = new TreeNode(file.Name);
                     imgNode.Tag = file.FullName;
                     imgNode.ImageIndex = 2;
+                    
                     directoryNode.Nodes.Add(imgNode);
                     imageCount++;
                 }
@@ -696,7 +773,7 @@ namespace CustomSetBuilder
                 imageList.Add(Convert.ToString(e.Node.Tag));
                 picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));
                 this.selectedImageNode = Convert.ToString(e.Node.Tag);
-                //selectedPic = picPreview;
+                picPreview.Tag = this.selectedImageNode;
                 SelectBox(picPreview);
             }
             
@@ -823,6 +900,7 @@ namespace CustomSetBuilder
         /// <param name="e"></param>
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
+            
             SelectBox((PictureBox)sender);
         }
 
@@ -878,7 +956,12 @@ namespace CustomSetBuilder
                 return;
             }
 
+            if (imageList.Contains(Convert.ToString(source.Tag))){
+                imageList.Remove(Convert.ToString(source.Tag));
+            }
+
             var temp = target.Image;
+            target.Tag = source.Tag;
             target.Image = source.Image;
             source.Image = temp;
         }
@@ -893,6 +976,38 @@ namespace CustomSetBuilder
 
         private void treeViewFolders_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
+
+        }
+
+        private void ctxMenuItemFillAll_Click(object sender, EventArgs e)
+        {
+            //imageListBacks = new List<Image>();
+            imageList = new List<string>();
+            if (picPreview.Image != null)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    //imageListBacks.Add(picPreview.Image);
+                    imageList.Add(Convert.ToString(picPreview.Tag));
+                }
+
+                LoadTable(imageList);
+            }
+        }
+
+        private void picPreview_MouseDown(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+
+                case MouseButtons.Left:
+                    // Left click
+                    break;
+
+                case MouseButtons.Right:
+                    ctxPreviewMenu.Show(this, new Point(e.X, e.Y));
+                    break;
+            }
 
         }
     }
