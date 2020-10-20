@@ -25,9 +25,6 @@ namespace CustomSetBuilder
         protected Thread getImageThread;
         PictureBox activePictureBox;
 
-        private XVector borderWidth;
-        private XColor shadowColor;
-        private XForm xform;
         PdfDocument document;
         bool linkSpacing = false;
 
@@ -36,12 +33,8 @@ namespace CustomSetBuilder
 
         private enum States { Idle, Move, Copy };
         private States CurrentState = States.Idle;
-        private System.Windows.Forms.DragDropEffects CurrentEffect = DragDropEffects.Move;
-        private TreeNode RootNode = new TreeNode("C:\\", 1, 0);
-        private TreeNode OriginalNode = new TreeNode("C:\\", 1, 0);
-        private TreeNode StartNode = null;
-        private TreeNode EndNode = null;
-        private TreeNode OldNode = null;
+        private DragDropEffects CurrentEffect = DragDropEffects.Move;
+       
 
         List<PictureBox> boxes = new List<PictureBox>();
         PictureBox selectedPic;
@@ -447,7 +440,7 @@ namespace CustomSetBuilder
                     DrawPage(page, imageList);
                 }
 
-                xform = new XForm(document,
+                XForm xform = new XForm(document,
                         XUnit.FromMillimeter(70),
                         XUnit.FromMillimeter(55));
 
@@ -463,13 +456,10 @@ namespace CustomSetBuilder
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
+            saveFileDialog1.Filter = "PDF Files(*.pdf)|*.pdf";
             if (document != null)
             {
                 string name = saveFileDialog1.FileName;
@@ -596,75 +586,12 @@ namespace CustomSetBuilder
                 ChooseFolder(folderBrowserDialog1.SelectedPath);
             }
         }
-
-        private void MoveFile(TreeNode Node1, TreeNode Node2)
-        {
-            string strdir1 = Node1.Parent.FullPath; // get the path of the source item  
-            string strdir2 = Node2.FullPath; // get the path of the drop target  
-            strdir1 = strdir1 + "\\" + Node1.Text; // create file paths using the name of the source item  
-            strdir2 = strdir2 + "\\" + Node1.Text;
-            Directory.Move(strdir1, strdir2);// use the static Directory Move command to move a file  
-            TreeNode aNode = new TreeNode(Node1.Text, 2, 2); // create a new file node  
-            Node1.Remove(); // remove the old file node  
-            Node2.Nodes.Add(aNode); // add the new file node under the target directory node  
-        }
-
-        private void treeViewFolders_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void treeViewFolders_DragDrop(object sender, DragEventArgs e)
-        {
-            // set a flag indicating if we are moving or not. If we are not moving, then we are copying  
-            bool movingFile = (CurrentEffect == DragDropEffects.Move);
-            // determine the node we are dropping into from the coordinates of the DragEvent Arguement  
-            //TreeNode DropNode = FindTreeNode(e.X, e.Y);
-            //// Reset the local state of the drag and the effect field  
-            //CurrentState = States.Idle;
-            //CurrentEffect = DragDropEffects.Move;
-            //// If the drop target is a folder (not a file), then perform drop operations  
-            //if (DropNode.ImageIndex != 2)
-            //{
-            //    // it's a folder, drop the file  
-            //    if (movingFile)
-            //    {
-            //        MoveFile(StartNode, DropNode);// move the file from the startnode to the dropnode  
-            //    }
-            //    else
-            //    {
-            //        CopyFile(StartNode, DropNode);// copy the file from the startnode to the dropnode  
-            //    }
-            //    this.Invalidate(new Region(this.ClientRectangle)); // redraw the treeview  
-            //    treeViewFolders.SelectedNode = DropNode; // select the drop node as the current selection  
-            //}
-        }
-
         private void treeViewFolders_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
 
-        protected TreeNode FindTreeNode(int x, int y)
-        {
-            TreeNode aNode = this.RootNode;
-
-            Point pt = new Point(x, y);
-            pt = PointToClient(pt);
-
-            while (aNode != null)
-            {
-                if (aNode.Bounds.Contains(pt))
-                {
-                    return aNode;
-                }
-                aNode = aNode.NextVisibleNode;
-            }
-
-            return null;
-
-        }
-
+        
         protected void treeViewFolders_MouseUp(object sender, MouseEventArgs e)
         {
             CurrentState = States.Idle;
@@ -696,16 +623,6 @@ namespace CustomSetBuilder
             }
         }
 
-        private void CopyFile(TreeNode Node1, TreeNode Node2)
-        {
-            string strdir1 = Node1.Parent.FullPath;
-            string strdir2 = Node2.FullPath;
-            strdir1 = strdir1 + "\\" + Node1.Text;
-            strdir2 = strdir2 + "\\" + Node1.Text;
-            File.Copy(strdir1, strdir2);
-            TreeNode aNode = new TreeNode(Node1.Text, 2, 2);
-            Node2.Nodes.Add(aNode);
-        }
 
         private void treeViewFolders_ItemDrag(object sender, ItemDragEventArgs e)
         {
@@ -714,7 +631,7 @@ namespace CustomSetBuilder
             // Only drag if it is a file, where not dragging directories in this example  
             if (aNode.ImageIndex == 2)
             {
-                StartNode = aNode;
+               
                 //The effect was previously set based on whether the ctrl key was pressed.  
                 // If it was, the effect will be copy otherwise it will be move  
                 // Set the state of the drag-drop operation, the state is a local enumeration in our class  
@@ -735,30 +652,6 @@ namespace CustomSetBuilder
             }
         }
 
-        private void treeViewFolders_DragOver(object sender, DragEventArgs e)
-        {
-            // set the effect again to maintain the effect we set in the DoDragDrop, (Seems you have to do this, may be a bug)  
-            e.Effect = CurrentEffect;
-            // Determine the node we are dragging over  
-            // FindTreeNode is a local function of this class that determines the node from a point  
-            TreeNode aNode = FindTreeNode(e.X, e.Y);
-            if (aNode != null)
-            {
-                // If the node is a folder, change the color of the background to dark blue to simulate selection  
-                // Be sure to return the previous node to its original color by copying from a blank node  
-                if ((aNode.ImageIndex == 1) || (aNode.ImageIndex == 0))
-                {
-                    aNode.BackColor = Color.DarkBlue;
-                    aNode.ForeColor = Color.White;
-                    if ((OldNode != null) && (OldNode != aNode))
-                    {
-                        OldNode.BackColor = OriginalNode.BackColor;
-                        OldNode.ForeColor = OriginalNode.ForeColor;
-                    }
-                    OldNode = aNode;
-                }
-            }
-        }
 
 
         public void treeViewFolders_AfterSelect(object sender, TreeViewEventArgs e)
@@ -780,137 +673,13 @@ namespace CustomSetBuilder
 
         }
 
-        protected void DirTree_Resize(object sender, System.EventArgs e)
-        {
-            treeViewFolders.SetBounds(0, 0, ClientRectangle.Width, ClientRectangle.Height);
-        }
 
-        protected string BuildDirectory(TreeNode aNode)
-        {
-            TreeNode theNode = aNode;
-            string strDir = "";
-            while (theNode != null)
-            {
-                if (theNode.Text[theNode.Text.Length - 1] != '\\')
-                {
-                    strDir = "\\" + strDir;
-                }
-                strDir = theNode.Text + strDir;
-                theNode = theNode.Parent;
-            }
-
-            return strDir;
-
-        }
-
-        private void InitializeTree()
-        {
-            try
-            {
-                treeViewFolders.Nodes.Add(RootNode);
-                string fileName = "DirectoryTree.File.bmp";
-                //				DragCursor = new Cursor(pictureBox1.);
-                ClearTree();
-            }
-            catch (Exception exx)
-            {
-                System.Console.WriteLine(exx.Message.ToString());
-            }
-        }
-
-        public void ClearTree()
-        {
-            RootNode.Nodes.Clear();
-        }
-
-        private string m_strPath = "C:\\";
-        public string Path
-        {
-            get
-            {
-                if (treeViewFolders.SelectedNode != null)
-                {
-                    m_strPath = BuildDirectory(treeViewFolders.SelectedNode);
-                }
-                return m_strPath;
-            }
-        }
-
-        string m_strFileName = "";
-        public string FileName
-        {
-            get
-            {
-                if (treeViewFolders.SelectedNode != null)
-                {
-                    if (treeViewFolders.SelectedNode.ImageIndex == 2)
-                        m_strFileName = treeViewFolders.SelectedNode.Text;
-                }
-                return m_strFileName;
-            }
-        }
-
-
-        private string m_strFilter = "*.*";
-        public string Filter
-        {
-            set
-            {
-                m_strFilter = value;
-            }
-
-            get
-            {
-                return m_strFilter;
-            }
-        }
-
-        private string m_strDrive = "C:\\";
-        public string Drive
-        {
-            set
-            {
-                m_strDrive = value;
-                RootNode.Text = m_strDrive;
-                ClearTree();
-            }
-            get
-            {
-                return m_strDrive;
-            }
-        }
-
-        private void treeViewFolders_GiveFeedback(object sender, GiveFeedbackEventArgs e)
-        {
-            e.UseDefaultCursors = false;
-            Bitmap bmp = (Bitmap)imageList1.Images[2];
-            Graphics g = Graphics.FromImage(bmp);
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            this.Cursor.Draw(g, rect);
-
-        }
-
-
-
-
-        /// <summary>
-        /// Handle mouse click on picture box
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             
             SelectBox((PictureBox)sender);
         }
 
-
-
-        /// <summary>
-        /// Override paint so we can draw a border on a selected image
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
             var pb = (PictureBox)sender;
@@ -925,10 +694,6 @@ namespace CustomSetBuilder
             }
         }
 
-        /// <summary>
-        /// Set the selected image, and trigger repaint on all boxes.
-        /// </summary>
-        /// <param name="pb"></param>
         private void SelectBox(PictureBox pb)
         {
             if (selectedPic != pb)
@@ -944,11 +709,6 @@ namespace CustomSetBuilder
             foreach (var box in boxes) box.Invalidate();
         }
 
-        /// <summary>
-        /// Swap images between two PictureBoxes
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="target"></param>
         private void SwapImages(PictureBox source, PictureBox target)
         {
             if (source.Image == null && target.Image == null)
@@ -966,18 +726,7 @@ namespace CustomSetBuilder
             source.Image = temp;
         }
 
-        private void treeViewFolders_DragLeave(object sender, EventArgs e)
-        {
 
-            //TreeNode treeNode = (TreeNode)sender;
-            //if(treeNode.ImageIndex == 2)
-            //    this.selectedImageNode = Convert.ToString(treeNode.Tag);
-        }
-
-        private void treeViewFolders_BeforeSelect(object sender, TreeViewCancelEventArgs e)
-        {
-
-        }
 
         private void ctxMenuItemFillAll_Click(object sender, EventArgs e)
         {

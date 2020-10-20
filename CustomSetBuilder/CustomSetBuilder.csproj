@@ -142,9 +142,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Legendary_Playmat_v2.0.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\arrow_switch.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
