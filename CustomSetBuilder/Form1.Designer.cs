@@ -839,6 +839,7 @@
             this.btnDirectorySelector.TabIndex = 11;
             this.btnDirectorySelector.Text = "Select Folder";
             this.btnDirectorySelector.UseVisualStyleBackColor = true;
+            this.btnDirectorySelector.Click += new System.EventHandler(this.btnDirectorySelector_Click);
             // 
             // Form1
             // 

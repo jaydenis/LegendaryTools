@@ -61,7 +61,7 @@ namespace CustomSetBuilder
                 imageListBacks.Add(picPreview.BackgroundImage);
                 
             }
-            ListDirectory(treeViewFolders, @"C:\");
+            //ListDirectory(treeViewFolders, @"C:\\");
             LoadTable();
         }
 
