@@ -17,7 +17,7 @@ namespace CustomSetBuilder
 {
     public partial class Form1 : Form
     {
-        List<string> imageListBacks = new List<string>();
+        List<Image> imageListBacks = new List<Image>();
         List<string> imageList = new List<string>();
         protected bool validData;
         string path;
@@ -58,10 +58,10 @@ namespace CustomSetBuilder
 
             for (int i = 0; i < 9; i++)
             {
-                imageListBacks.Add(@"C:\Users\jayte\OneDrive\TableTopGaming\Legendery-Marvel\CustomSets\test\cardback.png");
+                imageListBacks.Add(picPreview.BackgroundImage);
                 
             }
-            ListDirectory(treeViewFolders, @"C:\Users\jayte\OneDrive\TableTopGaming\Legendery-Marvel\CustomSets\");
+            ListDirectory(treeViewFolders, @"C:\");
             LoadTable();
         }
 
@@ -362,19 +362,24 @@ namespace CustomSetBuilder
 
                 if (chkIncludeCardBacks.Checked)
                 {
+                    imageList.Clear();
                     page = document.AddPage();
-                    DrawPage(page, imageListBacks);
+                    foreach (var imgBack in imageListBacks) {
+                        Image pictureBox = (Image)imgBack;
+                        imageList.Add(pictureBox.Tag.ToString());
+                    }
+                    DrawPage(page, imageList);
                 }
 
                 xform = new XForm(document,
                         XUnit.FromMillimeter(70),
                         XUnit.FromMillimeter(55));
 
-                XGraphics formGfx = XGraphics.FromForm(xform);
+                //XGraphics formGfx = XGraphics.FromForm(xform);
 
                 saveFileDialog1.ShowDialog();
                 //string fileName = $"test{numX.Value}{numY.Value}.pdf";
-                //document.Save(@"C:\Users\jayte\OneDrive\TableTopGaming\Legendery-Marvel\CustomSets\Test\" + fileName);
+                //document.Save(@"C:\Test\" + fileName);
             }
             catch(Exception ex)
             {
