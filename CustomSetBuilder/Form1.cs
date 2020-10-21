@@ -809,6 +809,11 @@ namespace CustomSetBuilder
             imageListChecked.Clear();
             imageList.Clear();
             var selectedPath = @"C:\\";
+
+            tabControl1.TabPages.Clear();
+
+            AddnewTabPage();
+
             UserSettings settings = UserSettings.Load();
 
             if (!string.IsNullOrEmpty(settings.lastFolder))
@@ -828,15 +833,7 @@ namespace CustomSetBuilder
 
         private void toolStripButtonAddPage_Click(object sender, EventArgs e)
         {
-            int pageCount = tabControl1.TabPages.Count+1;
-            TabPage tabPage = new TabPage($"Page {pageCount++}");
-
-            UCTabPage ucTab = new UCTabPage(imageListBacks);
-
-            ucTabPages.Add(ucTab);
-            tabPage.Controls.Add(ucTab);
-
-            tabControl1.TabPages.Add(tabPage);
+            AddnewTabPage();
 
         }
 
@@ -847,6 +844,19 @@ namespace CustomSetBuilder
             selectedPage = (UCTabPage)tabPage.Controls[0];
 
             var x = "";
+        }
+
+        private void AddnewTabPage()
+        {
+            int pageCount = tabControl1.TabPages.Count + 1;
+            TabPage tabPage = new TabPage($"Page {pageCount++}");
+
+            UCTabPage ucTab = new UCTabPage(imageListBacks);
+
+            ucTabPages.Add(ucTab);
+            tabPage.Controls.Add(ucTab);
+
+            tabControl1.TabPages.Add(tabPage);
         }
     }
 }
