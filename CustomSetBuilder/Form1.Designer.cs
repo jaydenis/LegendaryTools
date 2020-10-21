@@ -94,11 +94,11 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.treeViewFolders = new System.Windows.Forms.TreeView();
             this.ctxPreviewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemFillAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFillChecked = new System.Windows.Forms.ToolStripMenuItem();
             this.copyCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCopy3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCopy5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemFillAll = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.txtFolderPath = new System.Windows.Forms.TextBox();
             this.btnDirectorySelector = new System.Windows.Forms.Button();
@@ -749,7 +749,6 @@
             this.treeViewFolders.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolders_AfterCheck);
             this.treeViewFolders.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewFolders_ItemDrag);
             this.treeViewFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolders_AfterSelect);
-            this.treeViewFolders.DragDrop += new System.Windows.Forms.DragEventHandler(this.PictureBox_DragDrop);
             this.treeViewFolders.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeViewFolders_DragEnter);
             this.treeViewFolders.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewFolders_KeyDown);
             this.treeViewFolders.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeViewFolders_KeyUp);
@@ -764,44 +763,44 @@
             this.toolStripMenuItemCopy5,
             this.toolStripMenuItemFillAll});
             this.ctxPreviewMenu.Name = "ctxPreviewMenu";
-            this.ctxPreviewMenu.Size = new System.Drawing.Size(181, 136);
-            // 
-            // toolStripMenuItemFillAll
-            // 
-            this.toolStripMenuItemFillAll.Image = global::CustomSetBuilder.Properties.Resources.arrow_switch;
-            this.toolStripMenuItemFillAll.Name = "toolStripMenuItemFillAll";
-            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemFillAll.Text = "Copy x9 Cards";
-            this.toolStripMenuItemFillAll.Click += new System.EventHandler(this.ctxMenuItemFillAll_Click);
+            this.ctxPreviewMenu.Size = new System.Drawing.Size(185, 114);
             // 
             // toolStripMenuItemFillChecked
             // 
             this.toolStripMenuItemFillChecked.Image = global::CustomSetBuilder.Properties.Resources.arrow_out;
             this.toolStripMenuItemFillChecked.Name = "toolStripMenuItemFillChecked";
-            this.toolStripMenuItemFillChecked.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemFillChecked.Text = "Fill Checked";
+            this.toolStripMenuItemFillChecked.Size = new System.Drawing.Size(184, 22);
+            this.toolStripMenuItemFillChecked.Text = "Copy Checked Cards";
             this.toolStripMenuItemFillChecked.Click += new System.EventHandler(this.toolStripMenuItemFillChecked_Click);
             // 
             // copyCardToolStripMenuItem
             // 
             this.copyCardToolStripMenuItem.Name = "copyCardToolStripMenuItem";
-            this.copyCardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyCardToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.copyCardToolStripMenuItem.Text = "Copy Card";
             this.copyCardToolStripMenuItem.Click += new System.EventHandler(this.copyCardToolStripMenuItem_Click);
             // 
             // toolStripMenuItemCopy3
             // 
             this.toolStripMenuItemCopy3.Name = "toolStripMenuItemCopy3";
-            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(150, 22);
             this.toolStripMenuItemCopy3.Text = "Copy x3 Cards";
             this.toolStripMenuItemCopy3.Click += new System.EventHandler(this.toolStripMenuItemCopy3_Click);
             // 
             // toolStripMenuItemCopy5
             // 
             this.toolStripMenuItemCopy5.Name = "toolStripMenuItemCopy5";
-            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(150, 22);
             this.toolStripMenuItemCopy5.Text = "Copy x5 Cards";
             this.toolStripMenuItemCopy5.Click += new System.EventHandler(this.toolStripMenuItemCopy5_Click);
+            // 
+            // toolStripMenuItemFillAll
+            // 
+            this.toolStripMenuItemFillAll.Image = global::CustomSetBuilder.Properties.Resources.arrow_switch;
+            this.toolStripMenuItemFillAll.Name = "toolStripMenuItemFillAll";
+            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItemFillAll.Text = "Copy x9 Cards";
+            this.toolStripMenuItemFillAll.Click += new System.EventHandler(this.ctxMenuItemFillAll_Click);
             // 
             // imageList1
             // 
