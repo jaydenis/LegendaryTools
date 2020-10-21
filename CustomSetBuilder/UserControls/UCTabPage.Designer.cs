@@ -46,7 +46,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(734, 857);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(640, 790);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // UCTabPage
@@ -55,7 +55,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UCTabPage";
-            this.Size = new System.Drawing.Size(734, 857);
+            this.Size = new System.Drawing.Size(640, 790);
             this.ResumeLayout(false);
 
         }

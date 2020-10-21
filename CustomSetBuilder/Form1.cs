@@ -1,4 +1,5 @@
-﻿using PdfSharp.Drawing;
+﻿using CustomSetBuilder.UserControls;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,8 @@ namespace CustomSetBuilder
         List<PictureBox> boxes = new List<PictureBox>();
         PictureBox selectedPic;
 
+        List<UCTabPage> ucTabPages = new List<UCTabPage>();
+        UCTabPage selectedPage;
         string selectedImageNode = "";
         public Form1()
         {
@@ -55,7 +58,11 @@ namespace CustomSetBuilder
                 
             }
             //ListDirectory(treeViewFolders, @"C:\\");
-            LoadTable(tableLayoutPanel1);
+            UCTabPage ucTab = new UCTabPage(imageListBacks);
+
+            ucTabPages.Add(ucTab);
+
+            tabPage1.Controls.Add(ucTabPages[0]);
         }
 
         private void LoadTable(TableLayoutPanel tableLayoutPanel)
@@ -133,81 +140,6 @@ namespace CustomSetBuilder
             }
         }
 
-        private void LoadTable(List<string> imageListTemp)
-        {
-            tableLayoutPanel1.Controls.Clear();
-            int x = 10;
-            int y = 10;
-            int h = 250;
-            int w = 180;
-            int rowNumber = 0;
-            int colNumber = 0;
-            int x_offset = 0;
-            int y_offset = 0;
-            int leftMargin = 10;
-            int topMargin = 10;
-
-            foreach (var item in imageListTemp)
-            {
-                if (rowNumber == 0)
-                    y = topMargin + y_offset;
-
-                if (rowNumber == 1)
-                    y = h + topMargin + (y_offset * 2);
-
-                if (rowNumber == 2)
-                {
-                    y = (h * 2) + topMargin + (y_offset * 3);
-                }
-
-                if (colNumber == 0)
-                    x = leftMargin + x_offset;
-
-                if (colNumber == 1)
-                    x = w + leftMargin + (x_offset * 2);
-
-                if (colNumber == 2)
-                {
-                    x = (w * 2) + leftMargin + (x_offset * 3);
-                }
-
-
-
-                PictureBox pictureBox = new PictureBox();
-                pictureBox.Location = new Point(x, y);
-                pictureBox.Image = new Bitmap(item);
-                pictureBox.Size = new Size(180, 250);
-                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox.AllowDrop = true;
-                pictureBox.DragOver += PictureBox_DragOver;
-                pictureBox.MouseMove += PictureBox_MouseMove;
-                pictureBox.DragEnter += PictureBox_DragEnter;
-                pictureBox.DragDrop += PictureBox_DragDrop;
-                pictureBox.DoubleClick += PictureBox_DoubleClick;
-                pictureBox.Paint += PictureBox_Paint;
-                pictureBox.Tag = item;
-                boxes.Add(pictureBox);
-                tableLayoutPanel1.Controls.Add(pictureBox, colNumber, rowNumber);
-
-                // string xy = $"row ={rowNumber},col={colNumber} / y={y.ToString()}, x={x.ToString()}{System.Environment.NewLine}";
-                //richTextBox1.Text += xy;
-
-                if (colNumber == 2)
-                {
-                    colNumber = 0;
-                    rowNumber++;
-
-                    //xy = $"[row={rowNumber},col={colNumber} / y={y.ToString()}, x={x.ToString()}]{System.Environment.NewLine}";
-                    //richTextBox1.Text += xy;
-                }
-                else
-                {
-                    colNumber++;
-                }
-
-
-            }
-        }
 
         private void PictureBox_DoubleClick(object sender, EventArgs e)
         {
@@ -426,15 +358,24 @@ namespace CustomSetBuilder
             try
             {
                 document = new PdfDocument();
-                PdfPage page = document.AddPage();
-                imageList = new List<string>();
-                foreach (var item in tableLayoutPanel1.Controls)
+                PdfPage page;
+
+                foreach(TabPage tab in tabControl1.TabPages)
                 {
-                    PictureBox pictureBox = (PictureBox)item;
-                    imageList.Add(pictureBox.Tag.ToString());
+                    foreach(UCTabPage tabPage in tab.Controls)
+                    {
+                        imageList = new List<string>();
+                        foreach (var item in tabPage.layoutPanel.Controls)
+                        {
+                            PictureBox pictureBox = (PictureBox)item;
+                            imageList.Add(pictureBox.Tag.ToString());
+                        }
+                        page = document.AddPage();
+                        DrawPage(page, imageList);
+                    }
                 }
 
-                DrawPage(page, imageList);
+                
 
                 if (chkIncludeCardBacks.Checked)
                 {
@@ -766,7 +707,7 @@ namespace CustomSetBuilder
                         imageList.Add(Convert.ToString(picPreview.Tag));
                     }
 
-                    LoadTable(imageList);
+                    //LoadTable(imageList);
                 }
             }catch(Exception ex)
             {
@@ -801,7 +742,14 @@ namespace CustomSetBuilder
             {
                 if(imageListChecked.Count() > 0)
                 {
-                    LoadTable(imageListChecked);
+                    var tempList = new List<Image>();
+                    foreach (var item in imageListChecked) 
+                    {
+                        image = new Bitmap(item);
+                        tempList.Add(image);
+                    }
+                    selectedPage.LoadTable(tempList);
+
                     imageListChecked.Clear();
 
                     foreach(TreeNode node in treeViewFolders.Nodes)
@@ -865,27 +813,31 @@ namespace CustomSetBuilder
                 imageListBacks.Add(picPreview.BackgroundImage);
             }
             picPreview.Image = picPreview.BackgroundImage;
-            TabPage tabPage = tabControl1.SelectedTab;
-            foreach (TableLayoutPanel tableLayoutPanel in tabPage.Controls)
-            {
-                LoadTable(tableLayoutPanel);
-            }
+
+            
         }
 
         private void toolStripButtonAddPage_Click(object sender, EventArgs e)
         {
-            //int pageCount = tabControl1.TabPages.Count+1;
-            //TabPage tabPage = new TabPage($"Page {pageCount++}");
-            //tabControl1.TabPages[0].Controls.CopyTo(tabPage.Controls., 0);
-            //foreach (TableLayoutPanel tableLayoutPanel in tabControl1.TabPages[0].Controls)
-            //{
-            //    tabPage.Controls.c
-            //    LoadTable(tableLayoutPanel);
-            //}
+            int pageCount = tabControl1.TabPages.Count+1;
+            TabPage tabPage = new TabPage($"Page {pageCount++}");
 
-            //LoadTable(tableLayoutPanel);
-            //tabPage.Controls.Add(tableLayoutPanel);
-            //tabControl1.TabPages.Add(tabPage);
+            UCTabPage ucTab = new UCTabPage(imageListBacks);
+
+            ucTabPages.Add(ucTab);
+            tabPage.Controls.Add(ucTab);
+
+            tabControl1.TabPages.Add(tabPage);
+
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            TabPage tabPage = tabControl1.SelectedTab;
+
+            selectedPage = (UCTabPage)tabPage.Controls[0];
+
+            var x = "";
         }
     }
 }
