@@ -121,11 +121,13 @@
   <data name="Spider-Gwen-C2-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Spider-Gwen-C2-1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  
+  <data name="arrow_switch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_switch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CardBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CardBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow_switch" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow_switch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CardBack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CardBack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

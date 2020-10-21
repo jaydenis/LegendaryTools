@@ -100,7 +100,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.treeViewFolders = new System.Windows.Forms.TreeView();
             this.ctxPreviewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ctxMenuItemFillAll = new ReaLTaiizor.Controls.MaterialToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.txtFolderPath = new System.Windows.Forms.TextBox();
             this.btnDirectorySelector = new System.Windows.Forms.Button();
@@ -122,7 +121,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
-            this.ctxPreviewMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -775,28 +773,33 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+            this.openFileDialog1.RestoreDirectory = true;
             // 
             // folderBrowserDialog1
             // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.UserProfile;
+            this.folderBrowserDialog1.Description = "Select the directory that you want to use as the default.";
             this.folderBrowserDialog1.SelectedPath = "C:\\Users\\jayte\\OneDrive\\TableTopGaming\\Legendery-Marvel\\CustomSets";
             this.folderBrowserDialog1.ShowNewFolderButton = false;
             // 
             // saveFileDialog1
             // 
+            this.saveFileDialog1.FileName = "PDF";
+            this.saveFileDialog1.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
             this.saveFileDialog1.RestoreDirectory = true;
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // treeViewFolders
             // 
             this.treeViewFolders.AllowDrop = true;
+            this.treeViewFolders.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.treeViewFolders.ContextMenuStrip = this.ctxPreviewMenu;
             this.treeViewFolders.ImageIndex = 0;
             this.treeViewFolders.ImageList = this.imageList1;
             this.treeViewFolders.Location = new System.Drawing.Point(946, 109);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 2;
-            this.treeViewFolders.Size = new System.Drawing.Size(268, 475);
+            this.treeViewFolders.Size = new System.Drawing.Size(268, 457);
             this.treeViewFolders.TabIndex = 8;
             this.treeViewFolders.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewFolders_ItemDrag);
             this.treeViewFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolders_AfterSelect);
@@ -808,18 +811,8 @@
             // 
             // ctxPreviewMenu
             // 
-            this.ctxPreviewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctxMenuItemFillAll});
             this.ctxPreviewMenu.Name = "ctxPreviewMenu";
-            this.ctxPreviewMenu.Size = new System.Drawing.Size(196, 26);
-            // 
-            // ctxMenuItemFillAll
-            // 
-            this.ctxMenuItemFillAll.AutoSize = false;
-            this.ctxMenuItemFillAll.Name = "ctxMenuItemFillAll";
-            this.ctxMenuItemFillAll.Size = new System.Drawing.Size(195, 22);
-            this.ctxMenuItemFillAll.Text = "Fill Image Placeholders";
-            this.ctxMenuItemFillAll.Click += new System.EventHandler(this.ctxMenuItemFillAll_Click);
+            this.ctxPreviewMenu.Size = new System.Drawing.Size(61, 4);
             // 
             // imageList1
             // 
@@ -849,14 +842,17 @@
             // 
             // picPreview
             // 
+            this.picPreview.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPreview.BackgroundImage")));
             this.picPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPreview.ContextMenuStrip = this.ctxPreviewMenu;
-            this.picPreview.Location = new System.Drawing.Point(989, 590);
+            this.picPreview.Image = ((System.Drawing.Image)(resources.GetObject("picPreview.Image")));
+            this.picPreview.Location = new System.Drawing.Point(950, 579);
             this.picPreview.Name = "picPreview";
             this.picPreview.Size = new System.Drawing.Size(180, 250);
             this.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picPreview.TabIndex = 9;
             this.picPreview.TabStop = false;
+            this.picPreview.Click += new System.EventHandler(this.picPreview_Click);
             this.picPreview.DragDrop += new System.Windows.Forms.DragEventHandler(this.PictureBox_DragDrop);
             this.picPreview.DragEnter += new System.Windows.Forms.DragEventHandler(this.PictureBox_DragEnter);
             this.picPreview.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_Paint);
@@ -904,7 +900,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numTopMargin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
-            this.ctxPreviewMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -987,7 +982,6 @@
         private System.Windows.Forms.CheckBox chkIncludeCardBacks;
         private System.Windows.Forms.Button btnCreatePDF;
         private System.Windows.Forms.ContextMenuStrip ctxPreviewMenu;
-        private ReaLTaiizor.Controls.MaterialToolStripMenuItem ctxMenuItemFillAll;
     }
 }
 

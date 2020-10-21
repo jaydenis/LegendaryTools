@@ -1,6 +1,5 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using ReaLTaiizor.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -459,11 +458,20 @@ namespace CustomSetBuilder
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            saveFileDialog1.Filter = "PDF Files(*.pdf)|*.pdf";
+            var selectedPath = string.Empty;
+            UserSettings settings = UserSettings.Load();
+
+            if (!string.IsNullOrEmpty(settings.lastFolder))
+            {
+                saveFileDialog1.InitialDirectory = settings.lastFolder;
+            }         
             if (document != null)
             {
+
                 string name = saveFileDialog1.FileName;
                 document.Save(name);
+
+                settings.Save();
             }
         }
 
@@ -570,22 +578,22 @@ namespace CustomSetBuilder
 
         public void ChooseFolder(string selectedPath)
         {
-
             txtFolderPath.Text = selectedPath;
-
             ListDirectory(treeViewFolders, selectedPath);
-
-
-
         }
 
         private void btnDirectorySelector_Click(object sender, EventArgs e)
-        {
+        {            
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
+               
                 ChooseFolder(folderBrowserDialog1.SelectedPath);
             }
+
+            
         }
+
+
         private void treeViewFolders_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
@@ -757,6 +765,11 @@ namespace CustomSetBuilder
                     ctxPreviewMenu.Show(this, new Point(e.X, e.Y));
                     break;
             }
+
+        }
+
+        private void picPreview_Click(object sender, EventArgs e)
+        {
 
         }
     }
