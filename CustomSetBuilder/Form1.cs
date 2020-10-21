@@ -43,6 +43,7 @@ namespace CustomSetBuilder
         List<UCTabPage> ucTabPages = new List<UCTabPage>();
         UCTabPage selectedPage;
         string selectedImageNode = "";
+
         public Form1()
         {
             InitializeComponent();
@@ -73,22 +74,27 @@ namespace CustomSetBuilder
             
         }
 
-        private void LoadTable(TableLayoutPanel tableLayoutPanel)
+        public void DrawPage(PdfPage page, List<Image> currentImageList)
         {
-            tableLayoutPanel.Controls.Clear();
-            int x = 10;
-            int y = 10;
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+
+            DrawImageScaled(gfx, currentImageList);
+        }
+
+        void DrawImageScaled(XGraphics gfx, List<Image> currentImageList)
+        {
+            int leftMargin = Convert.ToInt32(numLeftMargin.Value);
+            int topMargin = Convert.ToInt32(numTopMargin.Value);
+            int x = 30;
+            int y = 20;
             int h = 250;
             int w = 180;
             int rowNumber = 0;
             int colNumber = 0;
-            int x_offset =0;
-            int y_offset = 0;
-            int leftMargin = 10;
-            int topMargin = 10;
 
-            foreach (var item in imageListBacks)
+            foreach (var item in currentImageList)
             {
+
                 if (rowNumber == 0)
                     y = topMargin + y_offset;
 
@@ -96,9 +102,7 @@ namespace CustomSetBuilder
                     y = h + topMargin + (y_offset * 2);
 
                 if (rowNumber == 2)
-                {
-                    y = (h * 2) + topMargin + (y_offset * 3);                    
-                }
+                    y = (h * 2) + topMargin + (y_offset * 3);
 
                 if (colNumber == 0)
                     x = leftMargin + x_offset;
@@ -108,65 +112,66 @@ namespace CustomSetBuilder
 
                 if (colNumber == 2)
                 {
-                    x = (w * 2) + leftMargin + (x_offset * 3);                    
-                }
-                
-                
-
-                PictureBox pictureBox = new PictureBox();
-                pictureBox.Location = new Point(x, y);
-                pictureBox.Image = new Bitmap(item);
-                pictureBox.Size = new Size(180, 250);
-                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox.AllowDrop = true;
-                pictureBox.DragOver += PictureBox_DragOver;
-                pictureBox.MouseMove += PictureBox_MouseMove;
-                pictureBox.DragEnter += PictureBox_DragEnter;
-                pictureBox.DragDrop += PictureBox_DragDrop;
-                pictureBox.DoubleClick += PictureBox_DoubleClick;
-                pictureBox.Paint += PictureBox_Paint;
-                boxes.Add(pictureBox);
-                tableLayoutPanel.Controls.Add(pictureBox, colNumber, rowNumber);
-
-               // string xy = $"row ={rowNumber},col={colNumber} / y={y.ToString()}, x={x.ToString()}{System.Environment.NewLine}";
-                //richTextBox1.Text += xy;
-
-                if (colNumber == 2)
-                {
+                    x = (w * 2) + leftMargin + (x_offset * 3);
                     colNumber = 0;
                     rowNumber++;
-
-                    //xy = $"[row={rowNumber},col={colNumber} / y={y.ToString()}, x={x.ToString()}]{System.Environment.NewLine}";
-                    //richTextBox1.Text += xy;
                 }
                 else
                 {
                     colNumber++;
                 }
 
-                
+                //var fileName = item;
+                MemoryStream strm = new MemoryStream();
+                item.Save(strm, System.Drawing.Imaging.ImageFormat.Png);
+
+                //XImage xfoto = XImage.FromStream(strm);
+
+                XImage image = XImage.FromStream(strm);
+                gfx.DrawImage(image, x, y, w, h);
+
             }
         }
 
-
-        private void PictureBox_DoubleClick(object sender, EventArgs e)
+        private void GeneratePDF()
         {
-            openFileDialog1.Filter = "Image Files(*.jpg; *.png)|*.jpg; *.png";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
+                document = new PdfDocument();
+                PdfPage page;
+
+                foreach (TabPage tab in tabControl1.TabPages)
                 {
-                    // display image in picture box  
-                    PictureBox pictureBox = (PictureBox)sender;
-                    imageList.Add(openFileDialog1.FileName);
-                    pictureBox.Image = new Bitmap(openFileDialog1.FileName);
+                    foreach (UCTabPage tabPage in tab.Controls)
+                    {
+                        page = document.AddPage();
+                        DrawPage(page, tabPage.imageListTemp);
+                    }
                 }
-                catch (Exception ex)
+
+
+
+                if (chkIncludeCardBacks.Checked)
                 {
-                    MessageBox.Show($"error.\n\nError message: {ex.Message}\n\n" +
-                    $"Details:\n\n{ex.StackTrace}");
+                    imageList.Clear();
+                    page = document.AddPage();
+
+                    DrawPage(page, imageListBacks);
                 }
+
+                XForm xform = new XForm(document,
+                        XUnit.FromMillimeter(70),
+                        XUnit.FromMillimeter(55));
+
+                //XGraphics formGfx = XGraphics.FromForm(xform);
+
+                saveFileDialog1.ShowDialog();
+                //string fileName = $"test{numX.Value}{numY.Value}.pdf";
+                //document.Save(@"C:\Test\" + fileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -196,11 +201,106 @@ namespace CustomSetBuilder
         }
 
         protected void LoadImage()
-
         {
             image = new Bitmap(path);
         }
 
+        private void ListDirectory(TreeView treeView, string path)
+        {
+            treeView.Nodes.Clear();
+            var rootDirectoryInfo = new DirectoryInfo(path);
+            treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+        }
+
+        private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
+        {
+            var directoryNode = new TreeNode(directoryInfo.Name);
+           
+            foreach (var directory in directoryInfo.GetDirectories())
+            {
+
+                directoryNode.Nodes.Add(CreateDirectoryNode(directory));
+            }
+
+            int imageCount = 0;
+            foreach (var file in directoryInfo.GetFiles())
+            {
+                if (file.Extension == ".jpg" || file.Extension == ".png")
+                {
+                    var imgNode = new TreeNode(file.Name);
+                    imgNode.Tag = file.FullName;
+                    imgNode.ImageIndex = 2;
+                    
+                    directoryNode.Nodes.Add(imgNode);
+                    imageCount++;
+                }
+            }
+            if (imageCount > 0)
+                directoryNode.ExpandAll();
+
+            return directoryNode;
+        }
+
+        public void ChooseFolder(string selectedPath)
+        {
+            txtFolderPath.Text = selectedPath;
+            ListDirectory(treeViewFolders, selectedPath);
+        }
+
+        private void SelectBox(PictureBox pb)
+        {
+            if (selectedPic != pb)
+            {
+                selectedPic = pb;
+            }
+            else
+            {
+                selectedPic = null;
+            }
+
+            // Cause each box to repaint
+            foreach (var box in boxes) box.Invalidate();
+        }
+
+        private void SwapImages(PictureBox source, PictureBox target)
+        {
+            if (source.Image == null && target.Image == null)
+            {
+                return;
+            }
+
+            if (imageList.Contains(Convert.ToString(source.Tag)))
+            {
+                imageList.Remove(Convert.ToString(source.Tag));
+            }
+
+            var temp = target.Image;
+            target.Tag = source.Tag;
+            target.Image = source.Image;
+            source.Image = temp;
+        }
+
+        private void PictureBox_DoubleClick(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Image Files(*.jpg; *.png)|*.jpg; *.png";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // display image in picture box  
+                    PictureBox pictureBox = (PictureBox)sender;
+                    imageList.Add(openFileDialog1.FileName);
+                    pictureBox.Image = new Bitmap(openFileDialog1.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"error.\n\nError message: {ex.Message}\n\n" +
+                    $"Details:\n\n{ex.StackTrace}");
+                }
+            }
+        }
+      
         private void PictureBox_DragOver(object sender, DragEventArgs e)
         {
             this.activePictureBox = (PictureBox)sender;
@@ -300,114 +400,12 @@ namespace CustomSetBuilder
             }
         }
 
-        public void DrawPage(PdfPage page, List<Image> currentImageList)
-        {
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-
-            DrawImageScaled(gfx, currentImageList);
-        }
-
-        void DrawImageScaled(XGraphics gfx, List<Image> currentImageList)
-        {
-            int leftMargin = Convert.ToInt32(numLeftMargin.Value);
-            int topMargin = Convert.ToInt32(numTopMargin.Value);
-            int x = 30;
-            int y = 20;
-            int h = 250;
-            int w = 180;
-            int rowNumber = 0;
-            int colNumber = 0;
-            
-            foreach (var item in currentImageList)
-            {
-
-                if (rowNumber == 0)
-                    y = topMargin + y_offset;
-
-                if (rowNumber == 1)
-                    y = h + topMargin + (y_offset * 2);
-
-                if (rowNumber == 2)
-                    y = (h * 2) + topMargin + (y_offset * 3);
-
-                if (colNumber == 0)
-                    x = leftMargin + x_offset;
-
-                if (colNumber == 1)
-                    x = w + leftMargin + (x_offset * 2);
-
-                if (colNumber == 2)
-                {
-                    x = (w * 2) + leftMargin + (x_offset * 3);
-                    colNumber = 0;
-                    rowNumber++;
-                }
-                else
-                {
-                    colNumber++;
-                }
-
-                //var fileName = item;
-                MemoryStream strm = new MemoryStream();
-                item.Save(strm, System.Drawing.Imaging.ImageFormat.Png);
-
-                //XImage xfoto = XImage.FromStream(strm);
-
-                XImage image = XImage.FromStream(strm);
-                gfx.DrawImage(image, x, y, w, h);
-
-            }
-        }
-
         private void btnCreatePDF_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
             GeneratePDF();
             this.Cursor = Cursors.Default;
         }
-
-        private void GeneratePDF()
-        {
-            try
-            {
-                document = new PdfDocument();
-                PdfPage page;
-
-                foreach(TabPage tab in tabControl1.TabPages)
-                {
-                    foreach(UCTabPage tabPage in tab.Controls)
-                    {
-                        page = document.AddPage();
-                        DrawPage(page, tabPage.imageListTemp);
-                    }
-                }
-
-                
-
-                if (chkIncludeCardBacks.Checked)
-                {
-                    imageList.Clear();
-                    page = document.AddPage();
-     
-                    DrawPage(page, imageListBacks);
-                }
-
-                XForm xform = new XForm(document,
-                        XUnit.FromMillimeter(70),
-                        XUnit.FromMillimeter(55));
-
-                //XGraphics formGfx = XGraphics.FromForm(xform);
-
-                saveFileDialog1.ShowDialog();
-                //string fileName = $"test{numX.Value}{numY.Value}.pdf";
-                //document.Save(@"C:\Test\" + fileName);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
@@ -494,49 +492,7 @@ namespace CustomSetBuilder
                 x_offset = Convert.ToInt32(numY.Value);
 
             ImageLayout_Changed(sender, e);
-        }
-
-        private void ListDirectory(TreeView treeView, string path)
-        {
-            treeView.Nodes.Clear();
-            var rootDirectoryInfo = new DirectoryInfo(path);
-            treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
-        }
-
-        private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
-        {
-            var directoryNode = new TreeNode(directoryInfo.Name);
-           
-            foreach (var directory in directoryInfo.GetDirectories())
-            {
-
-                directoryNode.Nodes.Add(CreateDirectoryNode(directory));
-            }
-
-            int imageCount = 0;
-            foreach (var file in directoryInfo.GetFiles())
-            {
-                if (file.Extension == ".jpg" || file.Extension == ".png")
-                {
-                    var imgNode = new TreeNode(file.Name);
-                    imgNode.Tag = file.FullName;
-                    imgNode.ImageIndex = 2;
-                    
-                    directoryNode.Nodes.Add(imgNode);
-                    imageCount++;
-                }
-            }
-            if (imageCount > 0)
-                directoryNode.ExpandAll();
-
-            return directoryNode;
-        }
-
-        public void ChooseFolder(string selectedPath)
-        {
-            txtFolderPath.Text = selectedPath;
-            ListDirectory(treeViewFolders, selectedPath);
-        }
+        }       
 
         private void btnDirectorySelector_Click(object sender, EventArgs e)
         {            
@@ -554,12 +510,10 @@ namespace CustomSetBuilder
             
         }
 
-
         private void treeViewFolders_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
-
         
         protected void treeViewFolders_MouseUp(object sender, MouseEventArgs e)
         {
@@ -592,7 +546,6 @@ namespace CustomSetBuilder
             }
         }
 
-
         private void treeViewFolders_ItemDrag(object sender, ItemDragEventArgs e)
         {
             TreeNode aNode = (TreeNode)e.Item;
@@ -621,8 +574,6 @@ namespace CustomSetBuilder
             }
         }
 
-
-
         public void treeViewFolders_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0 || e.Node.ImageIndex == -1)
@@ -641,7 +592,6 @@ namespace CustomSetBuilder
             
 
         }
-
 
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
@@ -662,40 +612,6 @@ namespace CustomSetBuilder
                    Color.OrangeRed, 3, ButtonBorderStyle.Solid); // Bottom
             }
         }
-
-        private void SelectBox(PictureBox pb)
-        {
-            if (selectedPic != pb)
-            {
-                selectedPic = pb;
-            }
-            else
-            {
-                selectedPic = null;
-            }
-
-            // Cause each box to repaint
-            foreach (var box in boxes) box.Invalidate();
-        }
-
-        private void SwapImages(PictureBox source, PictureBox target)
-        {
-            if (source.Image == null && target.Image == null)
-            {
-                return;
-            }
-
-            if (imageList.Contains(Convert.ToString(source.Tag))){
-                imageList.Remove(Convert.ToString(source.Tag));
-            }
-
-            var temp = target.Image;
-            target.Tag = source.Tag;
-            target.Image = source.Image;
-            source.Image = temp;
-        }
-
-
 
         private void ctxMenuItemFillAll_Click(object sender, EventArgs e)
         {
