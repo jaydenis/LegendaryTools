@@ -55,12 +55,12 @@ namespace CustomSetBuilder
                 
             }
             //ListDirectory(treeViewFolders, @"C:\\");
-            LoadTable();
+            LoadTable(tableLayoutPanel1);
         }
 
-        private void LoadTable()
+        private void LoadTable(TableLayoutPanel tableLayoutPanel)
         {
-            tableLayoutPanel1.Controls.Clear();
+            tableLayoutPanel.Controls.Clear();
             int x = 10;
             int y = 10;
             int h = 250;
@@ -111,7 +111,7 @@ namespace CustomSetBuilder
                 pictureBox.DoubleClick += PictureBox_DoubleClick;
                 pictureBox.Paint += PictureBox_Paint;
                 boxes.Add(pictureBox);
-                tableLayoutPanel1.Controls.Add(pictureBox, colNumber, rowNumber);
+                tableLayoutPanel.Controls.Add(pictureBox, colNumber, rowNumber);
 
                // string xy = $"row ={rowNumber},col={colNumber} / y={y.ToString()}, x={x.ToString()}{System.Environment.NewLine}";
                 //richTextBox1.Text += xy;
@@ -680,7 +680,7 @@ namespace CustomSetBuilder
 
         public void treeViewFolders_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0)
+            if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0 || e.Node.ImageIndex == -1)
             {
                 return;
             }
@@ -754,17 +754,23 @@ namespace CustomSetBuilder
 
         private void ctxMenuItemFillAll_Click(object sender, EventArgs e)
         {
-            //imageListBacks = new List<Image>();
-            imageList = new List<string>();
-            if (picPreview.Image != null)
+            try
             {
-                for (int i = 0; i < 9; i++)
+                //imageListBacks = new List<Image>();
+                imageList = new List<string>();
+                if (picPreview.Image != null)
                 {
-                    //imageListBacks.Add(picPreview.Image);
-                    imageList.Add(Convert.ToString(picPreview.Tag));
-                }
+                    for (int i = 0; i < 9; i++)
+                    {
+                        //imageListBacks.Add(picPreview.Image);
+                        imageList.Add(Convert.ToString(picPreview.Tag));
+                    }
 
-                LoadTable(imageList);
+                    LoadTable(imageList);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -801,6 +807,17 @@ namespace CustomSetBuilder
                     foreach(TreeNode node in treeViewFolders.Nodes)
                     {
                         node.Checked = false;
+                        foreach(TreeNode node1 in node.Nodes)
+                        {
+                            node1.Checked = false;
+                            if (node1.Nodes.Count > 0)
+                            {
+                                foreach (TreeNode node2 in node1.Nodes)
+                                {
+                                    node2.Checked = false;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -848,7 +865,27 @@ namespace CustomSetBuilder
                 imageListBacks.Add(picPreview.BackgroundImage);
             }
             picPreview.Image = picPreview.BackgroundImage;
-            LoadTable();
+            TabPage tabPage = tabControl1.SelectedTab;
+            foreach (TableLayoutPanel tableLayoutPanel in tabPage.Controls)
+            {
+                LoadTable(tableLayoutPanel);
+            }
+        }
+
+        private void toolStripButtonAddPage_Click(object sender, EventArgs e)
+        {
+            //int pageCount = tabControl1.TabPages.Count+1;
+            //TabPage tabPage = new TabPage($"Page {pageCount++}");
+            //tabControl1.TabPages[0].Controls.CopyTo(tabPage.Controls., 0);
+            //foreach (TableLayoutPanel tableLayoutPanel in tabControl1.TabPages[0].Controls)
+            //{
+            //    tabPage.Controls.c
+            //    LoadTable(tableLayoutPanel);
+            //}
+
+            //LoadTable(tableLayoutPanel);
+            //tabPage.Controls.Add(tableLayoutPanel);
+            //tabControl1.TabPages.Add(tabPage);
         }
     }
 }

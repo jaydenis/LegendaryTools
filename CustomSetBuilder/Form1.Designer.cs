@@ -69,7 +69,6 @@
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -78,6 +77,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.txtFolderPath = new System.Windows.Forms.TextBox();
             this.btnDirectorySelector = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.picPreview = new System.Windows.Forms.PictureBox();
             this.toolStripMenuItemFillAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFillChecked = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,6 +100,7 @@
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddPage = new System.Windows.Forms.ToolStripButton();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,6 +118,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
             this.ctxPreviewMenu.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPreviewTopRight)).BeginInit();
@@ -136,7 +141,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1228, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1308, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -297,6 +302,7 @@
             this.newToolStripButton,
             this.openToolStripButton,
             this.saveToolStripButton,
+            this.toolStripButtonAddPage,
             this.printToolStripButton,
             this.toolStripSeparator,
             this.cutToolStripButton,
@@ -306,7 +312,7 @@
             this.helpToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1228, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1308, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -521,23 +527,6 @@
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(339, 49);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 800);
-            this.tableLayoutPanel1.TabIndex = 4;
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -565,7 +554,7 @@
             this.treeViewFolders.ContextMenuStrip = this.ctxPreviewMenu;
             this.treeViewFolders.ImageIndex = 0;
             this.treeViewFolders.ImageList = this.imageList1;
-            this.treeViewFolders.Location = new System.Drawing.Point(946, 109);
+            this.treeViewFolders.Location = new System.Drawing.Point(1028, 105);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 2;
             this.treeViewFolders.Size = new System.Drawing.Size(268, 457);
@@ -598,14 +587,14 @@
             // 
             // txtFolderPath
             // 
-            this.txtFolderPath.Location = new System.Drawing.Point(946, 53);
+            this.txtFolderPath.Location = new System.Drawing.Point(1028, 49);
             this.txtFolderPath.Name = "txtFolderPath";
             this.txtFolderPath.Size = new System.Drawing.Size(268, 20);
             this.txtFolderPath.TabIndex = 10;
             // 
             // btnDirectorySelector
             // 
-            this.btnDirectorySelector.Location = new System.Drawing.Point(946, 80);
+            this.btnDirectorySelector.Location = new System.Drawing.Point(1028, 76);
             this.btnDirectorySelector.Name = "btnDirectorySelector";
             this.btnDirectorySelector.Size = new System.Drawing.Size(268, 23);
             this.btnDirectorySelector.TabIndex = 11;
@@ -613,13 +602,54 @@
             this.btnDirectorySelector.UseVisualStyleBackColor = true;
             this.btnDirectorySelector.Click += new System.EventHandler(this.btnDirectorySelector_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Right;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.HotTrack = true;
+            this.tabControl1.Location = new System.Drawing.Point(339, 59);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(673, 807);
+            this.tabControl1.TabIndex = 12;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(646, 799);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Page 1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(640, 793);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
             // picPreview
             // 
             this.picPreview.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPreview.BackgroundImage")));
             this.picPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPreview.ContextMenuStrip = this.ctxPreviewMenu;
             this.picPreview.Image = ((System.Drawing.Image)(resources.GetObject("picPreview.Image")));
-            this.picPreview.Location = new System.Drawing.Point(950, 579);
+            this.picPreview.Location = new System.Drawing.Point(1032, 575);
             this.picPreview.Name = "picPreview";
             this.picPreview.Size = new System.Drawing.Size(180, 250);
             this.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -637,7 +667,7 @@
             // 
             this.toolStripMenuItemFillAll.Image = global::CustomSetBuilder.Properties.Resources.arrow_switch;
             this.toolStripMenuItemFillAll.Name = "toolStripMenuItemFillAll";
-            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(138, 22);
             this.toolStripMenuItemFillAll.Text = "Fill All";
             this.toolStripMenuItemFillAll.Click += new System.EventHandler(this.ctxMenuItemFillAll_Click);
             // 
@@ -645,7 +675,7 @@
             // 
             this.toolStripMenuItemFillChecked.Image = global::CustomSetBuilder.Properties.Resources.arrow_out;
             this.toolStripMenuItemFillChecked.Name = "toolStripMenuItemFillChecked";
-            this.toolStripMenuItemFillChecked.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemFillChecked.Size = new System.Drawing.Size(138, 22);
             this.toolStripMenuItemFillChecked.Text = "Fill Checked";
             this.toolStripMenuItemFillChecked.Click += new System.EventHandler(this.toolStripMenuItemFillChecked_Click);
             // 
@@ -813,6 +843,16 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
+            // toolStripButtonAddPage
+            // 
+            this.toolStripButtonAddPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddPage.Image = global::CustomSetBuilder.Properties.Resources.add;
+            this.toolStripButtonAddPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddPage.Name = "toolStripButtonAddPage";
+            this.toolStripButtonAddPage.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAddPage.Text = "Add Page";
+            this.toolStripButtonAddPage.Click += new System.EventHandler(this.toolStripButtonAddPage_Click);
+            // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
@@ -891,19 +931,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1228, 866);
+            this.ClientSize = new System.Drawing.Size(1308, 866);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnDirectorySelector);
             this.Controls.Add(this.txtFolderPath);
             this.Controls.Add(this.picPreview);
             this.Controls.Add(this.treeViewFolders);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Legendary Tools";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -917,6 +958,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
             this.ctxPreviewMenu.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPreviewTopRight)).EndInit();
@@ -977,7 +1020,6 @@
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label2;
@@ -1010,6 +1052,10 @@
         private System.Windows.Forms.ContextMenuStrip ctxPreviewMenu;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFillAll;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFillChecked;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddPage;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
