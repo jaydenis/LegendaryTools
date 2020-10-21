@@ -63,6 +63,7 @@ namespace CustomSetBuilder
             ucTabPages.Add(ucTab);
 
             tabPage1.Controls.Add(ucTabPages[0]);
+            selectedPage = (UCTabPage)tabPage1.Controls[0];
         }
 
         private void LoadTable(TableLayoutPanel tableLayoutPanel)
@@ -697,17 +698,17 @@ namespace CustomSetBuilder
         {
             try
             {
-                //imageListBacks = new List<Image>();
-                imageList = new List<string>();
+                imageListBacks = new List<Image>();
+                //imageList = new List<string>();
                 if (picPreview.Image != null)
                 {
                     for (int i = 0; i < 9; i++)
                     {
-                        //imageListBacks.Add(picPreview.Image);
-                        imageList.Add(Convert.ToString(picPreview.Tag));
+                        imageListBacks.Add(picPreview.Image);
+                        //imageList.Add(Convert.ToString(picPreview.Tag));
                     }
 
-                    //LoadTable(imageList);
+                    selectedPage.LoadTable(imageListBacks);
                 }
             }catch(Exception ex)
             {
