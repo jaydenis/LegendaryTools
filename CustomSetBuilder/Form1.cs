@@ -56,13 +56,21 @@ namespace CustomSetBuilder
             {
                 imageListBacks.Add(picCardBack.BackgroundImage);                
             }
-            //ListDirectory(treeViewFolders, @"C:\\");
+            
             UCTabPage ucTab = new UCTabPage(imageListBacks);
 
             ucTabPages.Add(ucTab);
 
             tabPage1.Controls.Add(ucTabPages[0]);
             selectedPage = (UCTabPage)tabPage1.Controls[0];
+
+            UserSettings settings = UserSettings.Load();
+
+            if (!string.IsNullOrEmpty(settings.lastFolder))
+            {
+                ListDirectory(treeViewFolders,settings.lastFolder);
+            }
+            
         }
 
         private void LoadTable(TableLayoutPanel tableLayoutPanel)
@@ -840,8 +848,8 @@ namespace CustomSetBuilder
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             TabPage tabPage = tabControl1.SelectedTab;
-
-            selectedPage = (UCTabPage)tabPage.Controls[0];
+            if(tabPage != null)
+                selectedPage = (UCTabPage)tabPage.Controls[0];
 
             var x = "";
         }
