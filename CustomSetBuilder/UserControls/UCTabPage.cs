@@ -22,7 +22,7 @@ namespace CustomSetBuilder.UserControls
         PictureBox activePictureBox;
         protected bool validData;
         protected Thread getImageThread;
-        PictureBox selectedPic;
+        public PictureBox selectedPic { get; set; }
 
         protected Image image;
 

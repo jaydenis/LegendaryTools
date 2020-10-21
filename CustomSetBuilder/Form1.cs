@@ -38,7 +38,7 @@ namespace CustomSetBuilder
        
 
         List<PictureBox> boxes = new List<PictureBox>();
-        PictureBox selectedPic;
+       
 
         List<UCTabPage> ucTabPages = new List<UCTabPage>();
         UCTabPage selectedPage;
@@ -249,13 +249,13 @@ namespace CustomSetBuilder
 
         private void SelectBox(PictureBox pb)
         {
-            if (selectedPic != pb)
+            if (selectedPage.selectedPic != pb)
             {
-                selectedPic = pb;
+                selectedPage.selectedPic = pb;
             }
             else
             {
-                selectedPic = null;
+                selectedPage.selectedPic = null;
             }
 
             // Cause each box to repaint
@@ -369,7 +369,7 @@ namespace CustomSetBuilder
                             // You can swap the images out, replace the target image, etc.
                             SwapImages(source, target);
 
-                            selectedPic = null;
+                            selectedPage.selectedPic = null;
                             SelectBox(target);
                             return;
                         }
@@ -385,7 +385,7 @@ namespace CustomSetBuilder
                                 // You can swap the images out, replace the target image, etc.
                                 SwapImages(source, target);
 
-                                selectedPic = null;
+                                selectedPage.selectedPic = null;
                                 SelectBox(target);
                                 return;
                             }
@@ -603,7 +603,7 @@ namespace CustomSetBuilder
         {
             var pb = (PictureBox)sender;
             pb.BackColor = Color.White;
-            if (selectedPic == pb)
+            if (selectedPage.selectedPic == pb)
             {
                 ControlPaint.DrawBorder(e.Graphics, pb.ClientRectangle,
                    Color.OrangeRed, 3, ButtonBorderStyle.Solid,  // Left
@@ -617,19 +617,21 @@ namespace CustomSetBuilder
         {
             try
             {
-                selectedPage.imageListTemp = new List<Image>();
-                selectedPage.imageList = new List<string>();
-                if (picPreview.Image != null)
-                {
-                    for (int i = 0; i < 9; i++)
-                    {
-                        selectedPage.imageListTemp.Add(picPreview.Image);
-                        selectedPage.imageList.Add(Convert.ToString(picPreview.Tag));
-                    }
+                CopyImageX(9);
+                //selectedPage.imageListTemp = new List<Image>();
+                //selectedPage.imageList = new List<string>();
+                //if (picPreview.Image != null)
+                //{
+                //    for (int i = 0; i < 9; i++)
+                //    {
+                //        selectedPage.imageListTemp.Add(picPreview.Image);
+                //        selectedPage.imageList.Add(Convert.ToString(picPreview.Tag));
+                //    }
 
-                    selectedPage.LoadTable(selectedPage.imageListTemp);
-                }
-            }catch(Exception ex)
+                //    selectedPage.LoadTable(selectedPage.imageListTemp);
+                //}
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -637,6 +639,7 @@ namespace CustomSetBuilder
 
         private void picPreview_MouseDown(object sender, MouseEventArgs e)
         {
+            selectedPage.selectedPic = picPreview;
             switch (e.Button)
             {
 
@@ -653,7 +656,7 @@ namespace CustomSetBuilder
 
         private void picPreview_Click(object sender, EventArgs e)
         {
-
+            selectedPage.selectedPic = picPreview;
         }
 
         private void toolStripMenuItemFillChecked_Click(object sender, EventArgs e)
@@ -662,24 +665,36 @@ namespace CustomSetBuilder
             {
                 if(imageListChecked.Count() > 0)
                 {
-                    selectedPage.imageListTemp = new List<Image>();
-                    selectedPage.imageList = new List<string>();
+                    if (selectedPage.imageListTemp == null)
+                        selectedPage.imageListTemp = new List<Image>();
+
+                    int totalImageCount = selectedPage.imageListTemp.Count + imageListChecked.Count;
+
+                    int dif = totalImageCount - 9;
+
+                    if (totalImageCount > 9)
+                    {
+                        for (int i = dif; i > 0; i--)
+                        {
+                            selectedPage.imageListTemp.RemoveAt(i);
+                        }
+                    }
+
                     foreach (var item in imageListChecked) 
                     {
                         image = new Bitmap(item);
                         selectedPage.imageListTemp.Add(image);
-                        selectedPage.imageList.Add(item);
                     }
 
                     if(selectedPage.imageListTemp.Count < 9)
                     {
-                        int dif = 9 - selectedPage.imageListTemp.Count;
                         for (int i=0; i < dif; i++)
                         {
                             selectedPage.imageListTemp.Add(picPreviewBottomRight.Image);
-                            //selectedPage.imageList.Add(item);
                         }
                     }
+
+                    
 
                     selectedPage.LoadTable(selectedPage.imageListTemp);
 
@@ -767,7 +782,6 @@ namespace CustomSetBuilder
             if(tabPage != null)
                 selectedPage = (UCTabPage)tabPage.Controls[0];
 
-            var x = "";
         }
 
         private void AddnewTabPage()
@@ -781,6 +795,60 @@ namespace CustomSetBuilder
             tabPage.Controls.Add(ucTab);
 
             tabControl1.TabPages.Add(tabPage);
+        }
+
+        private void CopyImageX(int copyCount)
+        {
+            try
+            {
+
+                if (picPreview.Image == null && selectedPage.selectedPic == null)
+                    return;
+
+                if (picPreview.Image != null)
+                    selectedPage.selectedPic = picPreview;
+                else if (selectedPage.selectedPic != null)
+                    picPreview = selectedPage.selectedPic;
+                else
+                    return;
+
+                if (selectedPage.imageListTemp == null)
+                    selectedPage.imageListTemp = new List<Image>();
+
+                int totalImageCount = selectedPage.imageListTemp.Count + copyCount;
+
+                int dif = totalImageCount - 9;
+
+                if (totalImageCount > 9)
+                {
+                    for (int i = dif; i > 0; i--)
+                        selectedPage.imageListTemp.RemoveAt(i);
+                }
+
+                for (int i = 0; i < copyCount; i++)
+                    selectedPage.imageListTemp.Add(selectedPage.selectedPic.Image);
+
+                selectedPage.LoadTable(selectedPage.imageListTemp);
+            
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItemCopy3_Click(object sender, EventArgs e)
+        {
+            CopyImageX(3);
+        }
+
+        private void toolStripMenuItemCopy5_Click(object sender, EventArgs e)
+        {
+            CopyImageX(5);
+        }
+
+        private void copyCardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyImageX(1);
         }
     }
 }
