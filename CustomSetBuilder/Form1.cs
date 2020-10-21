@@ -18,6 +18,7 @@ namespace CustomSetBuilder
     {
         List<Image> imageListBacks = new List<Image>();
         List<string> imageList = new List<string>();
+        List<string> imageListChecked = new List<string>();
         protected bool validData;
         string path;
         protected Image image;
@@ -59,6 +60,7 @@ namespace CustomSetBuilder
 
         private void LoadTable()
         {
+            tableLayoutPanel1.Controls.Clear();
             int x = 10;
             int y = 10;
             int h = 250;
@@ -298,43 +300,29 @@ namespace CustomSetBuilder
 
         private void PictureBox_DragDrop(object sender, DragEventArgs e)
         {
-            if (validData)
+            try
             {
-                while (getImageThread.IsAlive)
+                if (validData)
                 {
-                    Application.DoEvents();
-                    Thread.Sleep(0);
-                }
-
-                this.activePictureBox.Image = image;
-                this.activePictureBox.Tag = path;
-
-            }
-            else
-            {
-
-                var target = (PictureBox)sender;
-                //picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));
-                //this.selectedImageNode = Convert.ToString(e.Node.Tag);
-                if (e.Data.GetDataPresent(typeof(PictureBox)))
-                {
-                    var source = (PictureBox)e.Data.GetData(typeof(PictureBox));
-                    if (source != target)
+                    while (getImageThread.IsAlive)
                     {
-                        Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
-                        // You can swap the images out, replace the target image, etc.
-                        SwapImages(source, target);
-
-                        selectedPic = null;
-                        SelectBox(target);
-                        return;
+                        Application.DoEvents();
+                        Thread.Sleep(0);
                     }
+
+                    this.activePictureBox.Image = image;
+                    this.activePictureBox.Tag = path;
+
                 }
                 else
                 {
-                    if (this.selectedImageNode != string.Empty)
+
+                    var target = (PictureBox)sender;
+                    //picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));
+                    //this.selectedImageNode = Convert.ToString(e.Node.Tag);
+                    if (e.Data.GetDataPresent(typeof(PictureBox)))
                     {
-                        var source = picPreview;
+                        var source = (PictureBox)e.Data.GetData(typeof(PictureBox));
                         if (source != target)
                         {
                             Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
@@ -346,9 +334,29 @@ namespace CustomSetBuilder
                             return;
                         }
                     }
-                }
+                    else
+                    {
+                        if (this.selectedImageNode != string.Empty)
+                        {
+                            var source = picPreview;
+                            if (source != target)
+                            {
+                                Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
+                                // You can swap the images out, replace the target image, etc.
+                                SwapImages(source, target);
 
-                Console.WriteLine("Don't do DragDrop");
+                                selectedPic = null;
+                                SelectBox(target);
+                                return;
+                            }
+                        }
+                    }
+
+                    Console.WriteLine("Don't do DragDrop");
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -553,9 +561,12 @@ namespace CustomSetBuilder
         private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
         {
             var directoryNode = new TreeNode(directoryInfo.Name);
-
+           
             foreach (var directory in directoryInfo.GetDirectories())
+            {
+
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
+            }
 
             int imageCount = 0;
             foreach (var file in directoryInfo.GetFiles())
@@ -588,6 +599,11 @@ namespace CustomSetBuilder
             {
                
                 ChooseFolder(folderBrowserDialog1.SelectedPath);
+
+                UserSettings settings = UserSettings.Load();
+                settings.lastFolder = folderBrowserDialog1.SelectedPath;
+                settings.Save();
+
             }
 
             
@@ -771,6 +787,68 @@ namespace CustomSetBuilder
         private void picPreview_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripMenuItemFillChecked_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(imageListChecked.Count() > 0)
+                {
+                    LoadTable(imageListChecked);
+                    imageListChecked.Clear();
+
+                    foreach(TreeNode node in treeViewFolders.Nodes)
+                    {
+                        node.Checked = false;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void treeViewFolders_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            try
+            {
+                if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    imageListChecked.Add(Convert.ToString(e.Node.Tag));
+                  
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void newToolStripButton_Click(object sender, EventArgs e)
+        {
+            imageListChecked.Clear();
+            imageList.Clear();
+            var selectedPath = @"C:\\";
+            UserSettings settings = UserSettings.Load();
+
+            if (!string.IsNullOrEmpty(settings.lastFolder))
+            {
+                selectedPath = settings.lastFolder;
+            }
+            ChooseFolder(selectedPath);
+
+            for (int i = 0; i < 9; i++)
+            {
+                imageListBacks.Add(picPreview.BackgroundImage);
+            }
+            picPreview.Image = picPreview.BackgroundImage;
+            LoadTable();
         }
     }
 }
