@@ -54,8 +54,7 @@ namespace CustomSetBuilder
 
             for (int i = 0; i < 9; i++)
             {
-                imageListBacks.Add(picPreview.BackgroundImage);
-                
+                imageListBacks.Add(picCardBack.BackgroundImage);                
             }
             //ListDirectory(treeViewFolders, @"C:\\");
             UCTabPage ucTab = new UCTabPage(imageListBacks);
@@ -293,14 +292,14 @@ namespace CustomSetBuilder
             }
         }
 
-        public void DrawPage(PdfPage page, List<string> currentImageList)
+        public void DrawPage(PdfPage page, List<Image> currentImageList)
         {
             XGraphics gfx = XGraphics.FromPdfPage(page);
 
             DrawImageScaled(gfx, currentImageList);
         }
 
-        void DrawImageScaled(XGraphics gfx, List<string> currentImageList)
+        void DrawImageScaled(XGraphics gfx, List<Image> currentImageList)
         {
             int leftMargin = Convert.ToInt32(numLeftMargin.Value);
             int topMargin = Convert.ToInt32(numTopMargin.Value);
@@ -340,8 +339,13 @@ namespace CustomSetBuilder
                     colNumber++;
                 }
 
-                var fileName = item;
-                XImage image = XImage.FromFile(fileName);
+                //var fileName = item;
+                MemoryStream strm = new MemoryStream();
+                item.Save(strm, System.Drawing.Imaging.ImageFormat.Png);
+
+                //XImage xfoto = XImage.FromStream(strm);
+
+                XImage image = XImage.FromStream(strm);
                 gfx.DrawImage(image, x, y, w, h);
 
             }
@@ -365,14 +369,8 @@ namespace CustomSetBuilder
                 {
                     foreach(UCTabPage tabPage in tab.Controls)
                     {
-                        imageList = new List<string>();
-                        foreach (var item in tabPage.layoutPanel.Controls)
-                        {
-                            PictureBox pictureBox = (PictureBox)item;
-                            imageList.Add(pictureBox.Tag.ToString());
-                        }
                         page = document.AddPage();
-                        DrawPage(page, imageList);
+                        DrawPage(page, tabPage.imageListTemp);
                     }
                 }
 
@@ -382,11 +380,8 @@ namespace CustomSetBuilder
                 {
                     imageList.Clear();
                     page = document.AddPage();
-                    foreach (var imgBack in imageListBacks) {
-                        Image pictureBox = (Image)imgBack;
-                        imageList.Add(pictureBox.Tag.ToString());
-                    }
-                    DrawPage(page, imageList);
+     
+                    DrawPage(page, imageListBacks);
                 }
 
                 XForm xform = new XForm(document,
@@ -698,17 +693,17 @@ namespace CustomSetBuilder
         {
             try
             {
-                imageListBacks = new List<Image>();
-                //imageList = new List<string>();
+                selectedPage.imageListTemp = new List<Image>();
+                selectedPage.imageList = new List<string>();
                 if (picPreview.Image != null)
                 {
                     for (int i = 0; i < 9; i++)
                     {
-                        imageListBacks.Add(picPreview.Image);
-                        //imageList.Add(Convert.ToString(picPreview.Tag));
+                        selectedPage.imageListTemp.Add(picPreview.Image);
+                        selectedPage.imageList.Add(Convert.ToString(picPreview.Tag));
                     }
 
-                    selectedPage.LoadTable(imageListBacks);
+                    selectedPage.LoadTable(selectedPage.imageListTemp);
                 }
             }catch(Exception ex)
             {
@@ -743,13 +738,26 @@ namespace CustomSetBuilder
             {
                 if(imageListChecked.Count() > 0)
                 {
-                    var tempList = new List<Image>();
+                    selectedPage.imageListTemp = new List<Image>();
+                    selectedPage.imageList = new List<string>();
                     foreach (var item in imageListChecked) 
                     {
                         image = new Bitmap(item);
-                        tempList.Add(image);
+                        selectedPage.imageListTemp.Add(image);
+                        selectedPage.imageList.Add(item);
                     }
-                    selectedPage.LoadTable(tempList);
+
+                    if(selectedPage.imageListTemp.Count < 9)
+                    {
+                        int dif = 9 - selectedPage.imageListTemp.Count;
+                        for (int i=0; i < dif; i++)
+                        {
+                            selectedPage.imageListTemp.Add(picPreviewBottomRight.Image);
+                            //selectedPage.imageList.Add(item);
+                        }
+                    }
+
+                    selectedPage.LoadTable(selectedPage.imageListTemp);
 
                     imageListChecked.Clear();
 

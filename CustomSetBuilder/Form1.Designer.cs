@@ -108,6 +108,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.picPreview = new System.Windows.Forms.PictureBox();
+            this.picCardBack = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -128,6 +129,7 @@
             this.ctxPreviewMenu.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCardBack)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -906,6 +908,20 @@
             this.picPreview.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPreview_MouseDown);
             this.picPreview.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             // 
+            // picCardBack
+            // 
+            this.picCardBack.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picCardBack.BackgroundImage")));
+            this.picCardBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picCardBack.ContextMenuStrip = this.ctxPreviewMenu;
+            this.picCardBack.Image = ((System.Drawing.Image)(resources.GetObject("picCardBack.Image")));
+            this.picCardBack.Location = new System.Drawing.Point(1116, 575);
+            this.picCardBack.Name = "picCardBack";
+            this.picCardBack.Size = new System.Drawing.Size(180, 250);
+            this.picCardBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picCardBack.TabIndex = 13;
+            this.picCardBack.TabStop = false;
+            this.picCardBack.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -922,6 +938,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.picCardBack);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -950,6 +967,7 @@
             this.ctxPreviewMenu.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCardBack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1035,6 +1053,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonAddPage;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.PictureBox picCardBack;
     }
 }
 
