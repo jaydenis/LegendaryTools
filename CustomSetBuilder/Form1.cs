@@ -651,26 +651,21 @@ namespace CustomSetBuilder
                     if (selectedPage.imageListTemp == null)
                         selectedPage.imageListTemp = new List<Image>();
 
-                    int totalImageCount = selectedPage.imageListTemp.Count + imageListChecked.Count;
 
-                    int dif = totalImageCount - 9;
-
-                    if (totalImageCount > 9)
-                    {
-                        for (int i = dif; i > 0; i--)
-                        {
-                            selectedPage.imageListTemp.RemoveAt(i);
-                        }
-                    }
-
-                    foreach (var item in imageListChecked) 
+                    foreach (var item in imageListChecked)
                     {
                         image = new Bitmap(item);
                         selectedPage.imageListTemp.Add(image);
                     }
 
+                    if (selectedPage.imageListTemp.Count > 9 && imageListChecked.Count > 0)
+                        selectedPage.imageListTemp.RemoveRange(0, imageListChecked.Count);
+
+                    
+
                     if(selectedPage.imageListTemp.Count < 9)
                     {
+                        int dif = 9 - selectedPage.imageListTemp.Count;
                         for (int i=0; i < dif; i++)
                         {
                             selectedPage.imageListTemp.Add(picPreviewBottomRight.Image);
@@ -702,6 +697,8 @@ namespace CustomSetBuilder
             }
             catch(Exception ex)
             {
+                selectedPage.imageListTemp = new List<Image>();
+               // imageListChecked.Clear();
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -728,15 +725,15 @@ namespace CustomSetBuilder
 
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            imageListChecked.Clear();
+            //imageListChecked.Clear();
             imageList.Clear();
-            var selectedPath = @"C:\\";
+            var selectedPath = @"C:\";
 
             tabControl1.TabPages.Clear();
 
             AddnewTabPage();
 
-            ChooseFolder(selectedPath);
+            //ChooseFolder(selectedPath);
 
             for (int i = 0; i < 9; i++)
             {
@@ -790,20 +787,22 @@ namespace CustomSetBuilder
                     return;
 
                 if (selectedPage.imageListTemp == null)
-                    selectedPage.imageListTemp = new List<Image>();
-
-                int totalImageCount = selectedPage.imageListTemp.Count + copyCount;
-
-                int dif = totalImageCount - 9;
-
-                if (totalImageCount > 9)
-                {
-                    for (int i = dif; i > 0; i--)
-                        selectedPage.imageListTemp.RemoveAt(i);
-                }
+                    selectedPage.imageListTemp = new List<Image>();               
 
                 for (int i = 0; i < copyCount; i++)
                     selectedPage.imageListTemp.Add(selectedPage.selectedPic.Image);
+
+                if (selectedPage.imageListTemp.Count > 9 && copyCount > 0)
+                    selectedPage.imageListTemp.RemoveRange(0, copyCount);
+
+                if (selectedPage.imageListTemp.Count < 9)
+                {
+                    int dif = 9 - selectedPage.imageListTemp.Count;
+                    for (int i = 0; i < dif; i++)
+                    {
+                        selectedPage.imageListTemp.Add(picCardBack.Image);
+                    }
+                }
 
                 selectedPage.LoadTable(selectedPage.imageListTemp);
             
