@@ -723,12 +723,12 @@
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.Description = "Select the directory that you want to use as the default.";
-            this.folderBrowserDialog1.SelectedPath = "C:\\Users\\jayte\\OneDrive\\TableTopGaming\\Legendery-Marvel\\CustomSets";
+            this.folderBrowserDialog1.SelectedPath = "C:\\";
             this.folderBrowserDialog1.ShowNewFolderButton = false;
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.FileName = "PDF";
+            this.saveFileDialog1.FileName = "LegendaryCards.pdf";
             this.saveFileDialog1.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
             this.saveFileDialog1.RestoreDirectory = true;
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
@@ -776,21 +776,21 @@
             // copyCardToolStripMenuItem
             // 
             this.copyCardToolStripMenuItem.Name = "copyCardToolStripMenuItem";
-            this.copyCardToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.copyCardToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.copyCardToolStripMenuItem.Text = "Copy Card";
             this.copyCardToolStripMenuItem.Click += new System.EventHandler(this.copyCardToolStripMenuItem_Click);
             // 
             // toolStripMenuItemCopy3
             // 
             this.toolStripMenuItemCopy3.Name = "toolStripMenuItemCopy3";
-            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(184, 22);
             this.toolStripMenuItemCopy3.Text = "Copy x3 Cards";
             this.toolStripMenuItemCopy3.Click += new System.EventHandler(this.toolStripMenuItemCopy3_Click);
             // 
             // toolStripMenuItemCopy5
             // 
             this.toolStripMenuItemCopy5.Name = "toolStripMenuItemCopy5";
-            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(184, 22);
             this.toolStripMenuItemCopy5.Text = "Copy x5 Cards";
             this.toolStripMenuItemCopy5.Click += new System.EventHandler(this.toolStripMenuItemCopy5_Click);
             // 
@@ -798,7 +798,7 @@
             // 
             this.toolStripMenuItemFillAll.Image = global::CustomSetBuilder.Properties.Resources.arrow_switch;
             this.toolStripMenuItemFillAll.Name = "toolStripMenuItemFillAll";
-            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(184, 22);
             this.toolStripMenuItemFillAll.Text = "Copy x9 Cards";
             this.toolStripMenuItemFillAll.Click += new System.EventHandler(this.ctxMenuItemFillAll_Click);
             // 
