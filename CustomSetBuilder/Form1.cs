@@ -65,12 +65,9 @@ namespace CustomSetBuilder
             tabPage1.Controls.Add(ucTabPages[0]);
             selectedPage = (UCTabPage)tabPage1.Controls[0];
 
-            UserSettings settings = UserSettings.Load();
-
-            if (!string.IsNullOrEmpty(settings.lastFolder))
-            {
-                ListDirectory(treeViewFolders,settings.lastFolder);
-            }
+            
+            //ListDirectory(treeViewFolders,@"C:\\");
+            
             
         }
 
@@ -409,20 +406,12 @@ namespace CustomSetBuilder
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            var selectedPath = string.Empty;
-            UserSettings settings = UserSettings.Load();
-
-            if (!string.IsNullOrEmpty(settings.lastFolder))
-            {
-                saveFileDialog1.InitialDirectory = settings.lastFolder;
-            }         
+            var selectedPath = string.Empty;                
             if (document != null)
             {
 
                 string name = saveFileDialog1.FileName;
                 document.Save(name);
-
-                settings.Save();
             }
         }
 
@@ -498,13 +487,7 @@ namespace CustomSetBuilder
         {            
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-               
                 ChooseFolder(folderBrowserDialog1.SelectedPath);
-
-                UserSettings settings = UserSettings.Load();
-                settings.lastFolder = folderBrowserDialog1.SelectedPath;
-                settings.Save();
-
             }
 
             
@@ -753,12 +736,6 @@ namespace CustomSetBuilder
 
             AddnewTabPage();
 
-            UserSettings settings = UserSettings.Load();
-
-            if (!string.IsNullOrEmpty(settings.lastFolder))
-            {
-                selectedPath = settings.lastFolder;
-            }
             ChooseFolder(selectedPath);
 
             for (int i = 0; i < 9; i++)
