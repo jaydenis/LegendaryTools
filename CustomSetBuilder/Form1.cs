@@ -826,5 +826,10 @@ namespace CustomSetBuilder
         {
             CopyImageX(1);
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("https://github.com/jaydenis/LegendaryTools");
+        }
     }
 }
