@@ -76,7 +76,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.treeViewFolders = new System.Windows.Forms.TreeView();
             this.ctxPreviewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCopy3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCopy5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFillAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -605,31 +604,23 @@
             // ctxPreviewMenu
             // 
             this.ctxPreviewMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyCardToolStripMenuItem,
             this.toolStripMenuItemCopy3,
             this.toolStripMenuItemCopy5,
             this.toolStripMenuItemFillAll});
             this.ctxPreviewMenu.Name = "ctxPreviewMenu";
-            this.ctxPreviewMenu.Size = new System.Drawing.Size(151, 92);
-            // 
-            // copyCardToolStripMenuItem
-            // 
-            this.copyCardToolStripMenuItem.Name = "copyCardToolStripMenuItem";
-            this.copyCardToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.copyCardToolStripMenuItem.Text = "Copy Card";
-            this.copyCardToolStripMenuItem.Click += new System.EventHandler(this.copyCardToolStripMenuItem_Click);
+            this.ctxPreviewMenu.Size = new System.Drawing.Size(181, 92);
             // 
             // toolStripMenuItemCopy3
             // 
             this.toolStripMenuItemCopy3.Name = "toolStripMenuItemCopy3";
-            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemCopy3.Text = "Copy x3 Cards";
             this.toolStripMenuItemCopy3.Click += new System.EventHandler(this.toolStripMenuItemCopy3_Click);
             // 
             // toolStripMenuItemCopy5
             // 
             this.toolStripMenuItemCopy5.Name = "toolStripMenuItemCopy5";
-            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemCopy5.Text = "Copy x5 Cards";
             this.toolStripMenuItemCopy5.Click += new System.EventHandler(this.toolStripMenuItemCopy5_Click);
             // 
@@ -637,7 +628,7 @@
             // 
             this.toolStripMenuItemFillAll.Image = global::CustomSetBuilder.Properties.Resources.arrow_switch;
             this.toolStripMenuItemFillAll.Name = "toolStripMenuItemFillAll";
-            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemFillAll.Text = "Copy x9 Cards";
             this.toolStripMenuItemFillAll.Click += new System.EventHandler(this.ctxMenuItemFillAll_Click);
             // 
@@ -824,7 +815,6 @@
         private System.Windows.Forms.PictureBox picCardBack;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCopy3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCopy5;
-        private System.Windows.Forms.ToolStripMenuItem copyCardToolStripMenuItem;
         private System.Windows.Forms.Label lblVersion;
     }
 }

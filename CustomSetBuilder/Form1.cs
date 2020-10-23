@@ -63,16 +63,9 @@ namespace CustomSetBuilder
             }
             
             UCTabPage ucTab = new UCTabPage();
-            ucTab.picCardBackImage = picCardBack.BackgroundImage;
             ucTabPages.Add(ucTab);
-
             tabPage1.Controls.Add(ucTabPages[0]);
             selectedPage = (UCTabPage)tabPage1.Controls[0];
-
-            
-            //ListDirectory(treeViewFolders,@"C:\\");
-            
-            
         }
 
         public void DrawPage(PdfPage page, List<Image> currentImageList)
@@ -149,8 +142,6 @@ namespace CustomSetBuilder
                         DrawPage(page, tabPage.GetImages());
                     }
                 }
-
-
 
                 if (chkIncludeCardBacks.Checked)
                 {                   
@@ -691,11 +682,11 @@ namespace CustomSetBuilder
             TabPage tabPage = new TabPage($"Page {pageCount++}");
 
             UCTabPage ucTab = new UCTabPage();
-            ucTab.picCardBackImage = picCardBack.BackgroundImage;
             ucTabPages.Add(ucTab);
             tabPage.Controls.Add(ucTab);
-
             tabControl1.TabPages.Add(tabPage);
+            tabControl1.SelectedTab = tabPage;
+            selectedPage = (UCTabPage)tabPage.Controls[0];
         }
         
         private void toolStripMenuItemCopy3_Click(object sender, EventArgs e)

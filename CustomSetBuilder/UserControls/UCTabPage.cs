@@ -118,7 +118,8 @@ namespace CustomSetBuilder.UserControls
             int i = 0;
             foreach(PictureBox pictureBox1 in tableLayoutPanel1.Controls)
             {
-                pictureBox1.Image = new Bitmap(imageList[i]);
+                if(imageList[i] != null)
+                    pictureBox1.Image = new Bitmap(imageList[i]);
                 i++;
             }
 
