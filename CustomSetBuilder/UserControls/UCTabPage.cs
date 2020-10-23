@@ -14,9 +14,13 @@ namespace CustomSetBuilder.UserControls
     public partial class UCTabPage : UserControl
     {
         public List<Image> imageListTemp { get; set; }
+        public List<Image> imageListPopulated { get; set; }
         public List<string> imageList { get; set; }
         public List<PictureBox> picBoxes { get; set; }
         public string selectedImageNode { get; set; }
+
+        public int ImageCount = 0;
+
         public PictureBox picPreview;
         string path;
         PictureBox activePictureBox;
@@ -35,17 +39,11 @@ namespace CustomSetBuilder.UserControls
             layoutPanel = tableLayoutPanel1;
             AllowDrop = true;
             LoadTable();
+
+            imageListPopulated = new List<Image>();
         }
 
-        //public UCTabPage(List<Image> imageListTemp)
-        //{
-        //    InitializeComponent();
-        //    LoadTable(imageListTemp);
-        //    layoutPanel = tableLayoutPanel1;
-        //    AllowDrop = true;
-            
-        //}
-
+ 
         public void LoadTable()
         {
             picBoxes = new List<PictureBox>();
@@ -116,10 +114,15 @@ namespace CustomSetBuilder.UserControls
         public void LoadTable(List<Image> imageList)
         {
             int i = 0;
-            foreach(PictureBox pictureBox1 in tableLayoutPanel1.Controls)
+
+            foreach (PictureBox pictureBox1 in tableLayoutPanel1.Controls)
             {
-                if(imageList[i] != null)
+                if (imageList.ElementAtOrDefault(i) != null)
+                {
+                    ImageCount++;
                     pictureBox1.Image = new Bitmap(imageList[i]);
+                    imageListPopulated.Add(pictureBox1.Image);
+                }
                 i++;
             }
 
@@ -178,8 +181,6 @@ namespace CustomSetBuilder.UserControls
             target.Image = source.Image;
             source.Image = temp;
 
-           
-
             if (imageListTemp != null)
             {
                 if (imageListTemp.Contains(source.Image))
@@ -195,7 +196,10 @@ namespace CustomSetBuilder.UserControls
                 };
             }
 
-           
+            imageListPopulated.Add(target.Image);
+
+            //LoadTable(imageListTemp);
+
         }
 
         public void SelectBox(PictureBox pb)
@@ -215,26 +219,20 @@ namespace CustomSetBuilder.UserControls
 
       
 
-        public void CopyImageX(int copyCount)
+        public void CopyImageX(int copyCount, Image currentImage)
         {
             try
             {
 
-                if (picPreview.Image == null && selectedPic == null)
+                if (currentImage == null)
                     return;
-
-                if (picPreview.Image != null)
-                    selectedPic = picPreview;
-                else if (selectedPic != null)
-                    picPreview = selectedPic;
-                else
-                    return;
+                
 
                 if (imageListTemp == null)
                     imageListTemp = new List<Image>();
 
                 for (int i = 0; i < copyCount; i++)
-                    imageListTemp.Add(selectedPic.Image);
+                    imageListTemp.Add(currentImage);
 
                 if (imageListTemp.Count > 9 && copyCount > 0)
                     imageListTemp.RemoveRange(0, copyCount);

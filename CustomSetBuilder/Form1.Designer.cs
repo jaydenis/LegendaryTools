@@ -51,7 +51,6 @@
             this.lblVersion = new System.Windows.Forms.Label();
             this.chkIncludeCardBacks = new System.Windows.Forms.CheckBox();
             this.btnCreatePDF = new System.Windows.Forms.Button();
-            this.chkLinkSpacing = new System.Windows.Forms.CheckBox();
             this.panelPreview = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.picPreviewTopRight = new System.Windows.Forms.PictureBox();
@@ -261,7 +260,6 @@
             this.panel1.Controls.Add(this.lblVersion);
             this.panel1.Controls.Add(this.chkIncludeCardBacks);
             this.panel1.Controls.Add(this.btnCreatePDF);
-            this.panel1.Controls.Add(this.chkLinkSpacing);
             this.panel1.Controls.Add(this.panelPreview);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
@@ -274,7 +272,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 49);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(330, 817);
+            this.panel1.Size = new System.Drawing.Size(280, 817);
             this.panel1.TabIndex = 2;
             // 
             // lblVersion
@@ -313,20 +311,6 @@
             this.btnCreatePDF.UseVisualStyleBackColor = false;
             this.btnCreatePDF.Click += new System.EventHandler(this.btnCreatePDF_Click);
             // 
-            // chkLinkSpacing
-            // 
-            this.chkLinkSpacing.AutoSize = true;
-            this.chkLinkSpacing.BackColor = System.Drawing.Color.Transparent;
-            this.chkLinkSpacing.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLinkSpacing.Location = new System.Drawing.Point(193, 110);
-            this.chkLinkSpacing.Name = "chkLinkSpacing";
-            this.chkLinkSpacing.Size = new System.Drawing.Size(50, 17);
-            this.chkLinkSpacing.TabIndex = 15;
-            this.chkLinkSpacing.Text = "Link";
-            this.chkLinkSpacing.UseVisualStyleBackColor = false;
-            this.chkLinkSpacing.Visible = false;
-            this.chkLinkSpacing.CheckStateChanged += new System.EventHandler(this.chkLinkSpacing_CheckStateChanged);
-            // 
             // panelPreview
             // 
             this.panelPreview.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -342,13 +326,13 @@
             this.panelPreview.Controls.Add(this.picPreviewBottomLeft);
             this.panelPreview.Location = new System.Drawing.Point(15, 158);
             this.panelPreview.Name = "panelPreview";
-            this.panelPreview.Size = new System.Drawing.Size(295, 399);
+            this.panelPreview.Size = new System.Drawing.Size(251, 337);
             this.panelPreview.TabIndex = 14;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(182, 39);
+            this.pictureBox2.Location = new System.Drawing.Point(162, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(70, 100);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -358,7 +342,7 @@
             // picPreviewTopRight
             // 
             this.picPreviewTopRight.Image = ((System.Drawing.Image)(resources.GetObject("picPreviewTopRight.Image")));
-            this.picPreviewTopRight.Location = new System.Drawing.Point(107, 39);
+            this.picPreviewTopRight.Location = new System.Drawing.Point(87, 12);
             this.picPreviewTopRight.Name = "picPreviewTopRight";
             this.picPreviewTopRight.Size = new System.Drawing.Size(70, 100);
             this.picPreviewTopRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -368,7 +352,7 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(182, 250);
+            this.pictureBox8.Location = new System.Drawing.Point(162, 223);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(70, 100);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -378,7 +362,7 @@
             // pictureBox7
             // 
             this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(107, 250);
+            this.pictureBox7.Location = new System.Drawing.Point(87, 223);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(70, 100);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -388,7 +372,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(182, 144);
+            this.pictureBox1.Location = new System.Drawing.Point(162, 117);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(70, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -398,7 +382,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(32, 249);
+            this.pictureBox6.Location = new System.Drawing.Point(12, 222);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(70, 100);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -408,7 +392,7 @@
             // picPreviewBottomRight
             // 
             this.picPreviewBottomRight.Image = ((System.Drawing.Image)(resources.GetObject("picPreviewBottomRight.Image")));
-            this.picPreviewBottomRight.Location = new System.Drawing.Point(107, 144);
+            this.picPreviewBottomRight.Location = new System.Drawing.Point(87, 117);
             this.picPreviewBottomRight.Name = "picPreviewBottomRight";
             this.picPreviewBottomRight.Size = new System.Drawing.Size(70, 100);
             this.picPreviewBottomRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -418,7 +402,7 @@
             // picPreviewTopLeft
             // 
             this.picPreviewTopLeft.Image = ((System.Drawing.Image)(resources.GetObject("picPreviewTopLeft.Image")));
-            this.picPreviewTopLeft.Location = new System.Drawing.Point(32, 39);
+            this.picPreviewTopLeft.Location = new System.Drawing.Point(12, 12);
             this.picPreviewTopLeft.Name = "picPreviewTopLeft";
             this.picPreviewTopLeft.Size = new System.Drawing.Size(70, 100);
             this.picPreviewTopLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -428,7 +412,7 @@
             // picPreviewBottomLeft
             // 
             this.picPreviewBottomLeft.Image = ((System.Drawing.Image)(resources.GetObject("picPreviewBottomLeft.Image")));
-            this.picPreviewBottomLeft.Location = new System.Drawing.Point(32, 144);
+            this.picPreviewBottomLeft.Location = new System.Drawing.Point(12, 117);
             this.picPreviewBottomLeft.Name = "picPreviewBottomLeft";
             this.picPreviewBottomLeft.Size = new System.Drawing.Size(70, 100);
             this.picPreviewBottomLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -461,7 +445,12 @@
             // 
             this.numLeftMargin.Location = new System.Drawing.Point(129, 69);
             this.numLeftMargin.Maximum = new decimal(new int[] {
-            40,
+            50,
+            0,
+            0,
+            0});
+            this.numLeftMargin.Minimum = new decimal(new int[] {
+            10,
             0,
             0,
             0});
@@ -469,7 +458,7 @@
             this.numLeftMargin.Size = new System.Drawing.Size(53, 20);
             this.numLeftMargin.TabIndex = 9;
             this.numLeftMargin.Value = new decimal(new int[] {
-            20,
+            40,
             0,
             0,
             0});
@@ -480,6 +469,11 @@
             this.numTopMargin.Location = new System.Drawing.Point(129, 43);
             this.numTopMargin.Maximum = new decimal(new int[] {
             50,
+            0,
+            0,
+            0});
+            this.numTopMargin.Minimum = new decimal(new int[] {
+            10,
             0,
             0,
             0});
@@ -553,7 +547,7 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(330, 49);
+            this.splitter1.Location = new System.Drawing.Point(280, 49);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 817);
             this.splitter1.TabIndex = 3;
@@ -586,7 +580,7 @@
             this.treeViewFolders.HotTracking = true;
             this.treeViewFolders.ImageIndex = 0;
             this.treeViewFolders.ImageList = this.imageList1;
-            this.treeViewFolders.Location = new System.Drawing.Point(1028, 82);
+            this.treeViewFolders.Location = new System.Drawing.Point(973, 89);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 2;
             this.treeViewFolders.Size = new System.Drawing.Size(268, 480);
@@ -608,19 +602,19 @@
             this.toolStripMenuItemCopy5,
             this.toolStripMenuItemFillAll});
             this.ctxPreviewMenu.Name = "ctxPreviewMenu";
-            this.ctxPreviewMenu.Size = new System.Drawing.Size(181, 92);
+            this.ctxPreviewMenu.Size = new System.Drawing.Size(151, 70);
             // 
             // toolStripMenuItemCopy3
             // 
             this.toolStripMenuItemCopy3.Name = "toolStripMenuItemCopy3";
-            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemCopy3.Size = new System.Drawing.Size(150, 22);
             this.toolStripMenuItemCopy3.Text = "Copy x3 Cards";
             this.toolStripMenuItemCopy3.Click += new System.EventHandler(this.toolStripMenuItemCopy3_Click);
             // 
             // toolStripMenuItemCopy5
             // 
             this.toolStripMenuItemCopy5.Name = "toolStripMenuItemCopy5";
-            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemCopy5.Size = new System.Drawing.Size(150, 22);
             this.toolStripMenuItemCopy5.Text = "Copy x5 Cards";
             this.toolStripMenuItemCopy5.Click += new System.EventHandler(this.toolStripMenuItemCopy5_Click);
             // 
@@ -628,7 +622,7 @@
             // 
             this.toolStripMenuItemFillAll.Image = global::CustomSetBuilder.Properties.Resources.arrow_switch;
             this.toolStripMenuItemFillAll.Name = "toolStripMenuItemFillAll";
-            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemFillAll.Size = new System.Drawing.Size(150, 22);
             this.toolStripMenuItemFillAll.Text = "Copy x9 Cards";
             this.toolStripMenuItemFillAll.Click += new System.EventHandler(this.ctxMenuItemFillAll_Click);
             // 
@@ -643,7 +637,7 @@
             // 
             // btnDirectorySelector
             // 
-            this.btnDirectorySelector.Location = new System.Drawing.Point(1028, 53);
+            this.btnDirectorySelector.Location = new System.Drawing.Point(973, 53);
             this.btnDirectorySelector.Name = "btnDirectorySelector";
             this.btnDirectorySelector.Size = new System.Drawing.Size(268, 23);
             this.btnDirectorySelector.TabIndex = 11;
@@ -657,7 +651,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl1.HotTrack = true;
-            this.tabControl1.Location = new System.Drawing.Point(333, 49);
+            this.tabControl1.Location = new System.Drawing.Point(283, 49);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -681,7 +675,7 @@
             this.picPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPreview.ContextMenuStrip = this.ctxPreviewMenu;
             this.picPreview.Image = ((System.Drawing.Image)(resources.GetObject("picPreview.Image")));
-            this.picPreview.Location = new System.Drawing.Point(1032, 575);
+            this.picPreview.Location = new System.Drawing.Point(973, 575);
             this.picPreview.Name = "picPreview";
             this.picPreview.Size = new System.Drawing.Size(180, 250);
             this.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -800,7 +794,6 @@
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.CheckBox chkLinkSpacing;
         private System.Windows.Forms.TreeView treeViewFolders;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox picPreview;

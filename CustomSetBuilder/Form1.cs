@@ -223,8 +223,7 @@ namespace CustomSetBuilder
                     imageCount++;
                 }
             }
-            if (imageCount > 0)
-                directoryNode.ExpandAll();
+            
 
             return directoryNode;
         }
@@ -397,12 +396,7 @@ namespace CustomSetBuilder
                 pictureBox.Location = new Point(x, y);
 
             }
-        }
-
-        private void chkLinkSpacing_CheckStateChanged(object sender, EventArgs e)
-        {
-            linkSpacing = chkLinkSpacing.Checked;
-        }
+        }      
 
         private void numX_ValueChanged(object sender, EventArgs e)
         {
@@ -504,8 +498,7 @@ namespace CustomSetBuilder
             {
                 picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));               
                 this.selectedImageNode = Convert.ToString(e.Node.Tag);
-                picPreview.Tag = this.selectedImageNode;
-                selectedPage.picPreview = picPreview;
+                picPreview.Tag = this.selectedImageNode;                
                 selectedPage.SelectBox(picPreview);
             }
             
@@ -536,9 +529,42 @@ namespace CustomSetBuilder
         {
             try
             {
-                selectedPage.CopyImageX(9);
+                if (selectedPage.ImageCount + 9 > 9)
+                    AddnewTabPage();
+
+                selectedPage.CopyImageX(9, picPreview.Image);
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItemCopy3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedPage.ImageCount + 3 > 9)
+                    AddnewTabPage();
+
+                selectedPage.CopyImageX(3, picPreview.Image);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItemCopy5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedPage.ImageCount + 5 > 9)
+                    AddnewTabPage();
+
+                selectedPage.CopyImageX(5, picPreview.Image);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -566,87 +592,7 @@ namespace CustomSetBuilder
             selectedPage.selectedPic = picPreview;
         }
 
-        private void toolStripMenuItemFillChecked_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if(imageListChecked.Count() > 0)
-                {
-                    if (selectedPage.imageListTemp == null)
-                        selectedPage.imageListTemp = new List<Image>();
-
-
-                    foreach (var item in imageListChecked)
-                    {
-                        image = new Bitmap(item);
-                        selectedPage.imageListTemp.Add(image);
-                    }
-
-                    if (selectedPage.imageListTemp.Count > 9 && imageListChecked.Count > 0)
-                        selectedPage.imageListTemp.RemoveRange(0, imageListChecked.Count);
-
-                    
-
-                    if(selectedPage.imageListTemp.Count < 9)
-                    {
-                        int dif = 9 - selectedPage.imageListTemp.Count;
-                        for (int i=0; i < dif; i++)
-                        {
-                            selectedPage.imageListTemp.Add(picPreviewBottomRight.Image);
-                        }
-                    }
-
-                    
-
-                    selectedPage.LoadTable(selectedPage.imageListTemp);
-
-                    imageListChecked.Clear();
-
-                    foreach(TreeNode node in treeViewFolders.Nodes)
-                    {
-                        node.Checked = false;
-                        foreach(TreeNode node1 in node.Nodes)
-                        {
-                            node1.Checked = false;
-                            if (node1.Nodes.Count > 0)
-                            {
-                                foreach (TreeNode node2 in node1.Nodes)
-                                {
-                                    node2.Checked = false;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                selectedPage.imageListTemp = new List<Image>();
-               // imageListChecked.Clear();
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private void treeViewFolders_AfterCheck(object sender, TreeViewEventArgs e)
-        {
-            try
-            {
-                if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0)
-                {
-                    return;
-                }
-                else
-                {
-                    imageListChecked.Add(Convert.ToString(e.Node.Tag));
-                  
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
+      
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
             tabControl1.TabPages.Clear();
@@ -687,24 +633,10 @@ namespace CustomSetBuilder
             selectedPage = (UCTabPage)tabPage.Controls[0];
         }
         
-        private void toolStripMenuItemCopy3_Click(object sender, EventArgs e)
-        {
-            selectedPage.CopyImageX(3);
-        }
-
-        private void toolStripMenuItemCopy5_Click(object sender, EventArgs e)
-        {
-            selectedPage.CopyImageX(5);
-        }
-
-        private void copyCardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           // selectedPage.SwapImages(selectedPage.selectedPic,this.activePictureBox);
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("https://github.com/jaydenis/LegendaryTools");
+            AboutBox1 aboutBox1 = new AboutBox1();
+            aboutBox1.Show();
         }
 
         private void treeViewFolders_MouseHover(object sender, EventArgs e)
@@ -715,8 +647,6 @@ namespace CustomSetBuilder
         private void treeViewFolders_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
         {
 
-           
-
             if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0 || e.Node.ImageIndex == -1)
             {
                 return;
@@ -726,16 +656,11 @@ namespace CustomSetBuilder
 
                 
                 picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));
-
                 this.selectedImageNode = Convert.ToString(e.Node.Tag);
-                picPreview.Tag = this.selectedImageNode;
-                selectedPage.picPreview = picPreview;
+                picPreview.Tag = this.selectedImageNode;                
                 selectedPage.SelectBox(picPreview);
 
-               // ToolTipWithImage t = new ToolTipWithImage();
-               // t.Text = "Card";
-               // t.ImageFile = Convert.ToString(e.Node.Tag);
-               // t.SetToolTip(treeViewFolders);
+              
             }
         }
 
