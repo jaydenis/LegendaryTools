@@ -50,8 +50,8 @@ namespace CustomSetBuilder.UserControls
         {
             picBoxes = new List<PictureBox>();
             tableLayoutPanel1.Controls.Clear();
-            int x = 10;
-            int y = 10;
+            int x = 20;
+            int y = 30;
             int h = 250;
             int w = 180;
             int rowNumber = 0;

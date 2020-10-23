@@ -88,41 +88,39 @@ namespace CustomSetBuilder
 
             foreach (var item in currentImageList)
             {
-
-                if (rowNumber == 0)
-                    y = topMargin + y_offset;
-
-                if (rowNumber == 1)
-                    y = h + topMargin + (y_offset * 2);
-
-                if (rowNumber == 2)
-                    y = (h * 2) + topMargin + (y_offset * 3);
-
-                if (colNumber == 0)
-                    x = leftMargin + x_offset;
-
-                if (colNumber == 1)
-                    x = w + leftMargin + (x_offset * 2);
-
-                if (colNumber == 2)
+                if (item != null)
                 {
-                    x = (w * 2) + leftMargin + (x_offset * 3);
-                    colNumber = 0;
-                    rowNumber++;
+                    if (rowNumber == 0)
+                        y = topMargin + y_offset;
+
+                    if (rowNumber == 1)
+                        y = h + topMargin + (y_offset * 2);
+
+                    if (rowNumber == 2)
+                        y = (h * 2) + topMargin + (y_offset * 3);
+
+                    if (colNumber == 0)
+                        x = leftMargin + x_offset;
+
+                    if (colNumber == 1)
+                        x = w + leftMargin + (x_offset * 2);
+
+                    if (colNumber == 2)
+                    {
+                        x = (w * 2) + leftMargin + (x_offset * 3);
+                        colNumber = 0;
+                        rowNumber++;
+                    }
+                    else
+                    {
+                        colNumber++;
+                    }
+
+                    MemoryStream strm = new MemoryStream();
+                    item.Save(strm, System.Drawing.Imaging.ImageFormat.Png);
+                    XImage image = XImage.FromStream(strm);
+                    gfx.DrawImage(image, x, y, w, h);
                 }
-                else
-                {
-                    colNumber++;
-                }
-
-                //var fileName = item;
-                MemoryStream strm = new MemoryStream();
-                item.Save(strm, System.Drawing.Imaging.ImageFormat.Png);
-
-                //XImage xfoto = XImage.FromStream(strm);
-
-                XImage image = XImage.FromStream(strm);
-                gfx.DrawImage(image, x, y, w, h);
 
             }
         }
