@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace CustomSetBuilder
     public partial class Form1 : Form
     {
         List<Image> imageListBacks = new List<Image>();
-        List<string> imageList = new List<string>();
+      
         List<string> imageListChecked = new List<string>();
         protected bool validData;
         string path;
@@ -36,8 +37,6 @@ namespace CustomSetBuilder
         private States CurrentState = States.Idle;
         private DragDropEffects CurrentEffect = DragDropEffects.Move;
        
-
-        List<PictureBox> boxes = new List<PictureBox>();
        
 
         List<UCTabPage> ucTabPages = new List<UCTabPage>();
@@ -47,6 +46,11 @@ namespace CustomSetBuilder
         public Form1()
         {
             InitializeComponent();
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            string versionDetails = $"v{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            Text = Text + " " + versionDetails; //change form title
+            lblVersion.Text = versionDetails;
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -58,8 +62,8 @@ namespace CustomSetBuilder
                 imageListBacks.Add(picCardBack.BackgroundImage);                
             }
             
-            UCTabPage ucTab = new UCTabPage(imageListBacks);
-
+            UCTabPage ucTab = new UCTabPage();
+            ucTab.picCardBackImage = picCardBack.BackgroundImage;
             ucTabPages.Add(ucTab);
 
             tabPage1.Controls.Add(ucTabPages[0]);
@@ -142,17 +146,15 @@ namespace CustomSetBuilder
                     foreach (UCTabPage tabPage in tab.Controls)
                     {
                         page = document.AddPage();
-                        DrawPage(page, tabPage.imageListTemp);
+                        DrawPage(page, tabPage.GetImages());
                     }
                 }
 
 
 
                 if (chkIncludeCardBacks.Checked)
-                {
-                    imageList.Clear();
+                {                   
                     page = document.AddPage();
-
                     DrawPage(page, imageListBacks);
                 }
 
@@ -168,7 +170,7 @@ namespace CustomSetBuilder
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString(),"Doh!",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
         }
 
@@ -240,64 +242,10 @@ namespace CustomSetBuilder
 
         public void ChooseFolder(string selectedPath)
         {
-            txtFolderPath.Text = selectedPath;
+           
             ListDirectory(treeViewFolders, selectedPath);
         }
-
-        private void SelectBox(PictureBox pb)
-        {
-            if (selectedPage.selectedPic != pb)
-            {
-                selectedPage.selectedPic = pb;
-            }
-            else
-            {
-                selectedPage.selectedPic = null;
-            }
-
-            // Cause each box to repaint
-            foreach (var box in boxes) box.Invalidate();
-        }
-
-        private void SwapImages(PictureBox source, PictureBox target)
-        {
-            if (source.Image == null && target.Image == null)
-            {
-                return;
-            }
-
-            if (imageList.Contains(Convert.ToString(source.Tag)))
-            {
-                imageList.Remove(Convert.ToString(source.Tag));
-            }
-
-            var temp = target.Image;
-            target.Tag = source.Tag;
-            target.Image = source.Image;
-            source.Image = temp;
-        }
-
-        private void PictureBox_DoubleClick(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "Image Files(*.jpg; *.png)|*.jpg; *.png";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    // display image in picture box  
-                    PictureBox pictureBox = (PictureBox)sender;
-                    imageList.Add(openFileDialog1.FileName);
-                    pictureBox.Image = new Bitmap(openFileDialog1.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"error.\n\nError message: {ex.Message}\n\n" +
-                    $"Details:\n\n{ex.StackTrace}");
-                }
-            }
-        }
-      
+        
         private void PictureBox_DragOver(object sender, DragEventArgs e)
         {
             this.activePictureBox = (PictureBox)sender;
@@ -364,10 +312,10 @@ namespace CustomSetBuilder
                         {
                             Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
                             // You can swap the images out, replace the target image, etc.
-                            SwapImages(source, target);
+                            selectedPage.SwapImages(source, target);
 
                             selectedPage.selectedPic = null;
-                            SelectBox(target);
+                            selectedPage.SelectBox(target);
                             return;
                         }
                     }
@@ -380,10 +328,10 @@ namespace CustomSetBuilder
                             {
                                 Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
                                 // You can swap the images out, replace the target image, etc.
-                                SwapImages(source, target);
+                                selectedPage.SwapImages(source, target);
 
                                 selectedPage.selectedPic = null;
-                                SelectBox(target);
+                                selectedPage.SelectBox(target);
                                 return;
                             }
                         }
@@ -565,12 +513,11 @@ namespace CustomSetBuilder
             }
             else
             {
-                
-                imageList.Add(Convert.ToString(e.Node.Tag));
-                picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));
+                picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));               
                 this.selectedImageNode = Convert.ToString(e.Node.Tag);
                 picPreview.Tag = this.selectedImageNode;
-                SelectBox(picPreview);
+                selectedPage.picPreview = picPreview;
+                selectedPage.SelectBox(picPreview);
             }
             
 
@@ -578,8 +525,8 @@ namespace CustomSetBuilder
 
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
-            
-            SelectBox((PictureBox)sender);
+
+            selectedPage.SelectBox((PictureBox)sender);
         }
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
@@ -600,19 +547,7 @@ namespace CustomSetBuilder
         {
             try
             {
-                CopyImageX(9);
-                //selectedPage.imageListTemp = new List<Image>();
-                //selectedPage.imageList = new List<string>();
-                //if (picPreview.Image != null)
-                //{
-                //    for (int i = 0; i < 9; i++)
-                //    {
-                //        selectedPage.imageListTemp.Add(picPreview.Image);
-                //        selectedPage.imageList.Add(Convert.ToString(picPreview.Tag));
-                //    }
-
-                //    selectedPage.LoadTable(selectedPage.imageListTemp);
-                //}
+                selectedPage.CopyImageX(9);
             }
             catch(Exception ex)
             {
@@ -725,16 +660,8 @@ namespace CustomSetBuilder
 
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            //imageListChecked.Clear();
-            imageList.Clear();
-            var selectedPath = @"C:\";
-
             tabControl1.TabPages.Clear();
-
             AddnewTabPage();
-
-            //ChooseFolder(selectedPath);
-
             for (int i = 0; i < 9; i++)
             {
                 imageListBacks.Add(picPreview.BackgroundImage);
@@ -763,73 +690,70 @@ namespace CustomSetBuilder
             int pageCount = tabControl1.TabPages.Count + 1;
             TabPage tabPage = new TabPage($"Page {pageCount++}");
 
-            UCTabPage ucTab = new UCTabPage(imageListBacks);
-
+            UCTabPage ucTab = new UCTabPage();
+            ucTab.picCardBackImage = picCardBack.BackgroundImage;
             ucTabPages.Add(ucTab);
             tabPage.Controls.Add(ucTab);
 
             tabControl1.TabPages.Add(tabPage);
         }
-
-        private void CopyImageX(int copyCount)
-        {
-            try
-            {
-
-                if (picPreview.Image == null && selectedPage.selectedPic == null)
-                    return;
-
-                if (picPreview.Image != null)
-                    selectedPage.selectedPic = picPreview;
-                else if (selectedPage.selectedPic != null)
-                    picPreview = selectedPage.selectedPic;
-                else
-                    return;
-
-                if (selectedPage.imageListTemp == null)
-                    selectedPage.imageListTemp = new List<Image>();               
-
-                for (int i = 0; i < copyCount; i++)
-                    selectedPage.imageListTemp.Add(selectedPage.selectedPic.Image);
-
-                if (selectedPage.imageListTemp.Count > 9 && copyCount > 0)
-                    selectedPage.imageListTemp.RemoveRange(0, copyCount);
-
-                if (selectedPage.imageListTemp.Count < 9)
-                {
-                    int dif = 9 - selectedPage.imageListTemp.Count;
-                    for (int i = 0; i < dif; i++)
-                    {
-                        selectedPage.imageListTemp.Add(picCardBack.Image);
-                    }
-                }
-
-                selectedPage.LoadTable(selectedPage.imageListTemp);
-            
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
+        
         private void toolStripMenuItemCopy3_Click(object sender, EventArgs e)
         {
-            CopyImageX(3);
+            selectedPage.CopyImageX(3);
         }
 
         private void toolStripMenuItemCopy5_Click(object sender, EventArgs e)
         {
-            CopyImageX(5);
+            selectedPage.CopyImageX(5);
         }
 
         private void copyCardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CopyImageX(1);
+           // selectedPage.SwapImages(selectedPage.selectedPic,this.activePictureBox);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("https://github.com/jaydenis/LegendaryTools");
+        }
+
+        private void treeViewFolders_MouseHover(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void treeViewFolders_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
+        {
+
+           
+
+            if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0 || e.Node.ImageIndex == -1)
+            {
+                return;
+            }
+            else
+            {
+
+                
+                picPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));
+
+                this.selectedImageNode = Convert.ToString(e.Node.Tag);
+                picPreview.Tag = this.selectedImageNode;
+                selectedPage.picPreview = picPreview;
+                selectedPage.SelectBox(picPreview);
+
+               // ToolTipWithImage t = new ToolTipWithImage();
+               // t.Text = "Card";
+               // t.ImageFile = Convert.ToString(e.Node.Tag);
+               // t.SetToolTip(treeViewFolders);
+            }
+        }
+
+        private void treeViewFolders_MouseLeave(object sender, EventArgs e)
+        {
+            //ToolTipWithImage t = new ToolTipWithImage();
+           // t.Dispose();
         }
     }
 }

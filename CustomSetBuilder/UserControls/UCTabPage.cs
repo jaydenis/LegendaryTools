@@ -25,6 +25,7 @@ namespace CustomSetBuilder.UserControls
         public PictureBox selectedPic { get; set; }
 
         protected Image image;
+        public Image picCardBackImage { get; set; }
 
         public TableLayoutPanel layoutPanel { get; set; }
 
@@ -32,16 +33,20 @@ namespace CustomSetBuilder.UserControls
         {
             InitializeComponent();
             layoutPanel = tableLayoutPanel1;
+            AllowDrop = true;
+            LoadTable();
         }
 
-        public UCTabPage(List<Image> imageListTemp)
-        {
-            InitializeComponent();
-            LoadTable(imageListTemp);
-            layoutPanel = tableLayoutPanel1;
-        }
+        //public UCTabPage(List<Image> imageListTemp)
+        //{
+        //    InitializeComponent();
+        //    LoadTable(imageListTemp);
+        //    layoutPanel = tableLayoutPanel1;
+        //    AllowDrop = true;
+            
+        //}
 
-        public void LoadTable(List<Image> imageListTemp)
+        public void LoadTable()
         {
             picBoxes = new List<PictureBox>();
             tableLayoutPanel1.Controls.Clear();
@@ -53,10 +58,10 @@ namespace CustomSetBuilder.UserControls
             int colNumber = 0;
             int x_offset = 0;
             int y_offset = 0;
-            int leftMargin = 10;
-            int topMargin = 10;
+            int leftMargin = 30;
+            int topMargin = 20;
 
-            foreach (var item in imageListTemp)
+            for(int i=0;i<9;i++) 
             {
                 if (rowNumber == 0)
                     y = topMargin + y_offset;
@@ -82,9 +87,11 @@ namespace CustomSetBuilder.UserControls
 
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Location = new Point(x, y);
-                pictureBox.Image = new Bitmap(item);
+                //pictureBox.Image = new Bitmap(item);
                 pictureBox.Size = new Size(180, 250);
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.BackColor = Color.LightSteelBlue;
+                pictureBox.BorderStyle = BorderStyle.FixedSingle;
                 pictureBox.AllowDrop = true;
                 pictureBox.DragOver += PictureBox_DragOver;
                 pictureBox.MouseMove += PictureBox_MouseMove;
@@ -106,13 +113,35 @@ namespace CustomSetBuilder.UserControls
             }
         }
 
+        public void LoadTable(List<Image> imageList)
+        {
+            int i = 0;
+            foreach(PictureBox pictureBox1 in tableLayoutPanel1.Controls)
+            {
+                pictureBox1.Image = new Bitmap(imageList[i]);
+                i++;
+            }
+
+        }
+
+        public List<Image> GetImages()
+        {
+            var list = new List<Image>();
+            foreach (PictureBox pictureBox1 in tableLayoutPanel1.Controls)
+            {
+                list.Add(pictureBox1.Image);               
+            }
+
+            return list;
+        }
+
         private bool GetFilename(out string filename, DragEventArgs e)
         {
             bool ret = false;
 
             filename = string.Empty;
 
-            if ((e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy)
+            if (e.AllowedEffect == DragDropEffects.Copy || e.AllowedEffect == DragDropEffects.Move)
             {
                 Array data = ((IDataObject)e.Data).GetData("FileDrop") as Array;
                 if (data != null)
@@ -136,7 +165,7 @@ namespace CustomSetBuilder.UserControls
             image = new Bitmap(path);
         }
 
-        private void SwapImages(PictureBox source, PictureBox target)
+        public void SwapImages(PictureBox source, PictureBox target)
         {
             if (source.Image == null && target.Image == null)
             {
@@ -148,25 +177,27 @@ namespace CustomSetBuilder.UserControls
             target.Image = source.Image;
             source.Image = temp;
 
-            if (imageList != null)
+           
+
+            if (imageListTemp != null)
             {
-                if (imageList.Contains(Convert.ToString(source.Tag)))
-                {
-                    imageList.Remove(Convert.ToString(source.Tag));
-                }
+                if (imageListTemp.Contains(source.Image))
+                    imageListTemp.Remove(source.Image);
+
+                imageListTemp.Add(target.Image);
             }
             else
             {
-                imageList = new List<string>
+                imageListTemp = new List<Image>
                 {
-                    Convert.ToString(target.Tag)
+                    target.Image
                 };
             }
 
            
         }
 
-        private void SelectBox(PictureBox pb)
+        public void SelectBox(PictureBox pb)
         {
             if (selectedPic != pb)
             {
@@ -181,6 +212,50 @@ namespace CustomSetBuilder.UserControls
             foreach (var box in picBoxes) box.Invalidate();
         }
 
+      
+
+        public void CopyImageX(int copyCount)
+        {
+            try
+            {
+
+                if (picPreview.Image == null && selectedPic == null)
+                    return;
+
+                if (picPreview.Image != null)
+                    selectedPic = picPreview;
+                else if (selectedPic != null)
+                    picPreview = selectedPic;
+                else
+                    return;
+
+                if (imageListTemp == null)
+                    imageListTemp = new List<Image>();
+
+                for (int i = 0; i < copyCount; i++)
+                    imageListTemp.Add(selectedPic.Image);
+
+                if (imageListTemp.Count > 9 && copyCount > 0)
+                    imageListTemp.RemoveRange(0, copyCount);
+
+                if (imageListTemp.Count < 9)
+                {
+                    int dif = 9 - imageListTemp.Count;
+                    for (int i = 0; i < dif; i++)
+                    {
+                        imageListTemp.Add(picCardBackImage);
+                    }
+                }
+
+                LoadTable(imageListTemp);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void PictureBox_DragOver(object sender, DragEventArgs e)
         {
             this.activePictureBox = (PictureBox)sender;
@@ -193,7 +268,7 @@ namespace CustomSetBuilder.UserControls
                 var pb = (PictureBox)sender;
                 if (pb.Image != null)
                 {
-                    pb.DoDragDrop(pb, DragDropEffects.Move);
+                    pb.DoDragDrop(pb, DragDropEffects.Copy);
                 }
             }
         }
@@ -222,24 +297,12 @@ namespace CustomSetBuilder.UserControls
         {
             try
             {
-                if (validData)
-                {
-                    while (getImageThread.IsAlive)
-                    {
-                        Application.DoEvents();
-                        Thread.Sleep(0);
-                    }
-
-                    this.activePictureBox.Image = image;
-                    this.activePictureBox.Tag = path;
-
-                }
-                else
-                {
+               
 
                     var target = (PictureBox)sender;
                     if (e.Data.GetDataPresent(typeof(Bitmap)) || e.Data.GetDataPresent(typeof(PictureBox)))
                     {
+                        picPreview = target;
                         if (e.Data.GetDataPresent(typeof(PictureBox)))
                         {
                             var source = (PictureBox)e.Data.GetData(typeof(PictureBox));
@@ -248,7 +311,8 @@ namespace CustomSetBuilder.UserControls
                                 Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
                                 // You can swap the images out, replace the target image, etc.
                                 SwapImages(source, target);
-
+                               
+                               
                                 selectedPic = null;
                                 SelectBox(target);
                                 return;
@@ -264,7 +328,6 @@ namespace CustomSetBuilder.UserControls
                                 Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
                                 // You can swap the images out, replace the target image, etc.
                                 SwapImages(source, target);
-
                                 selectedPic = null;
                                 SelectBox(target);
                                 return;
@@ -274,7 +337,7 @@ namespace CustomSetBuilder.UserControls
 
 
                     Console.WriteLine("Don't do DragDrop");
-                }
+                
             }
             catch (Exception ex)
             {
