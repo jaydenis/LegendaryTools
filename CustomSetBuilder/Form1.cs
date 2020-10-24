@@ -400,7 +400,6 @@ namespace CustomSetBuilder
 
         private void numX_ValueChanged(object sender, EventArgs e)
         {
-            if (linkSpacing)
                 y_offset = Convert.ToInt32(numX.Value);
 
             ImageLayout_Changed(sender, e);
@@ -408,7 +407,6 @@ namespace CustomSetBuilder
 
         private void numY_ValueChanged(object sender, EventArgs e)
         {
-            if (linkSpacing)
                 x_offset = Convert.ToInt32(numY.Value);
 
             ImageLayout_Changed(sender, e);
