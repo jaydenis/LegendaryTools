@@ -1,4 +1,4 @@
-﻿using CustomSetBuilder.UserControls;
+﻿
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
@@ -618,6 +618,7 @@ namespace CustomSetBuilder
                 SelectedPictires = new List<Image>();
                 activePictureBoxStaged = null;
                 btnCreatePDF.Enabled = false;
+                labelCardCount.Text = $"0 Cards";
             }
             catch(Exception ex)
             {
