@@ -28,6 +28,10 @@ namespace CustomSetBuilder
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ChooseFolder(folderBrowserDialog1.SelectedPath);
+            }
             //DirectoryInfo info = new DirectoryInfo(@"../..");
             //if (info.Exists)
             //{
@@ -409,6 +413,7 @@ namespace CustomSetBuilder
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.ContextMenuStrip = this.contextMenuStaged;
                 pb.MouseDown += Pb_MouseDown;
+                pb.Click += Pb_Click;
 
                 int i = 1;
                 foreach (PictureBox p in flowLayoutPanelStage.Controls)
@@ -426,6 +431,11 @@ namespace CustomSetBuilder
             {
                 return null;
             }
+        }
+
+        private void Pb_Click(object sender, EventArgs e)
+        {
+            SelectBoxStaged((PictureBox)sender);
         }
 
         private void Pb_MouseDown(object sender, MouseEventArgs e)

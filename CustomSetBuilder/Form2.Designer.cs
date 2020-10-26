@@ -127,11 +127,11 @@
             this.treeViewFolders.HotTracking = true;
             this.treeViewFolders.ImageIndex = 0;
             this.treeViewFolders.ImageList = this.imageList1;
-            this.treeViewFolders.Location = new System.Drawing.Point(0, 19);
+            this.treeViewFolders.Location = new System.Drawing.Point(0, 32);
             this.treeViewFolders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 1;
-            this.treeViewFolders.Size = new System.Drawing.Size(217, 530);
+            this.treeViewFolders.Size = new System.Drawing.Size(217, 517);
             this.treeViewFolders.TabIndex = 1;
             this.treeViewFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolders_AfterSelect);
             // 
@@ -149,7 +149,7 @@
             this.btnSelectDirectory.Location = new System.Drawing.Point(0, 0);
             this.btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSelectDirectory.Name = "btnSelectDirectory";
-            this.btnSelectDirectory.Size = new System.Drawing.Size(217, 19);
+            this.btnSelectDirectory.Size = new System.Drawing.Size(217, 32);
             this.btnSelectDirectory.TabIndex = 0;
             this.btnSelectDirectory.Text = "Select Folder";
             this.btnSelectDirectory.UseVisualStyleBackColor = true;
