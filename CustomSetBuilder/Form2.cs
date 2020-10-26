@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,9 @@ namespace CustomSetBuilder
         public Form2()
         {
             InitializeComponent();
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            string versionDetails = $"v{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            Text = Text + " " + versionDetails; //change form title
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -32,6 +36,8 @@ namespace CustomSetBuilder
             {
                 ChooseFolder(folderBrowserDialog1.SelectedPath);
             }
+
+            btnCreatePDF.Enabled = false;
             //DirectoryInfo info = new DirectoryInfo(@"../..");
             //if (info.Exists)
             //{
@@ -215,6 +221,7 @@ namespace CustomSetBuilder
             {
                 flowLayoutPanel1.Controls.Clear();
                 cardList = new List<PictureBox>();
+
                 foreach (TreeNode node in e.Node.Nodes)
                 {
                     if (node.Tag != null)
@@ -233,6 +240,7 @@ namespace CustomSetBuilder
                         pictureBox.DragDrop += PictureBox_DragDrop;
                         pictureBox.Paint += PictureBox_Paint;
                         pictureBox.ContextMenuStrip = contextMenuPreview;
+                        pictureBox.Name = $"picture_{cardList.Count}";
                         
                         cardList.Add(pictureBox);
                         //flowLayoutPanel1.Controls.Add(card);
@@ -359,12 +367,9 @@ namespace CustomSetBuilder
             if (activePictureBox != pb)
             {
                 activePictureBox = pb;
+                
             }
-            else
-            {
-                activePictureBox = null;
-            }
-
+           
             // Cause each box to repaint
             foreach (var box in cardList) box.Invalidate();
         }
@@ -374,11 +379,10 @@ namespace CustomSetBuilder
             if (activePictureBoxStaged != pb)
             {
                 activePictureBoxStaged = pb;
+                activePictureBoxStaged.Name = pb.Name;
+                
             }
-            else
-            {
-                activePictureBoxStaged = null;
-            }
+           
 
             // Cause each box to repaint
             foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
@@ -415,17 +419,13 @@ namespace CustomSetBuilder
                 pb.MouseDown += Pb_MouseDown;
                 pb.Click += Pb_Click;
 
-                int i = 1;
-                foreach (PictureBox p in flowLayoutPanelStage.Controls)
-                {
-                    i++;
-                }
+                int i = flowLayoutPanelStage.Controls.Count;              
 
-                pb.Name = $"picture_{i}";
+                pb.Name = $"picture_{i++}";
 
                 SelectedPictires.Add(pb.Image);
                 labelCardCount.Text = $"{SelectedPictires.Count} Cards";
-                
+                btnCreatePDF.Enabled = true;
                 return pb;
             }catch(Exception ex)
             {
@@ -455,6 +455,7 @@ namespace CustomSetBuilder
 
         private void panelAdd1_DragDrop(object sender, DragEventArgs e)
         {
+
             AddXCards(1, activePictureBox);
         }
 
@@ -515,22 +516,17 @@ namespace CustomSetBuilder
         }
 
 
-        private void AddXCards(int addCount)
-        {
-            for (int i = 0; i < addCount; i++)
-            {
-                flowLayoutPanelStage.Controls.Add(CopyImage(activePictureBox));
-            }
-            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
-        }
 
         private void AddXCards(int addCount, PictureBox pictureBox)
         {
-            for (int i = 0; i < addCount; i++)
+            if (pictureBox != null)
             {
-                flowLayoutPanelStage.Controls.Add(CopyImage(pictureBox));
+                for (int i = 0; i < addCount; i++)
+                {
+                    flowLayoutPanelStage.Controls.Add(CopyImage(pictureBox));
+                }
+                flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
             }
-            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
         }
 
         private void toolStripMenuAdd1_Click(object sender, EventArgs e)
@@ -571,7 +567,8 @@ namespace CustomSetBuilder
                 }
 
                 labelCardCount.Text = $"{SelectedPictires.Count} Cards";
-
+                if(SelectedPictires.Count == 0)
+                    btnCreatePDF.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -611,6 +608,28 @@ namespace CustomSetBuilder
         private void flowLayoutPanelStage_DragOver(object sender, DragEventArgs e)
         {
 
+        }
+
+        private void btnStartOver_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                flowLayoutPanelStage.Controls.Clear();
+                SelectedPictires = new List<Image>();
+                activePictureBoxStaged = null;
+                btnCreatePDF.Enabled = false;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnCreatePDF_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            GeneratePDF();
+            this.Cursor = Cursors.Default;
         }
     }
 }
