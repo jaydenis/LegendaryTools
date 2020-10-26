@@ -33,6 +33,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.treeViewFolders = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.btnSelectDirectory = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -54,23 +55,24 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.contextMenuStaged = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.contextMenuPreview = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuAdd1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuIAdd3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuIAdd5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuAdd10 = new System.Windows.Forms.ToolStripMenuItem();
             this.addXCardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuPreview = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuAdd1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuIAdd3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuIAdd5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuAdd10 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnStartOver = new System.Windows.Forms.Button();
             this.btnCreatePDF = new System.Windows.Forms.Button();
-            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.addAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,7 +86,6 @@
             this.contextMenuStaged.SuspendLayout();
             this.contextMenuPreview.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -94,7 +95,7 @@
             this.panel1.Controls.Add(this.btnSelectDirectory);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(217, 598);
             this.panel1.TabIndex = 2;
@@ -109,7 +110,7 @@
             this.treeViewFolders.ImageIndex = 0;
             this.treeViewFolders.ImageList = this.imageList1;
             this.treeViewFolders.Location = new System.Drawing.Point(0, 32);
-            this.treeViewFolders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeViewFolders.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 1;
             this.treeViewFolders.Size = new System.Drawing.Size(217, 566);
@@ -124,11 +125,21 @@
             this.imageList1.Images.SetKeyName(1, "Pictures Folder.ico");
             this.imageList1.Images.SetKeyName(2, "Raster App.ico");
             // 
+            // pictureBoxPreview
+            // 
+            this.pictureBoxPreview.Location = new System.Drawing.Point(0, 345);
+            this.pictureBoxPreview.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBoxPreview.Name = "pictureBoxPreview";
+            this.pictureBoxPreview.Size = new System.Drawing.Size(189, 213);
+            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPreview.TabIndex = 2;
+            this.pictureBoxPreview.TabStop = false;
+            // 
             // btnSelectDirectory
             // 
             this.btnSelectDirectory.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSelectDirectory.Location = new System.Drawing.Point(0, 0);
-            this.btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelectDirectory.Name = "btnSelectDirectory";
             this.btnSelectDirectory.Size = new System.Drawing.Size(217, 32);
             this.btnSelectDirectory.TabIndex = 0;
@@ -139,7 +150,7 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(217, 0);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(2);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(2, 598);
             this.splitter1.TabIndex = 3;
@@ -149,7 +160,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(219, 42);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -171,7 +182,7 @@
             this.flowLayoutPanel1.Controls.Add(this.splitter2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(327, 556);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -179,7 +190,7 @@
             // splitter2
             // 
             this.splitter2.Location = new System.Drawing.Point(2, 2);
-            this.splitter2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter2.Margin = new System.Windows.Forms.Padding(2);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(2, 0);
             this.splitter2.TabIndex = 0;
@@ -194,7 +205,7 @@
             this.flowLayoutPanelStage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanelStage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelStage.Location = new System.Drawing.Point(107, 0);
-            this.flowLayoutPanelStage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanelStage.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanelStage.Name = "flowLayoutPanelStage";
             this.flowLayoutPanelStage.Size = new System.Drawing.Size(313, 556);
             this.flowLayoutPanelStage.TabIndex = 1;
@@ -215,7 +226,7 @@
             this.panelCopyContainer.Controls.Add(this.panelAdd1);
             this.panelCopyContainer.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelCopyContainer.Location = new System.Drawing.Point(0, 0);
-            this.panelCopyContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelCopyContainer.Margin = new System.Windows.Forms.Padding(2);
             this.panelCopyContainer.MinimumSize = new System.Drawing.Size(76, 558);
             this.panelCopyContainer.Name = "panelCopyContainer";
             this.panelCopyContainer.Size = new System.Drawing.Size(107, 558);
@@ -259,7 +270,7 @@
             this.panelAdd3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAdd3.Controls.Add(this.labelAdd3);
             this.panelAdd3.Location = new System.Drawing.Point(3, 180);
-            this.panelAdd3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd3.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd3.Name = "panelAdd3";
             this.panelAdd3.Size = new System.Drawing.Size(101, 55);
             this.panelAdd3.TabIndex = 1;
@@ -287,7 +298,7 @@
             this.panelAdd5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAdd5.Controls.Add(this.label3);
             this.panelAdd5.Location = new System.Drawing.Point(3, 270);
-            this.panelAdd5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd5.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd5.Name = "panelAdd5";
             this.panelAdd5.Size = new System.Drawing.Size(101, 55);
             this.panelAdd5.TabIndex = 2;
@@ -315,7 +326,7 @@
             this.panelAdd10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAdd10.Controls.Add(this.label4);
             this.panelAdd10.Location = new System.Drawing.Point(3, 360);
-            this.panelAdd10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd10.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd10.Name = "panelAdd10";
             this.panelAdd10.Size = new System.Drawing.Size(101, 55);
             this.panelAdd10.TabIndex = 3;
@@ -343,7 +354,7 @@
             this.panelAdd1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAdd1.Controls.Add(this.labelAdd1);
             this.panelAdd1.Location = new System.Drawing.Point(3, 89);
-            this.panelAdd1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd1.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd1.Name = "panelAdd1";
             this.panelAdd1.Size = new System.Drawing.Size(101, 55);
             this.panelAdd1.TabIndex = 0;
@@ -380,48 +391,18 @@
             this.contextMenuStaged.Name = "contextMenuStaged";
             this.contextMenuStaged.Size = new System.Drawing.Size(140, 54);
             // 
+            // toolStripMenuItemDelete
+            // 
+            this.toolStripMenuItemDelete.Image = global::CustomSetBuilder.Properties.Resources.cancel;
+            this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
+            this.toolStripMenuItemDelete.Size = new System.Drawing.Size(139, 22);
+            this.toolStripMenuItemDelete.Text = "Delete";
+            this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(136, 6);
-            // 
-            // contextMenuPreview
-            // 
-            this.contextMenuPreview.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuAdd1,
-            this.toolStripMenuIAdd3,
-            this.toolStripMenuIAdd5,
-            this.toolStripMenuAdd10});
-            this.contextMenuPreview.Name = "contextMenuPreview";
-            this.contextMenuPreview.Size = new System.Drawing.Size(118, 92);
-            // 
-            // toolStripMenuAdd1
-            // 
-            this.toolStripMenuAdd1.Name = "toolStripMenuAdd1";
-            this.toolStripMenuAdd1.Size = new System.Drawing.Size(117, 22);
-            this.toolStripMenuAdd1.Text = "Add x1";
-            this.toolStripMenuAdd1.Click += new System.EventHandler(this.toolStripMenuAdd1_Click);
-            // 
-            // toolStripMenuIAdd3
-            // 
-            this.toolStripMenuIAdd3.Name = "toolStripMenuIAdd3";
-            this.toolStripMenuIAdd3.Size = new System.Drawing.Size(117, 22);
-            this.toolStripMenuIAdd3.Text = "Add x3";
-            this.toolStripMenuIAdd3.Click += new System.EventHandler(this.toolStripMenuIAdd3_Click);
-            // 
-            // toolStripMenuIAdd5
-            // 
-            this.toolStripMenuIAdd5.Name = "toolStripMenuIAdd5";
-            this.toolStripMenuIAdd5.Size = new System.Drawing.Size(117, 22);
-            this.toolStripMenuIAdd5.Text = "Add x5";
-            this.toolStripMenuIAdd5.Click += new System.EventHandler(this.toolStripMenuIAdd5_Click);
-            // 
-            // toolStripMenuAdd10
-            // 
-            this.toolStripMenuAdd10.Name = "toolStripMenuAdd10";
-            this.toolStripMenuAdd10.Size = new System.Drawing.Size(117, 22);
-            this.toolStripMenuAdd10.Text = "Add x10";
-            this.toolStripMenuAdd10.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
             // 
             // addXCardsToolStripMenuItem
             // 
@@ -462,6 +443,45 @@
             this.x10ToolStripMenuItem.Text = "x10";
             this.x10ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
             // 
+            // contextMenuPreview
+            // 
+            this.contextMenuPreview.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addAllToolStripMenuItem,
+            this.toolStripMenuAdd1,
+            this.toolStripMenuIAdd3,
+            this.toolStripMenuIAdd5,
+            this.toolStripMenuAdd10});
+            this.contextMenuPreview.Name = "contextMenuPreview";
+            this.contextMenuPreview.Size = new System.Drawing.Size(181, 136);
+            // 
+            // toolStripMenuAdd1
+            // 
+            this.toolStripMenuAdd1.Name = "toolStripMenuAdd1";
+            this.toolStripMenuAdd1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuAdd1.Text = "Add x1";
+            this.toolStripMenuAdd1.Click += new System.EventHandler(this.toolStripMenuAdd1_Click);
+            // 
+            // toolStripMenuIAdd3
+            // 
+            this.toolStripMenuIAdd3.Name = "toolStripMenuIAdd3";
+            this.toolStripMenuIAdd3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuIAdd3.Text = "Add x3";
+            this.toolStripMenuIAdd3.Click += new System.EventHandler(this.toolStripMenuIAdd3_Click);
+            // 
+            // toolStripMenuIAdd5
+            // 
+            this.toolStripMenuIAdd5.Name = "toolStripMenuIAdd5";
+            this.toolStripMenuIAdd5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuIAdd5.Text = "Add x5";
+            this.toolStripMenuIAdd5.Click += new System.EventHandler(this.toolStripMenuIAdd5_Click);
+            // 
+            // toolStripMenuAdd10
+            // 
+            this.toolStripMenuAdd10.Name = "toolStripMenuAdd10";
+            this.toolStripMenuAdd10.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuAdd10.Text = "Add x10";
+            this.toolStripMenuAdd10.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -500,23 +520,12 @@
             this.btnCreatePDF.UseVisualStyleBackColor = true;
             this.btnCreatePDF.Click += new System.EventHandler(this.btnCreatePDF_Click);
             // 
-            // pictureBoxPreview
+            // addAllToolStripMenuItem
             // 
-            this.pictureBoxPreview.Location = new System.Drawing.Point(0, 345);
-            this.pictureBoxPreview.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(189, 213);
-            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPreview.TabIndex = 2;
-            this.pictureBoxPreview.TabStop = false;
-            // 
-            // toolStripMenuItemDelete
-            // 
-            this.toolStripMenuItemDelete.Image = global::CustomSetBuilder.Properties.Resources.cancel;
-            this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
-            this.toolStripMenuItemDelete.Size = new System.Drawing.Size(139, 22);
-            this.toolStripMenuItemDelete.Text = "Delete";
-            this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
+            this.addAllToolStripMenuItem.Name = "addAllToolStripMenuItem";
+            this.addAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addAllToolStripMenuItem.Text = "Add All";
+            this.addAllToolStripMenuItem.Click += new System.EventHandler(this.addAllToolStripMenuItem_Click);
             // 
             // Form2
             // 
@@ -528,12 +537,13 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2";
             this.Text = "Custom Set Builder";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -553,7 +563,6 @@
             this.contextMenuStaged.ResumeLayout(false);
             this.contextMenuPreview.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -599,5 +608,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnStartOver;
         private System.Windows.Forms.Button btnCreatePDF;
+        private System.Windows.Forms.ToolStripMenuItem addAllToolStripMenuItem;
     }
 }

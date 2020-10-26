@@ -160,7 +160,6 @@ namespace CustomSetBuilder
             }
         }
 
-
         private void ListDirectory(TreeView treeView, string path)
         {
             treeView.Nodes.Clear();
@@ -220,7 +219,10 @@ namespace CustomSetBuilder
             if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0 || e.Node.ImageIndex == -1)
             {
                 flowLayoutPanel1.Controls.Clear();
-                cardList = new List<PictureBox>();
+                if (cardList == null)
+                    cardList = new List<PictureBox>();
+                else
+                    cardList.Clear();
 
                 foreach (TreeNode node in e.Node.Nodes)
                 {
@@ -277,11 +279,6 @@ namespace CustomSetBuilder
 
         }
 
-        /// <summary>
-        /// Fires after dragging has completed on the target control
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PictureBox_DragDrop(object sender, DragEventArgs e)
         {
             var target = (PictureBox)sender;
@@ -302,31 +299,16 @@ namespace CustomSetBuilder
             Console.WriteLine("Don't do DragDrop");
         }
 
-        /// <summary>
-        /// Set the target's accepted DragDropEffect. Should match the source.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PictureBox_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
         }
 
-        /// <summary>
-        /// Handle mouse click on picture box
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             SelectBox((PictureBox)sender);
         }
 
-        /// <summary>
-        /// Only start DragDrop if the mouse moves. Allows MouseClick to trigger
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -339,11 +321,6 @@ namespace CustomSetBuilder
             }
         }
 
-        /// <summary>
-        /// Override paint so we can draw a border on a selected image
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
             var pb = (PictureBox)sender;
@@ -358,10 +335,6 @@ namespace CustomSetBuilder
             }
         }
 
-        /// <summary>
-        /// Set the selected image, and trigger repaint on all boxes.
-        /// </summary>
-        /// <param name="pb"></param>
         private void SelectBox(PictureBox pb)
         {
             if (activePictureBox != pb)
@@ -388,11 +361,6 @@ namespace CustomSetBuilder
             foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
         }
 
-        /// <summary>
-        /// Swap images between two PictureBoxes
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="target"></param>
         private void SwapImages(PictureBox source, PictureBox target)
         {
             //if (source.BackgroundImage == null && target.BackgroundImage == null)
@@ -404,7 +372,6 @@ namespace CustomSetBuilder
             //target.BackgroundImage = source.BackgroundImage;
             //source.BackgroundImage = temp;
         }
-
 
         private PictureBox CopyImage(PictureBox picture)
         {
@@ -475,7 +442,6 @@ namespace CustomSetBuilder
             AddXCards(10, activePictureBox);
         }
 
-
         private void panelAdd1_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
@@ -492,7 +458,6 @@ namespace CustomSetBuilder
         {
             e.Effect = DragDropEffects.Copy;
         }
-
         
         private void panelAdd10_DragEnter(object sender, DragEventArgs e)
         {
@@ -514,8 +479,6 @@ namespace CustomSetBuilder
                 document.Save(name);
             }
         }
-
-
 
         private void AddXCards(int addCount, PictureBox pictureBox)
         {
@@ -559,7 +522,7 @@ namespace CustomSetBuilder
                         flowLayoutPanelStage.Controls.Remove(p);
                 }
 
-                SelectedPictires = new List<Image>();
+                SelectedPictires.Clear();
 
                 foreach (PictureBox p in flowLayoutPanelStage.Controls)
                 {
@@ -615,7 +578,7 @@ namespace CustomSetBuilder
             try
             {
                 flowLayoutPanelStage.Controls.Clear();
-                SelectedPictires = new List<Image>();
+                SelectedPictires.Clear();
                 activePictureBoxStaged = null;
                 btnCreatePDF.Enabled = false;
                 labelCardCount.Text = $"0 Cards";
@@ -631,6 +594,14 @@ namespace CustomSetBuilder
             this.Cursor = Cursors.WaitCursor;
             GeneratePDF();
             this.Cursor = Cursors.Default;
+        }
+
+        private void addAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (PictureBox box in flowLayoutPanel1.Controls)
+            {
+                AddXCards(1, box);
+            }
         }
     }
 }
