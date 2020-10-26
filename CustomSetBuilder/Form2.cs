@@ -18,6 +18,7 @@ namespace CustomSetBuilder
     {
         List<Image> SelectedPictires = new List<Image>();
         PictureBox activePictureBox;
+        PictureBox activePictureBoxStaged;
         List<PictureBox> cardList = new List<PictureBox>();
         PdfDocument document;
         public Form2()
@@ -51,8 +52,8 @@ namespace CustomSetBuilder
             int w = 180;
             int rowNumber = 0;
             int colNumber = 0;
-            int x_offset = 1;
-            int y_offset = 1;
+            int x_offset = 2;
+            int y_offset = 2;
 
             foreach (var item in currentImageList)
             {
@@ -227,6 +228,7 @@ namespace CustomSetBuilder
                         pictureBox.DragEnter += PictureBox_DragEnter;
                         pictureBox.DragDrop += PictureBox_DragDrop;
                         pictureBox.Paint += PictureBox_Paint;
+                        pictureBox.ContextMenuStrip = contextMenuPreview;
                         
                         cardList.Add(pictureBox);
                         //flowLayoutPanel1.Controls.Add(card);
@@ -256,7 +258,8 @@ namespace CustomSetBuilder
                     break;
 
                 case MouseButtons.Right:
-                    //ctxPreviewMenu.Show(this, new Point(e.X, e.Y));
+                    SelectBox((PictureBox)sender);
+                    contextMenuPreview.Show(this, new Point(e.X, e.Y));
                     break;
             }
 
@@ -362,6 +365,21 @@ namespace CustomSetBuilder
             foreach (var box in cardList) box.Invalidate();
         }
 
+        private void SelectBoxStaged(PictureBox pb)
+        {
+            if (activePictureBoxStaged != pb)
+            {
+                activePictureBoxStaged = pb;
+            }
+            else
+            {
+                activePictureBoxStaged = null;
+            }
+
+            // Cause each box to repaint
+            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+        }
+
         /// <summary>
         /// Swap images between two PictureBoxes
         /// </summary>
@@ -389,6 +407,8 @@ namespace CustomSetBuilder
                 pb.ImageLocation = picture.ImageLocation;
                 pb.Size = new Size(180, 250);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.ContextMenuStrip = this.contextMenuStaged;
+                pb.MouseDown += Pb_MouseDown;
 
                 int i = 1;
                 foreach (PictureBox p in flowLayoutPanelStage.Controls)
@@ -408,40 +428,40 @@ namespace CustomSetBuilder
             }
         }
 
+        private void Pb_MouseDown(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    SelectBoxStaged((PictureBox)sender);
+                    break;
+
+                case MouseButtons.Right:
+                    SelectBoxStaged((PictureBox)sender);
+                    contextMenuStaged.Show(this, new Point(e.X, e.Y));
+                    break;
+            }
+        }
+
         private void panelAdd1_DragDrop(object sender, DragEventArgs e)
-        {           
-            flowLayoutPanelStage.Controls.Add(CopyImage(activePictureBox));
-            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
+        {
+            AddXCards(1, activePictureBox);
         }
 
         private void panelAdd3_DragDrop(object sender, DragEventArgs e)
         {
-            for(int i = 0; i < 3; i++)
-            {
-                flowLayoutPanelStage.Controls.Add(CopyImage(activePictureBox));
-            }
-
-            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
+            AddXCards(3, activePictureBox);
 
         }
 
         private void panelAdd5_DragDrop(object sender, DragEventArgs e)
         {
-
-            for (int i = 0; i < 5; i++)
-            {
-                flowLayoutPanelStage.Controls.Add(CopyImage(activePictureBox));
-            }
-            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
+            AddXCards(5, activePictureBox);
         }
 
         private void panelAdd10_DragDrop(object sender, DragEventArgs e)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                flowLayoutPanelStage.Controls.Add(CopyImage(activePictureBox));
-            }
-            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
+            AddXCards(10, activePictureBox);
         }
 
 
@@ -484,6 +504,103 @@ namespace CustomSetBuilder
             }
         }
 
-        
+
+        private void AddXCards(int addCount)
+        {
+            for (int i = 0; i < addCount; i++)
+            {
+                flowLayoutPanelStage.Controls.Add(CopyImage(activePictureBox));
+            }
+            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
+        }
+
+        private void AddXCards(int addCount, PictureBox pictureBox)
+        {
+            for (int i = 0; i < addCount; i++)
+            {
+                flowLayoutPanelStage.Controls.Add(CopyImage(pictureBox));
+            }
+            flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
+        }
+
+        private void toolStripMenuAdd1_Click(object sender, EventArgs e)
+        {
+            AddXCards(1, activePictureBox);
+        }
+
+        private void toolStripMenuIAdd3_Click(object sender, EventArgs e)
+        {
+            AddXCards(3, activePictureBox);
+        }
+
+        private void toolStripMenuIAdd5_Click(object sender, EventArgs e)
+        {
+            AddXCards(5, activePictureBox);
+        }
+
+        private void toolStripMenuAdd10_Click(object sender, EventArgs e)
+        {
+            AddXCards(10, activePictureBox);
+        }
+
+        private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (PictureBox p in flowLayoutPanelStage.Controls)
+                {
+                    if (p.Name == activePictureBoxStaged.Name)
+                        flowLayoutPanelStage.Controls.Remove(p);
+                }
+
+                SelectedPictires = new List<Image>();
+
+                foreach (PictureBox p in flowLayoutPanelStage.Controls)
+                {
+                    SelectedPictires.Add(p.Image);
+                }
+
+                labelCardCount.Text = $"{SelectedPictires.Count} Cards";
+
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void x1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddXCards(1, activePictureBoxStaged);
+        }
+
+        private void x3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddXCards(3, activePictureBoxStaged);
+        }
+
+        private void x5ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddXCards(5, activePictureBoxStaged);
+        }
+
+        private void x10ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddXCards(10, activePictureBoxStaged);
+        }
+
+        private void flowLayoutPanelStage_DragDrop(object sender, DragEventArgs e)
+        {
+            AddXCards(1, activePictureBox);
+        }
+
+        private void flowLayoutPanelStage_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void flowLayoutPanelStage_DragOver(object sender, DragEventArgs e)
+        {
+
+        }
     }
 }
