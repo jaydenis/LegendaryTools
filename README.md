@@ -3,7 +3,8 @@
 # CustomSetEditor for Legendary Marvel DBG
 [Legendary Marvel by Upper Deck](http://www.upperdeck.com/products/entertainment/marvel/marvel-legendary.aspx)
 
-This too allows you to select custom cards to be added to a PDF file in a 3x3 printing layout.
+This tool allows you to create a printable PDF file of custom cards in a 3x3 printing layout.
+
 **Basic Functions**
  - Right-Click on a Card in the **Preview Window** (Left) to Add All, 1 , 3, 5 or 10 Cards to the **Staging Window** (Right).
  - Right-Click on a Card in the **Staging Window** (Right) to Duplicate 1 , 3, 5 or 10 Cards in the **Staging Window** (Left).
