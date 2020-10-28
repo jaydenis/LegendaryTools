@@ -22,6 +22,10 @@ namespace CustomSetBuilder
         PictureBox activePictureBoxStaged;
         List<PictureBox> cardList = new List<PictureBox>();
         PdfDocument document;
+
+        
+        
+
         public Form2()
         {
             InitializeComponent();
@@ -125,7 +129,7 @@ namespace CustomSetBuilder
                         remainingCards = remainingCards - 9;
                     }
 
-                    if (remainingCards < 9 && remainingCards == tempList.Count)
+                    if (remainingCards < 9 && remainingCards == tempList.Count && remainingCards !=0 && tempList.Count != 0)
                     {
                         page = document.AddPage();
                         DrawPage(page, tempList);
@@ -170,13 +174,12 @@ namespace CustomSetBuilder
         private TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
         {
             var directoryNode = new TreeNode(directoryInfo.Name);
-
+           
             foreach (var directory in directoryInfo.GetDirectories())
             {
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
             }
 
-            int imageCount = 0;
             foreach (var file in directoryInfo.GetFiles())
             {
                 if (file.Extension == ".jpg" || file.Extension == ".png")
@@ -184,12 +187,8 @@ namespace CustomSetBuilder
                     var imgNode = new TreeNode(file.Name);
                     imgNode.Tag = file.FullName;
                     imgNode.ImageIndex = 2;
-
+                   
                     directoryNode.Nodes.Add(imgNode);
-
-                    
-
-                    imageCount++;
                 }
             }
 
@@ -383,8 +382,14 @@ namespace CustomSetBuilder
                 pb.Size = new Size(180, 250);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.ContextMenuStrip = this.contextMenuStaged;
-                pb.MouseDown += Pb_MouseDown;
-                pb.Click += Pb_Click;
+                pb.AllowDrop = true;
+                pb.DragDrop += StagingPictureBox_DragDrop;
+                pb.DragEnter += StagingPictureBox_DragEnter;
+                pb.MouseClick += StagingPictureBox_MouseClick;
+                pb.MouseMove += StagingPictureBox_MouseMove;
+                pb.Paint += StagingPictureBox_Paint;
+               //pb.MouseDown += Pb_MouseDown;
+                //pb.Click += Pb_Click;
 
                 int i = flowLayoutPanelStage.Controls.Count;              
 
@@ -402,7 +407,7 @@ namespace CustomSetBuilder
 
         private void Pb_Click(object sender, EventArgs e)
         {
-            SelectBoxStaged((PictureBox)sender);
+            StagingSelectBox((PictureBox)sender);
         }
 
         private void Pb_MouseDown(object sender, MouseEventArgs e)
@@ -410,11 +415,11 @@ namespace CustomSetBuilder
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    SelectBoxStaged((PictureBox)sender);
+                    StagingSelectBox((PictureBox)sender);
                     break;
 
                 case MouseButtons.Right:
-                    SelectBoxStaged((PictureBox)sender);
+                    StagingSelectBox((PictureBox)sender);
                     contextMenuStaged.Show(this, new Point(e.X, e.Y));
                     break;
             }
@@ -603,5 +608,145 @@ namespace CustomSetBuilder
                 AddXCards(1, box);
             }
         }
+
+        #region staging
+        /// <summary>
+        /// Fires after dragging has completed on the target control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StagingPictureBox_DragDrop(object sender, DragEventArgs e)
+        {
+            var target = (PictureBox)sender;
+            if (e.Data.GetDataPresent(typeof(PictureBox)))
+            {
+                var source = (PictureBox)e.Data.GetData(typeof(PictureBox));
+                if (source != target)
+                {
+                    Console.WriteLine("Do DragDrop from " + source.Name + " to " + target.Name);
+                    // You can swap the images out, replace the target image, etc.
+                    StagingSwapImages(source, target);
+
+                   // activePictureBoxStaged = null;
+                    StagingSelectBox(target);
+                    return;
+                }
+            }
+            Console.WriteLine("Don't do DragDrop");
+        }
+
+        /// <summary>
+        /// Set the target's accepted DragDropEffect. Should match the source.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StagingPictureBox_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        /// <summary>
+        /// Handle mouse click on picture box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StagingPictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            StagingSelectBox((PictureBox)sender);
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    //StagingSelectBox((PictureBox)sender);
+                    break;
+
+                case MouseButtons.Right:
+                    //StagingSelectBox((PictureBox)sender);
+                    contextMenuStaged.Show(this, new Point(e.X, e.Y));
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Only start DragDrop if the mouse moves. Allows MouseClick to trigger
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StagingPictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                var pb = (PictureBox)sender;
+                if (pb.Image != null)
+                {
+                    pb.DoDragDrop(pb, DragDropEffects.Move);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Override paint so we can draw a border on a selected image
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StagingPictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            var pb = (PictureBox)sender;
+            pb.BackColor = Color.White;
+            if (activePictureBoxStaged == pb)
+            {
+                ControlPaint.DrawBorder(e.Graphics, pb.ClientRectangle,
+                   Color.Blue, 3, ButtonBorderStyle.Solid,  // Left
+                   Color.Blue, 3, ButtonBorderStyle.Solid,  // Top
+                   Color.Blue, 3, ButtonBorderStyle.Solid,  // Right
+                   Color.Blue, 3, ButtonBorderStyle.Solid); // Bottom
+            }
+        }
+
+        /// <summary>
+        /// Set the selected image, and trigger repaint on all boxes.
+        /// </summary>
+        /// <param name="pb"></param>
+        private void StagingSelectBox(PictureBox pb)
+        {
+            if (activePictureBoxStaged != pb)
+            {
+                activePictureBoxStaged = pb;
+                activePictureBoxStaged.Name = pb.Name;
+            }
+            else
+            {
+               // activePictureBoxStaged = null;
+            }
+
+
+            // Cause each box to repaint
+            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+
+
+        }
+
+        /// <summary>
+        /// Swap images between two PictureBoxes
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        private void StagingSwapImages(PictureBox source, PictureBox target)
+        {
+            if (source.Image == null && target.Image == null)
+            {
+                return;
+            }
+
+            var temp = target.Image;
+            target.Image = source.Image;
+            //target.ImageLocation = source.ImageLocation;
+            //target.Name = source.Name;
+
+            source.Image = temp;
+            //source.ImageLocation = temp.ImageLocation;
+            //source.Name = temp.Name;
+
+        }
+        #endregion
     }
 }
