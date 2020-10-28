@@ -59,7 +59,7 @@ namespace CustomSetBuilder
         void DrawImageScaled(XGraphics gfx, List<Image> currentImageList)
         {
             int leftMargin = 30;
-            int topMargin = 30;
+            int topMargin = 20;
             int x = 30;
             int y = 20;
             int h = 250;
@@ -112,6 +112,7 @@ namespace CustomSetBuilder
         {
             try
             {
+                this.Cursor = Cursors.WaitCursor;
                 document = new PdfDocument();
                 PdfPage page;
 
@@ -157,6 +158,8 @@ namespace CustomSetBuilder
                 saveFileDialog1.ShowDialog();
                 //string fileName = $"test{numX.Value}{numY.Value}.pdf";
                 //document.Save(@"C:\Test\" + fileName);
+
+                this.Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
