@@ -66,31 +66,31 @@ namespace CustomSetBuilder
             int w = 180;
             int rowNumber = 0;
             int colNumber = 0;
-            int x_offset = 2;
-            int y_offset = 2;
+            int cardSpacing = Convert.ToInt32(numericCardSpacing.Value);
+            
 
             foreach (var item in currentImageList)
             {
                 if (item != null)
                 {
                     if (rowNumber == 0)
-                        y = topMargin + y_offset;
+                        y = topMargin + cardSpacing;
 
                     if (rowNumber == 1)
-                        y = h + topMargin + (y_offset * 2);
+                        y = h + topMargin + (cardSpacing * 2);
 
                     if (rowNumber == 2)
-                        y = (h * 2) + topMargin + (y_offset * 3);
+                        y = (h * 2) + topMargin + (cardSpacing * 3);
 
                     if (colNumber == 0)
-                        x = leftMargin + x_offset;
+                        x = leftMargin + cardSpacing;
 
                     if (colNumber == 1)
-                        x = w + leftMargin + (x_offset * 2);
+                        x = w + leftMargin + (cardSpacing * 2);
 
                     if (colNumber == 2)
                     {
-                        x = (w * 2) + leftMargin + (x_offset * 3);
+                        x = (w * 2) + leftMargin + (cardSpacing * 3);
                         colNumber = 0;
                         rowNumber++;
                     }

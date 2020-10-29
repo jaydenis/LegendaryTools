@@ -63,6 +63,7 @@
             this.x10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuPreview = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuAdd1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuIAdd3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuIAdd5 = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnStartOver = new System.Windows.Forms.Button();
             this.btnCreatePDF = new System.Windows.Forms.Button();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.numericCardSpacing = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -82,6 +84,7 @@
             this.contextMenuStaged.SuspendLayout();
             this.contextMenuPreview.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCardSpacing)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -168,7 +171,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanelStage);
             this.splitContainer1.Panel2.Controls.Add(this.panelCopyContainer);
             this.splitContainer1.Size = new System.Drawing.Size(856, 692);
-            this.splitContainer1.SplitterDistance = 372;
+            this.splitContainer1.SplitterDistance = 371;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -180,7 +183,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(372, 692);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(371, 692);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // splitter2
@@ -203,7 +206,7 @@
             this.flowLayoutPanelStage.Location = new System.Drawing.Point(107, 0);
             this.flowLayoutPanelStage.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanelStage.Name = "flowLayoutPanelStage";
-            this.flowLayoutPanelStage.Size = new System.Drawing.Size(374, 692);
+            this.flowLayoutPanelStage.Size = new System.Drawing.Size(375, 692);
             this.flowLayoutPanelStage.TabIndex = 1;
             this.flowLayoutPanelStage.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanelStage_DragDrop);
             this.flowLayoutPanelStage.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanelStage_DragEnter);
@@ -293,7 +296,7 @@
             this.labelCardCount.Location = new System.Drawing.Point(22, 19);
             this.labelCardCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCardCount.Name = "labelCardCount";
-            this.labelCardCount.Size = new System.Drawing.Size(54, 16);
+            this.labelCardCount.Size = new System.Drawing.Size(43, 13);
             this.labelCardCount.TabIndex = 5;
             this.labelCardCount.Text = "0 Cards";
             // 
@@ -442,47 +445,54 @@
             this.toolStripMenuIAdd5,
             this.toolStripMenuAdd10});
             this.contextMenuPreview.Name = "contextMenuPreview";
-            this.contextMenuPreview.Size = new System.Drawing.Size(181, 142);
+            this.contextMenuPreview.Size = new System.Drawing.Size(118, 120);
             // 
             // addAllToolStripMenuItem
             // 
             this.addAllToolStripMenuItem.Image = global::CustomSetBuilder.Properties.Resources.arrow_out;
             this.addAllToolStripMenuItem.Name = "addAllToolStripMenuItem";
-            this.addAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addAllToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.addAllToolStripMenuItem.Text = "Add All";
             this.addAllToolStripMenuItem.Click += new System.EventHandler(this.addAllToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(114, 6);
             // 
             // toolStripMenuAdd1
             // 
             this.toolStripMenuAdd1.Name = "toolStripMenuAdd1";
-            this.toolStripMenuAdd1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuAdd1.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuAdd1.Text = "Add x1";
             this.toolStripMenuAdd1.Click += new System.EventHandler(this.toolStripMenuAdd1_Click);
             // 
             // toolStripMenuIAdd3
             // 
             this.toolStripMenuIAdd3.Name = "toolStripMenuIAdd3";
-            this.toolStripMenuIAdd3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuIAdd3.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuIAdd3.Text = "Add x3";
             this.toolStripMenuIAdd3.Click += new System.EventHandler(this.toolStripMenuIAdd3_Click);
             // 
             // toolStripMenuIAdd5
             // 
             this.toolStripMenuIAdd5.Name = "toolStripMenuIAdd5";
-            this.toolStripMenuIAdd5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuIAdd5.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuIAdd5.Text = "Add x5";
             this.toolStripMenuIAdd5.Click += new System.EventHandler(this.toolStripMenuIAdd5_Click);
             // 
             // toolStripMenuAdd10
             // 
             this.toolStripMenuAdd10.Name = "toolStripMenuAdd10";
-            this.toolStripMenuAdd10.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuAdd10.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuAdd10.Text = "Add x10";
             this.toolStripMenuAdd10.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
             // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.numericCardSpacing);
             this.panel2.Controls.Add(this.btnStartOver);
             this.panel2.Controls.Add(this.btnCreatePDF);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -520,10 +530,26 @@
             this.btnCreatePDF.UseVisualStyleBackColor = false;
             this.btnCreatePDF.Click += new System.EventHandler(this.btnCreatePDF_Click);
             // 
-            // toolStripSeparator2
+            // numericCardSpacing
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.numericCardSpacing.Location = new System.Drawing.Point(429, 7);
+            this.numericCardSpacing.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericCardSpacing.Name = "numericCardSpacing";
+            this.numericCardSpacing.Size = new System.Drawing.Size(48, 20);
+            this.numericCardSpacing.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(322, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(101, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Card Spacing (0-10)";
             // 
             // Form2
             // 
@@ -553,6 +579,8 @@
             this.contextMenuStaged.ResumeLayout(false);
             this.contextMenuPreview.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCardSpacing)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -599,5 +627,7 @@
         private System.Windows.Forms.Button btnCreatePDF;
         private System.Windows.Forms.ToolStripMenuItem addAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numericCardSpacing;
     }
 }
