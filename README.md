@@ -1,18 +1,26 @@
-# LegendaryTools
-Legendary Marvel Tools
 
-Quick HowTo:
-1) launch app
-2) click on Select Folder
-3) browse to a folder that has images
-4) select images from the tree:
-  a) select one image and drag it to one of the card backs
-  b) click on a tree node and then drag the preview image to one of the card backs
-  c) check several images and then right-click
-  d) right-click on an image
-     i) copy 1
-    ii) copy 3
-   iii) copy 5
-    iv) copy 9 
-5) click Generate PDF
-6) save the file
+
+# CustomSetEditor for Legendary Marvel DBG
+[Legendary Marvel by Upper Deck](http://www.upperdeck.com/products/entertainment/marvel/marvel-legendary.aspx)
+
+This tool allows you to create a printable PDF file of custom cards in a 3x3 printing layout.
+
+**Basic Functions**
+ - Right-Click on a Card in the **Preview Window** (Left) to Add All, 1 , 3, 5 or 10 Cards to the **Staging Window** (Right).
+ - Right-Click on a Card in the **Staging Window** (Right) to Duplicate 1 , 3, 5 or 10 Cards in the **Staging Window** (Left).
+
+**Drag N' Drop**
+
+ - Drag a card from the **Preview Window** to the **Staging Window** to add 1 card.
+ - Drag a card from the **Preview Window** to the center boxes to add 1, 3, 5 or 10 cards to the **Staging Window** 
+
+**Create PDF**:
+Click the Create PDF button to generate the PDF File. Each Page will be filled with 9 cards and waht ever remains will fill the last page.
+
+**Start Over**:
+Click Start Over to clear the **Staging Window** of any selected cards.
+
+**Select Folder**:
+Click Select Folder to change the directory tree.
+
+![Screen Shot](https://cf.geekdo-images.com/LB-oqXhWW6yKKlRXTqGm6w__imagepage/img/wrlr6m2216bz8_0X2shqYPcxSgk=/fit-in/900x600/filters:no_upscale():strip_icc()/pic5740546.png)
