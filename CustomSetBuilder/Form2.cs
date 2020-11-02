@@ -481,10 +481,16 @@ namespace CustomSetBuilder
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            if (document != null)
+            try
             {
-                string name = saveFileDialog1.FileName;
-                document.Save(name);
+                if (document != null)
+                {
+                    string name = saveFileDialog1.FileName;
+                    document.Save(name);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
