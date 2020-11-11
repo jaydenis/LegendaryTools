@@ -204,22 +204,22 @@ namespace CustomSetBuilder
             
             if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0 || e.Node.ImageIndex == -1)
             {
-                flowLayoutPanel1.Controls.Clear();
-                if (cardList == null)
-                    cardList = new List<PictureBox>();
-                else
-                    cardList.Clear();
+                if(flowLayoutPanel1.Controls.Count > 0)
+                    foreach (Control pb in flowLayoutPanel1.Controls.OfType<PictureBox>())
+                        pb.Dispose();
+
+                flowLayoutPanel1.Controls.Clear();                
+                cardList = new List<PictureBox>();
 
                 foreach (TreeNode node in e.Node.Nodes)
                 {
                     if (node.Tag != null)
                     {
-                        //CardControl card = new CardControl(Convert.ToString(node.Tag));
                         PictureBox pictureBox = new PictureBox();
                         pictureBox.AllowDrop = true;
                         pictureBox.Image = new Bitmap(Convert.ToString(node.Tag));
                         pictureBox.ImageLocation = Convert.ToString(node.Tag);
-                        pictureBox.Size = new Size(180, 250);
+                        pictureBox.Size = new Size(200, 270);
                         pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         pictureBox.MouseClick += PictureBox_MouseClick;
                         pictureBox.MouseDown += PictureBox_MouseDown;
@@ -231,18 +231,11 @@ namespace CustomSetBuilder
                         pictureBox.Name = $"picture_{cardList.Count}";
                         
                         cardList.Add(pictureBox);
-                        //flowLayoutPanel1.Controls.Add(card);
                     }                 
                 }
 
                 if (cardList.Count > 0)
                     flowLayoutPanel1.Controls.AddRange(cardList.ToArray());
-                
-            }
-            else
-            {
-                pictureBoxPreview.Image = new Bitmap(Convert.ToString(e.Node.Tag));
-                pictureBoxPreview.ImageLocation = Convert.ToString(e.Node.Tag);
                 
             }
         }
@@ -366,7 +359,7 @@ namespace CustomSetBuilder
                 PictureBox pb = new PictureBox();
                 pb.Image = picture.Image;
                 pb.ImageLocation = picture.ImageLocation;
-                pb.Size = new Size(180, 250);
+                pb.Size = new Size(200, 270);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.ContextMenuStrip = this.contextMenuStaged;
                 pb.AllowDrop = true;
@@ -577,6 +570,15 @@ namespace CustomSetBuilder
         {
             try
             {
+                if (flowLayoutPanelStage.Controls.Count > 0)
+                    foreach (PictureBox pb in flowLayoutPanelStage.Controls.OfType<PictureBox>())
+                        pb.Dispose();
+
+                if (flowLayoutPanel1.Controls.Count > 0)
+                    foreach (PictureBox pb in flowLayoutPanel1.Controls.OfType<PictureBox>())
+                        pb.Dispose();
+
+                flowLayoutPanel1.Controls.Clear();
                 flowLayoutPanelStage.Controls.Clear();
                 SelectedPictures.Clear();
                 SelectedPicturesPath.Clear();

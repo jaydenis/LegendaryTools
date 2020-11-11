@@ -33,7 +33,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.treeViewFolders = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.btnSelectDirectory = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -74,7 +73,6 @@
             this.btnStartOver = new System.Windows.Forms.Button();
             this.btnCreatePDF = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -90,11 +88,10 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.treeViewFolders);
-            this.panel1.Controls.Add(this.pictureBoxPreview);
             this.panel1.Controls.Add(this.btnSelectDirectory);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(217, 734);
             this.panel1.TabIndex = 2;
@@ -109,7 +106,7 @@
             this.treeViewFolders.ImageIndex = 0;
             this.treeViewFolders.ImageList = this.imageList1;
             this.treeViewFolders.Location = new System.Drawing.Point(0, 32);
-            this.treeViewFolders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeViewFolders.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 1;
             this.treeViewFolders.Size = new System.Drawing.Size(217, 702);
@@ -124,21 +121,11 @@
             this.imageList1.Images.SetKeyName(1, "Pictures Folder.ico");
             this.imageList1.Images.SetKeyName(2, "Raster App.ico");
             // 
-            // pictureBoxPreview
-            // 
-            this.pictureBoxPreview.Location = new System.Drawing.Point(0, 345);
-            this.pictureBoxPreview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(189, 213);
-            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPreview.TabIndex = 2;
-            this.pictureBoxPreview.TabStop = false;
-            // 
             // btnSelectDirectory
             // 
             this.btnSelectDirectory.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSelectDirectory.Location = new System.Drawing.Point(0, 0);
-            this.btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelectDirectory.Name = "btnSelectDirectory";
             this.btnSelectDirectory.Size = new System.Drawing.Size(217, 32);
             this.btnSelectDirectory.TabIndex = 0;
@@ -149,7 +136,7 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(217, 0);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(2);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(2, 734);
             this.splitter1.TabIndex = 3;
@@ -159,7 +146,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(219, 54);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -181,7 +168,7 @@
             this.flowLayoutPanel1.Controls.Add(this.splitter2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(370, 680);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -189,7 +176,7 @@
             // splitter2
             // 
             this.splitter2.Location = new System.Drawing.Point(2, 2);
-            this.splitter2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter2.Margin = new System.Windows.Forms.Padding(2);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(2, 0);
             this.splitter2.TabIndex = 0;
@@ -204,7 +191,7 @@
             this.flowLayoutPanelStage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanelStage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelStage.Location = new System.Drawing.Point(107, 0);
-            this.flowLayoutPanelStage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanelStage.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanelStage.Name = "flowLayoutPanelStage";
             this.flowLayoutPanelStage.Size = new System.Drawing.Size(376, 680);
             this.flowLayoutPanelStage.TabIndex = 1;
@@ -228,7 +215,7 @@
             this.panelCopyContainer.Controls.Add(this.panelAdd1);
             this.panelCopyContainer.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelCopyContainer.Location = new System.Drawing.Point(0, 0);
-            this.panelCopyContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelCopyContainer.Margin = new System.Windows.Forms.Padding(2);
             this.panelCopyContainer.MinimumSize = new System.Drawing.Size(76, 558);
             this.panelCopyContainer.Name = "panelCopyContainer";
             this.panelCopyContainer.Size = new System.Drawing.Size(107, 680);
@@ -318,7 +305,7 @@
             this.panelAdd3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelAdd3.BackgroundImage")));
             this.panelAdd3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelAdd3.Location = new System.Drawing.Point(3, 305);
-            this.panelAdd3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd3.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd3.Name = "panelAdd3";
             this.panelAdd3.Size = new System.Drawing.Size(100, 90);
             this.panelAdd3.TabIndex = 1;
@@ -332,7 +319,7 @@
             this.panelAdd5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelAdd5.BackgroundImage")));
             this.panelAdd5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelAdd5.Location = new System.Drawing.Point(3, 447);
-            this.panelAdd5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd5.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd5.Name = "panelAdd5";
             this.panelAdd5.Size = new System.Drawing.Size(100, 90);
             this.panelAdd5.TabIndex = 2;
@@ -346,7 +333,7 @@
             this.panelAdd10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelAdd10.BackgroundImage")));
             this.panelAdd10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelAdd10.Location = new System.Drawing.Point(3, 589);
-            this.panelAdd10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd10.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd10.Name = "panelAdd10";
             this.panelAdd10.Size = new System.Drawing.Size(100, 90);
             this.panelAdd10.TabIndex = 3;
@@ -360,7 +347,7 @@
             this.panelAdd1.BackgroundImage = global::CustomSetBuilder.Properties.Resources.download;
             this.panelAdd1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelAdd1.Location = new System.Drawing.Point(3, 163);
-            this.panelAdd1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAdd1.Margin = new System.Windows.Forms.Padding(2);
             this.panelAdd1.Name = "panelAdd1";
             this.panelAdd1.Size = new System.Drawing.Size(100, 90);
             this.panelAdd1.TabIndex = 0;
@@ -526,7 +513,6 @@
             // 
             // btnStartOver
             // 
-            this.btnStartOver.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnStartOver.BackColor = System.Drawing.Color.DarkOrange;
             this.btnStartOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStartOver.Image = global::CustomSetBuilder.Properties.Resources.arrow_undo;
@@ -541,7 +527,7 @@
             // 
             // btnCreatePDF
             // 
-            this.btnCreatePDF.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnCreatePDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreatePDF.BackColor = System.Drawing.Color.LimeGreen;
             this.btnCreatePDF.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCreatePDF.Image = global::CustomSetBuilder.Properties.Resources.page_white_acrobat;
@@ -564,13 +550,12 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2";
             this.Text = "Custom Set Builder";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -591,7 +576,6 @@
         #endregion
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TreeView treeViewFolders;
-        private System.Windows.Forms.PictureBox pictureBoxPreview;
         private System.Windows.Forms.Button btnSelectDirectory;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
