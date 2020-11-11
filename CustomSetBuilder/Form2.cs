@@ -17,7 +17,8 @@ namespace CustomSetBuilder
 {
     public partial class Form2 : Form
     {
-        List<Image> SelectedPictires = new List<Image>();
+        List<Image> SelectedPictures = new List<Image>();
+        List<string> SelectedPicturesPath = new List<string>();
         PictureBox activePictureBox;
         PictureBox activePictureBoxStaged;
         List<PictureBox> cardList = new List<PictureBox>();
@@ -32,6 +33,7 @@ namespace CustomSetBuilder
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             string versionDetails = $"v{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             Text = Text + " " + versionDetails; //change form title
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -42,12 +44,10 @@ namespace CustomSetBuilder
             }
 
             btnCreatePDF.Enabled = false;
-            //DirectoryInfo info = new DirectoryInfo(@"../..");
-            //if (info.Exists)
-            //{
-            //    ChooseFolder(info.FullName);
-            //}
+           
         }
+
+       
 
         public void DrawPage(PdfPage page, List<Image> currentImageList)
         {
@@ -117,9 +117,9 @@ namespace CustomSetBuilder
                 PdfPage page;
 
                 var tempList = new List<Image>();
-                int totalCards = SelectedPictires.Count;
+                int totalCards = SelectedPictures.Count;
                 int remainingCards = totalCards;
-                foreach (Image img in SelectedPictires)
+                foreach (Image img in SelectedPictures)
                 {
                     tempList.Add(img);
                     if(tempList.Count == 9)
@@ -135,29 +135,13 @@ namespace CustomSetBuilder
                         page = document.AddPage();
                         DrawPage(page, tempList);
                     }
-
-
-                }   
-                
-
-                        //if (chkIncludeCardBacks.Checked)
-                        //{
-                        //    page = document.AddPage();
-                        //    DrawPage(page, imageListBacks);
-                        //}
-
-
-                
+                }                   
 
                 XForm xform = new XForm(document,
                         XUnit.FromMillimeter(70),
                         XUnit.FromMillimeter(55));
 
-                //XGraphics formGfx = XGraphics.FromForm(xform);
-
                 saveFileDialog1.ShowDialog();
-                //string fileName = $"test{numX.Value}{numY.Value}.pdf";
-                //document.Save(@"C:\Test\" + fileName);
 
                 this.Cursor = Cursors.Default;
             }
@@ -397,9 +381,9 @@ namespace CustomSetBuilder
                 int i = flowLayoutPanelStage.Controls.Count;              
 
                 pb.Name = $"picture_{i++}";
-
-                SelectedPictires.Add(pb.Image);
-                labelCardCount.Text = $"{SelectedPictires.Count} Cards";
+                SelectedPicturesPath.Add(pb.ImageLocation);
+                SelectedPictures.Add(pb.Image);
+                labelCardCount.Text = $"{SelectedPictures.Count} Cards";
                 btnCreatePDF.Enabled = true;
                 return pb;
             }catch(Exception ex)
@@ -536,15 +520,17 @@ namespace CustomSetBuilder
                         flowLayoutPanelStage.Controls.Remove(p);
                 }
 
-                SelectedPictires.Clear();
+                SelectedPictures.Clear();
+                SelectedPicturesPath.Clear();
 
                 foreach (PictureBox p in flowLayoutPanelStage.Controls)
                 {
-                    SelectedPictires.Add(p.Image);
+                    SelectedPictures.Add(p.Image);
+                    SelectedPicturesPath.Add(p.ImageLocation);
                 }
 
-                labelCardCount.Text = $"{SelectedPictires.Count} Cards";
-                if(SelectedPictires.Count == 0)
+                labelCardCount.Text = $"{SelectedPictures.Count} Cards";
+                if(SelectedPictures.Count == 0)
                     btnCreatePDF.Enabled = false;
             }
             catch (Exception ex)
@@ -592,7 +578,8 @@ namespace CustomSetBuilder
             try
             {
                 flowLayoutPanelStage.Controls.Clear();
-                SelectedPictires.Clear();
+                SelectedPictures.Clear();
+                SelectedPicturesPath.Clear();
                 activePictureBoxStaged = null;
                 btnCreatePDF.Enabled = false;
                 labelCardCount.Text = $"0 Cards";
@@ -757,5 +744,16 @@ namespace CustomSetBuilder
 
         }
         #endregion
+
+        private void btnSaveProject_Click(object sender, EventArgs e)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (string path in SelectedPicturesPath)
+            {
+                stringBuilder.Append($"{path}{System.Environment.NewLine}");
+            }
+
+            MessageBox.Show(stringBuilder.ToString());
+        }
     }
 }
