@@ -73,24 +73,11 @@ namespace CustomSetBuilder
             {
                 if (item != null)
                 {
-                    if (rowNumber == 0)
-                        y = topMargin + cardSpacing;
-
-                    if (rowNumber == 1)
-                        y = h + topMargin + (cardSpacing * 2);
-
-                    if (rowNumber == 2)
-                        y = (h * 2) + topMargin + (cardSpacing * 3);
-
-                    if (colNumber == 0)
-                        x = leftMargin + cardSpacing;
-
-                    if (colNumber == 1)
-                        x = w + leftMargin + (cardSpacing * 2);
+                    y = (h * rowNumber) + topMargin + (cardSpacing * (rowNumber+1));
+                    x = (w * colNumber) + leftMargin + (cardSpacing * (colNumber+1));                    
 
                     if (colNumber == 2)
                     {
-                        x = (w * 2) + leftMargin + (cardSpacing * 3);
                         colNumber = 0;
                         rowNumber++;
                     }
@@ -153,9 +140,13 @@ namespace CustomSetBuilder
 
         private void ListDirectory(TreeView treeView, string path)
         {
+            this.Cursor = Cursors.WaitCursor;
+
             treeView.Nodes.Clear();
             var rootDirectoryInfo = new DirectoryInfo(path);
             treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+
+            this.Cursor = Cursors.Default;
         }
 
         private TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
@@ -185,7 +176,6 @@ namespace CustomSetBuilder
 
         public void ChooseFolder(string selectedPath)
         {
-
             ListDirectory(treeViewFolders, selectedPath);
         }
 
@@ -195,16 +185,14 @@ namespace CustomSetBuilder
             {
                 ChooseFolder(folderBrowserDialog1.SelectedPath);
             }
-
-
         }
 
         private void treeViewFolders_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            
+        {            
             if (e.Node.Nodes.Count > 0 || e.Node.ImageIndex == 0 || e.Node.ImageIndex == -1)
             {
-                if(flowLayoutPanel1.Controls.Count > 0)
+                this.Cursor = Cursors.WaitCursor;
+                if (flowLayoutPanel1.Controls.Count > 0)
                     foreach (Control pb in flowLayoutPanel1.Controls.OfType<PictureBox>())
                         pb.Dispose();
 
@@ -213,6 +201,7 @@ namespace CustomSetBuilder
 
                 foreach (TreeNode node in e.Node.Nodes)
                 {
+                   
                     if (node.Tag != null)
                     {
                         PictureBox pictureBox = new PictureBox();
@@ -236,7 +225,8 @@ namespace CustomSetBuilder
 
                 if (cardList.Count > 0)
                     flowLayoutPanel1.Controls.AddRange(cardList.ToArray());
-                
+
+                this.Cursor = Cursors.Default;
             }
         }
 
@@ -302,6 +292,7 @@ namespace CustomSetBuilder
 
         private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             var pb = (PictureBox)sender;
             pb.BackColor = Color.White;
             if (activePictureBox == pb)
@@ -312,6 +303,7 @@ namespace CustomSetBuilder
                    Color.Blue, 2, ButtonBorderStyle.Solid,  // Right
                    Color.Blue, 2, ButtonBorderStyle.Solid); // Bottom
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void SelectBox(PictureBox pb)
@@ -368,6 +360,7 @@ namespace CustomSetBuilder
                 pb.MouseClick += StagingPictureBox_MouseClick;
                 pb.MouseMove += StagingPictureBox_MouseMove;
                 pb.Paint += StagingPictureBox_Paint;
+                pb.DoubleClick += Pb_DoubleClick;
                //pb.MouseDown += Pb_MouseDown;
                 //pb.Click += Pb_Click;
 
@@ -383,6 +376,12 @@ namespace CustomSetBuilder
             {
                 return null;
             }
+        }
+
+        private void Pb_DoubleClick(object sender, EventArgs e)
+        {
+            StagingSelectBox((PictureBox)sender);
+            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
         }
 
         private void Pb_Click(object sender, EventArgs e)
@@ -473,6 +472,7 @@ namespace CustomSetBuilder
 
         private void AddXCards(int addCount, PictureBox pictureBox)
         {
+            this.Cursor = Cursors.WaitCursor;
             if (pictureBox != null)
             {
                 for (int i = 0; i < addCount; i++)
@@ -481,6 +481,7 @@ namespace CustomSetBuilder
                 }
                 flowLayoutPanelStage.ScrollControlIntoView(flowLayoutPanelStage.Controls[flowLayoutPanelStage.Controls.Count - 1]);
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void toolStripMenuAdd1_Click(object sender, EventArgs e)
@@ -570,6 +571,7 @@ namespace CustomSetBuilder
         {
             try
             {
+                this.Cursor = Cursors.WaitCursor;
                 if (flowLayoutPanelStage.Controls.Count > 0)
                     foreach (PictureBox pb in flowLayoutPanelStage.Controls.OfType<PictureBox>())
                         pb.Dispose();
@@ -585,6 +587,7 @@ namespace CustomSetBuilder
                 activePictureBoxStaged = null;
                 btnCreatePDF.Enabled = false;
                 labelCardCount.Text = $"0 Cards";
+                this.Cursor = Cursors.Default;
             }
             catch(Exception ex)
             {
@@ -688,6 +691,7 @@ namespace CustomSetBuilder
         /// <param name="e"></param>
         private void StagingPictureBox_Paint(object sender, PaintEventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             var pb = (PictureBox)sender;
             pb.BackColor = Color.White;
             if (activePictureBoxStaged == pb)
@@ -698,6 +702,7 @@ namespace CustomSetBuilder
                    Color.Blue, 3, ButtonBorderStyle.Solid,  // Right
                    Color.Blue, 3, ButtonBorderStyle.Solid); // Bottom
             }
+            this.Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -756,6 +761,11 @@ namespace CustomSetBuilder
             }
 
             MessageBox.Show(stringBuilder.ToString());
+        }
+
+        private void toolStripMenuItemRotateImage_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
