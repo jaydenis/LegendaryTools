@@ -3,6 +3,7 @@ using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Util.Store;
+using LegendaryData.Models;
 using LegendaryData.Repositories;
 using Newtonsoft.Json;
 using System;
@@ -326,6 +327,7 @@ namespace LegendaryData
             this.Cursor = Cursors.WaitCursor;
             if (e.Node.Text == "Authors" && e.Node.Parent.Text == "Legendary")
             {
+                tabControl1.SelectedIndex = 0;
                 if (e.Node.Nodes.Count == 0)
                 {
                     GetAuthors();
@@ -347,18 +349,69 @@ namespace LegendaryData
             }
 
             if (e.Node.Parent != null)
+            {
+               
                 if (e.Node.Parent.Text == "Authors")
                 {
+                    tabControl1.SelectedIndex = 0;
                     CreateAuthorsNode(e.Node);
 
                     this.Cursor = Cursors.Default;
                     return;
                 }
+            }
 
+            //heroes
+            if (e.Node.Text == "Heroes" && e.Node.Parent.Text == "Legendary")
+            {
+                tabControl1.SelectedIndex = 1;
+                if (e.Node.Nodes.Count == 0)
+                {
+                    GetHeroes();
+
+                    if (heroesList.Count > 0)
+                    {
+                        heroesList.OrderBy(o => o.HeroName);
+                        foreach (var item in heroesList)
+                        {
+                            TreeNode node = new TreeNode(item.HeroName);
+                            node.Tag = item;
+                            e.Node.Nodes.Add(node);
+                        }
+                    }
+                }
+                dataGridViewHeroes.DataSource = heroesList;
+                this.Cursor = Cursors.Default;
+                return;
+            }
+
+            if (e.Node.NextNode != null && e.Node.Parent.Text == "Teams")
+            {
+                dataGridViewHeroes.DataSource = repositoryHeroes.GetAllByTeam(e.Node.Text).Result.ToList();
+                tabControl1.SelectedIndex = 1;
+            }
+
+            if (e.Node.Parent != null)
+            {
+
+                if (e.Node.Parent.Text == "Heroes")
+                {
+                    tabControl1.SelectedIndex = 1;
+                    if (e.Node.Tag != null)
+                    {
+                        var heroModel = (Heroes)e.Node.Tag;
+                        GetHeroDetails(heroModel);
+                    }
+
+                    this.Cursor = Cursors.Default;
+                    return;
+                }
+            }
 
             //teams
             if (e.Node.Text == "Teams" && e.Node.Parent.Text == "Legendary")
             {
+                tabControl1.SelectedIndex = 2;
                 if (e.Node.Nodes.Count == 0)
                 {
                     GetTeams();
@@ -378,47 +431,14 @@ namespace LegendaryData
                 return;
             }
 
-            //heroes
-            if (e.Node.Text == "Heroes" && e.Node.Parent.Text == "Legendary")
-            {
-                if (e.Node.Nodes.Count == 0)
-                {
-                    GetHeroes();
-
-                    if (heroesList.Count > 0)
-                    {
-                        heroesList.OrderBy(o => o.HeroName);
-                        foreach (var item in heroesList)
-                        {
-                            TreeNode node = new TreeNode(item.HeroName);
-                            node.Tag = item;
-                            e.Node.Nodes.Add(node);
-                        }
-                    }
-                }
-
-                this.Cursor = Cursors.Default;
-                return;
-            }
-
-            if (e.Node.Parent != null)
-                if (e.Node.Parent.Text == "Heroes")
-                {
-                    if (e.Node.Tag != null)
-                    {
-                        var heroModel = (Heroes)e.Node.Tag;
-                        GetHeroDetails(heroModel);
-                    }
-
-                    this.Cursor = Cursors.Default;
-                    return;
-                }
 
             //masterminds
             if (e.Node.Text == "Masterminds" && e.Node.Parent.Text == "Legendary")
             {
+                
                 if (e.Node.Nodes.Count == 0)
                 {
+                    tabControl1.SelectedIndex = 3;
                     GetMasterminds();
                     if (mastermindsList.Count > 0)
                     {
@@ -437,8 +457,11 @@ namespace LegendaryData
             }
 
             if (e.Node.Parent != null)
+            {
+                
                 if (e.Node.Parent.Text == "Masterminds")
                 {
+                    tabControl1.SelectedIndex = 3;
                     if (e.Node.Tag != null)
                     {
                         var mastermindModel = (Masterminds)e.Node.Tag;
@@ -448,10 +471,11 @@ namespace LegendaryData
                     this.Cursor = Cursors.Default;
                     return;
                 }
-
+            }
             //villains
             if (e.Node.Text == "Villains" && e.Node.Parent.Text == "Legendary")
             {
+                tabControl1.SelectedIndex = 4;
                 if (e.Node.Nodes.Count == 0)
                 {
                     GetVillains();
@@ -473,8 +497,11 @@ namespace LegendaryData
             }
 
             if (e.Node.Parent != null)
+            {
+                
                 if (e.Node.Parent.Text == "Villains")
                 {
+                    tabControl1.SelectedIndex = 4;
                     if (e.Node.Tag != null)
                     {
                         var villainModel = (VillainGroups)e.Node.Tag;
@@ -483,10 +510,11 @@ namespace LegendaryData
                     this.Cursor = Cursors.Default;
                     return;
                 }
-
+            }
             //henchmen
             if (e.Node.Text == "Henchmen" && e.Node.Parent.Text == "Legendary")
             {
+                tabControl1.SelectedIndex = 5;
                 if (e.Node.Nodes.Count == 0)
                 {
                     GetHenchmen();
@@ -507,8 +535,11 @@ namespace LegendaryData
             }
 
             if (e.Node.Parent != null)
+            {
+                
                 if (e.Node.Parent.Text == "Henchmen")
                 {
+                    tabControl1.SelectedIndex = 5;
                     if (e.Node.Tag != null)
                     {
                         var henchmenModel = (Henchmen)e.Node.Tag;
@@ -517,7 +548,7 @@ namespace LegendaryData
                     this.Cursor = Cursors.Default;
                     return;
                 }
-
+            }
             this.Cursor = Cursors.Default;
         }
 
@@ -587,6 +618,10 @@ namespace LegendaryData
             {
                 heroesList = this.repositoryHeroes.GetAll().Result.ToList();
             }
+
+
+            heroesBindingSource.DataSource = heroesList;
+           
         }
 
         private void GetAuthors()
@@ -595,6 +630,10 @@ namespace LegendaryData
             {
                 authorsList = this.repositoryAuthors.GetAll().Result.ToList();
             }
+                     
+
+            dataGridViewAuthors.DataSource = authorsList;
+           
         }
 
         private void GetTeams()
@@ -603,6 +642,9 @@ namespace LegendaryData
             {
                 teamList = this.repositoryTeams.GetAll().Result.ToList();
             }
+            
+            dataGridViewTeams.DataSource = teamList;
+            
         }
 
         private void GetMasterminds()
@@ -611,6 +653,8 @@ namespace LegendaryData
             {
                 mastermindsList = this.repositoryMasterminds.GetAll().Result.ToList();
             }
+            mastermindsBindingSource.DataSource = mastermindsList;
+            
         }
 
         private void GetVillains()
@@ -622,6 +666,10 @@ namespace LegendaryData
                 if (villainsList.Count == 0)
                     SyncVillains();
             }
+
+
+            villainGroupsBindingSource.DataSource = villainsList;
+            
         }
 
         private void GetHenchmen()
@@ -633,6 +681,9 @@ namespace LegendaryData
                 if (henchmenList.Count == 0)
                     SyncHenchmen();
             }
+
+            henchmenBindingSource.DataSource = henchmenList;
+            
         }
 
         private void GetAuthorDetails()
@@ -1044,8 +1095,68 @@ namespace LegendaryData
             this.Cursor = Cursors.Default;
         }
 
+
         #endregion
 
+        private void dataGridViewAuthors_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
 
+        private void dataGridViewHeroes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                var row = dataGridViewHeroes.Rows[e.RowIndex];
+                var model = (Heroes)row.DataBoundItem;
+                GetHeroDetails(model);
+            }
+            
+        }
+
+        private void dataGridViewMasterminds_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                var row = dataGridViewMasterminds.Rows[e.RowIndex];
+                var model = (Masterminds)row.DataBoundItem;
+
+                GetMastermindDetails(model);
+            }
+        }
+
+        private void dataGridViewVillains_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                var row = dataGridViewVillains.Rows[e.RowIndex];
+                var model = (VillainGroups)row.DataBoundItem;
+
+                GetVillainDetails(model);
+            }
+            
+        }
+
+        private void dataGridViewHenchmen_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                var row = dataGridViewHenchmen.Rows[e.RowIndex];
+                var model = (Henchmen)row.DataBoundItem;
+
+                GetHenchmenDetails(model);
+            }
+        }
+
+        private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            
+            //dataGridViewHeroes.Columns["ID"].Visible = false;
+            //dataGridViewAuthors.Columns["ID"].Visible = false;
+            //dataGridViewTeams.Columns["ID"].Visible = false;
+            //dataGridViewHenchmen.Columns["ID"].Visible = false;
+            //dataGridViewVillains.Columns["ID"].Visible = false;
+            //dataGridViewMasterminds.Columns["ID"].Visible = false;
+        }
     }
 }

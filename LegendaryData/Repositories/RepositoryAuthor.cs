@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static LegendaryData.Data.DataTools;
-
+using LegendaryData.Models;
 namespace LegendaryData.Repositories
 {
     public class RepositoryAuthor : BaseDataManager, IRepositoryAuthor

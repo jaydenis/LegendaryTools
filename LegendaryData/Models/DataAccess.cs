@@ -4,7 +4,7 @@
 using SQLite;
 using System;
 
-namespace LegendaryData
+namespace LegendaryData.Models
 {
     public class SQLiteDb
     {
