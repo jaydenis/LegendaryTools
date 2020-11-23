@@ -576,11 +576,7 @@ namespace CustomSetBuilder
                     foreach (PictureBox pb in flowLayoutPanelStage.Controls.OfType<PictureBox>())
                         pb.Dispose();
 
-                if (flowLayoutPanel1.Controls.Count > 0)
-                    foreach (PictureBox pb in flowLayoutPanel1.Controls.OfType<PictureBox>())
-                        pb.Dispose();
-
-                flowLayoutPanel1.Controls.Clear();
+                
                 flowLayoutPanelStage.Controls.Clear();
                 SelectedPictures.Clear();
                 SelectedPicturesPath.Clear();
