@@ -20,46 +20,73 @@ namespace LegendaryData.Mappers
 
             return config.CreateMapper();
         }
-        public static Stat_Author AddMapping(Stat_Author source, Stat_Author destination)
+
+        public static AuthorViewModel GetMapping(Stat_Author source, AuthorViewModel destination)
         {
             var iMapper = CreateMap(source, destination);
-
             var dto = iMapper.Map(source, destination, opt =>
             {
+                opt.BeforeMap((src, dest) => src.AuthorName = dest.Name);
             });
 
             return dto;
         }
 
-        public static Stat_Author UpdateMapping(Stat_Author source, Stat_Author destination)
+      
+        public static Stat_Author AddMapping(AuthorViewModel source, Stat_Author destination)
         {
             var iMapper = CreateMap(source, destination);
+
             var dto = iMapper.Map(source, destination, opt =>
             {
-                //opt.BeforeMap((src, dest) => src.DATE_UPDATED = DateTime.Now);
+                opt.BeforeMap((src, dest) => src.Name = dest.AuthorName);
+
             });
 
             return dto;
         }
 
-        public static Heroes AddMapping(Heroes source, Heroes destination)
+        public static Stat_Author UpdateMapping(AuthorViewModel source, Stat_Author destination)
         {
             var iMapper = CreateMap(source, destination);
-
             var dto = iMapper.Map(source, destination, opt =>
             {
-                 //opt.BeforeMap((src, dest) => src.DATE_UPDATED = DateTime.Now);
+                opt.BeforeMap((src, dest) => src.Name = dest.AuthorName);
             });
 
             return dto;
         }
 
-        public static Heroes UpdateMapping(Heroes source, Heroes destination)
+        public static BaseCardViewModel GetMapping(Heroes source, BaseCardViewModel destination)
         {
             var iMapper = CreateMap(source, destination);
             var dto = iMapper.Map(source, destination, opt =>
             {
-                //opt.BeforeMap((src, dest) => src.DATE_UPDATED = DateTime.Now);
+                opt.BeforeMap((src, dest) => src.HeroName = dest.Name);
+            });
+
+            return dto;
+        }
+
+
+        public static Heroes AddMapping(BaseCardViewModel source, Heroes destination)
+        {
+            var iMapper = CreateMap(source, destination);
+
+            var dto = iMapper.Map(source, destination, opt =>
+            {
+                opt.BeforeMap((src, dest) => src.Name = dest.HeroName);
+            });
+
+            return dto;
+        }
+
+        public static Heroes UpdateMapping(BaseCardViewModel source, Heroes destination)
+        {
+            var iMapper = CreateMap(source, destination);
+            var dto = iMapper.Map(source, destination, opt =>
+            {
+                opt.BeforeMap((src, dest) => src.Name = dest.HeroName);
             });
 
             return dto;

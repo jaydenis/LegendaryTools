@@ -10,6 +10,16 @@ namespace LegendaryData.Repositories
 {
     public class RepositoryTeams : BaseDataManager, IRepositoryTeams
     {
+        public async Task<IQueryable<Stat_Affiliation>> SearchByName(string name)
+        {
+            var modelList = new List<Stat_Affiliation>();
+            using (var db = new DataContext())
+            {
+                modelList = db.Teams.Where(x => x.TeamName.ToLower().Contains(name)).ToList();
+            }
+            return modelList.AsQueryable();
+        }
+
         public async Task<IQueryable<Stat_Affiliation>> GetAll()
         {
             var modelList = new List<Stat_Affiliation>();

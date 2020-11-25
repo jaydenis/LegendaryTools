@@ -10,7 +10,16 @@ namespace LegendaryData.Repositories
 {
     public class RepositoryHenchmen : BaseDataManager, IRepositoryHenchmen
     {
-       
+        public async Task<IQueryable<Henchmen>> SearchByName(string name)
+        {
+            var modelList = new List<Henchmen>();
+            using (var db = new DataContext())
+            {
+                modelList = db.Henchmen.Where(x => x.HenchmenName.ToLower().Contains(name)).ToList();
+            }
+            return modelList.AsQueryable();
+        }
+
         public async Task<IQueryable<Henchmen>> GetAll()
         {
             var modelList = new List<Henchmen>();
@@ -144,5 +153,7 @@ namespace LegendaryData.Repositories
                 throw ex;
             }
         }
+
+        
     }
 }

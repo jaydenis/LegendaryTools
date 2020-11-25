@@ -10,14 +10,31 @@ namespace LegendaryData.Repositories
 {
     public class RepositoryAuthor : BaseDataManager, IRepositoryAuthor
     {
-        public async Task<IQueryable<Stat_Author>> GetAll()
+        public async Task<IQueryable<AuthorViewModel>> SearchByName(string name)
+        {
+            var modelList = new List<AuthorViewModel>();
+            using (var db = new DataContext())
+            {
+                var entities = db.Authors.Where(x => x.AuthorName.ToLower().Contains(name)).ToList();
+                foreach(var entity in entities)
+                {
+                    modelList.Add(Mappers.DataMap.GetMapping(entity, new AuthorViewModel()));
+                }
+            }
+            return modelList.AsQueryable();
+        }
+        public async Task<IQueryable<AuthorViewModel>> GetAll()
         {
             try
             {
-                var modelList = new List<Stat_Author>();
+                var modelList = new List<AuthorViewModel>();
                 using (var db = new DataContext())
                 {
-                    modelList = db.Authors.ToList();
+                    var entities = db.Authors.ToList();
+                    foreach (var entity in entities)
+                    {
+                        modelList.Add(Mappers.DataMap.GetMapping(entity, new AuthorViewModel()));
+                    }
 
                 }
                 return modelList.AsQueryable();
@@ -30,23 +47,35 @@ namespace LegendaryData.Repositories
 
         }
 
-        public async Task<Stat_Author> GetOneByName(string name)
+        public async Task<AuthorViewModel> GetOneByName(string name)
+        {
+            var model = new AuthorViewModel();
+            using (var db = new DataContext())
+            {
+                var entity = db.Authors.Where(x => x.AuthorName.Contains(name)).FirstOrDefault();
+                model = Mappers.DataMap.GetMapping(entity, new AuthorViewModel());
+            }
+            return model;
+        }
+
+        private async Task<Stat_Author> GetByName(string name)
         {
             var model = new Stat_Author();
             using (var db = new DataContext())
             {
                 model = db.Authors.Where(x => x.AuthorName.Contains(name)).FirstOrDefault();
+               
             }
             return model;
         }
 
-        public async Task Insert(Stat_Author model)
+        public async Task Insert(AuthorViewModel model)
         {
             try
             {
                 using (var db = new DataContext())
                 {
-                    var entity = GetOneByName(model.AuthorName);
+                    var entity = GetByName(model.Name);
                     if (entity.Result == null)
                     {
                         Mappers.DataMap.AddMapping(model, entity.Result);
@@ -70,23 +99,20 @@ namespace LegendaryData.Repositories
         }
 
 
-        public Task Update(Stat_Author model)
+        public Task Update(AuthorViewModel model)
         {
             try
             {
                 using (var db = new DataContext())
                 {
-                    var entity = GetOneByName(model.AuthorName);
+                    var entity = GetByName(model.Name);
                     if (entity.Result != null)
                     {
-                        DataCompareResult dcr = DataTools.CompareObjects(model, entity.Result);
-                        if (dcr.ObjectIdentical == false)
-                        {
                             Mappers.DataMap.UpdateMapping(model, entity.Result);
                             db.Entry(model).State = System.Data.Entity.EntityState.Modified;
 
                             db.SaveChanges();
-                        }
+                        
                     }
                     return Task.CompletedTask;
                 }
@@ -98,7 +124,7 @@ namespace LegendaryData.Repositories
             }
         }
 
-        public Task Update(Stat_Author model, Stat_Author entity)
+        public Task Update(AuthorViewModel model, Stat_Author entity)
         {
             try
             {
@@ -106,14 +132,12 @@ namespace LegendaryData.Repositories
                 {
                     if (entity != null)
                     {
-                        DataCompareResult dcr = DataTools.CompareObjects(model, entity);
-                        if (dcr.ObjectIdentical == false)
-                        {
+                        
                             Mappers.DataMap.UpdateMapping(model, entity);
                             db.Entry(model).State = System.Data.Entity.EntityState.Modified;
 
                             db.SaveChanges();
-                        }
+                        
                     }
                     return Task.CompletedTask;
                 }
@@ -148,5 +172,6 @@ namespace LegendaryData.Repositories
             }
         }
 
+        
     }
 }

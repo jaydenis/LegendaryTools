@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LegendaryData.Repositories
 {
-    public interface IRepositoryAuthor : IGenericRepository<Stat_Author>
+    public interface IRepositoryAuthor : IGenericRepository<AuthorViewModel>
     {
 
     }

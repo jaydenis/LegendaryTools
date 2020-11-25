@@ -32,41 +32,19 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripComboSearch = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripTextSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButtonSearch = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageAuthors = new System.Windows.Forms.TabPage();
-            this.dataGridViewAuthors = new System.Windows.Forms.DataGridView();
+            this.tabPageTeams = new System.Windows.Forms.TabPage();
+            this.dgAuthorHeroes = new System.Windows.Forms.DataGridView();
+            this.dgAuthorTeams = new System.Windows.Forms.DataGridView();
             this.tabPageHeroes = new System.Windows.Forms.TabPage();
             this.dataGridViewHeroes = new System.Windows.Forms.DataGridView();
-            this.tabPageTeams = new System.Windows.Forms.TabPage();
-            this.dataGridViewTeams = new System.Windows.Forms.DataGridView();
             this.tabPageMasterminds = new System.Windows.Forms.TabPage();
             this.dataGridViewMasterminds = new System.Windows.Forms.DataGridView();
-            this.tabPageVillains = new System.Windows.Forms.TabPage();
-            this.dataGridViewVillains = new System.Windows.Forms.DataGridView();
-            this.tabPageHenchmen = new System.Windows.Forms.TabPage();
-            this.dataGridViewHenchmen = new System.Windows.Forms.DataGridView();
-            this.lblLastUpdated = new System.Windows.Forms.Label();
-            this.btnSyncData = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.statAuthorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heroNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bGGLinkDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expansionNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.universeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.yearDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.teamNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isOfficialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.keyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heroesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.teamNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.universeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statAffiliationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.iDDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mastermindNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bGGLinkDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +54,8 @@
             this.yearDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.keyDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mastermindsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPageVillains = new System.Windows.Forms.TabPage();
+            this.dataGridViewVillains = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.villainGroupDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bGGLinkDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +64,8 @@
             this.universeNameDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yearDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.villainGroupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPageHenchmen = new System.Windows.Forms.TabPage();
+            this.dataGridViewHenchmen = new System.Windows.Forms.DataGridView();
             this.henchmenNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bGGLinkDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.authorDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,48 +73,60 @@
             this.universeNameDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yearDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.henchmenBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.authorNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bGGLinkDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.dataGridMain = new System.Windows.Forms.DataGridView();
+            this.lblCurrentDataModel = new System.Windows.Forms.Label();
+            this.lblLastUpdated = new System.Windows.Forms.Label();
+            this.btnSyncData = new System.Windows.Forms.Button();
+            this.statAffiliationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.authorViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.heroesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.statAuthorBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.villainGroupsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPageAuthors.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuthors)).BeginInit();
+            this.tabPageTeams.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAuthorHeroes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAuthorTeams)).BeginInit();
             this.tabPageHeroes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHeroes)).BeginInit();
-            this.tabPageTeams.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeams)).BeginInit();
             this.tabPageMasterminds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMasterminds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mastermindsBindingSource)).BeginInit();
             this.tabPageVillains.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVillains)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villainGroupsBindingSource)).BeginInit();
             this.tabPageHenchmen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHenchmen)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statAuthorBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.heroesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statAffiliationBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mastermindsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.villainGroupsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.henchmenBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statAffiliationBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.authorViewModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heroesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statAuthorBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villainGroupsBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(3, 7);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(393, 163);
+            this.richTextBox1.Size = new System.Drawing.Size(330, 217);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 25);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1183, 24);
             this.menuStrip1.TabIndex = 2;
@@ -140,11 +134,47 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboSearch,
+            this.toolStripTextSearch,
+            this.toolStripButtonSearch});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1183, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripComboSearch
+            // 
+            this.toolStripComboSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboSearch.Items.AddRange(new object[] {
+            "Search All",
+            "Heroes",
+            "Teams",
+            "Masterminds",
+            "Villain Groups",
+            "Henchmen",
+            "Authors"});
+            this.toolStripComboSearch.Name = "toolStripComboSearch";
+            this.toolStripComboSearch.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboSearch.SelectedIndexChanged += new System.EventHandler(this.toolStripComboSearch_SelectedIndexChanged);
+            // 
+            // toolStripTextSearch
+            // 
+            this.toolStripTextSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextSearch.Name = "toolStripTextSearch";
+            this.toolStripTextSearch.Size = new System.Drawing.Size(200, 25);
+            // 
+            // toolStripButtonSearch
+            // 
+            this.toolStripButtonSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSearch.Image = global::LegendaryData.Properties.Resources.magnifier;
+            this.toolStripButtonSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSearch.Name = "toolStripButtonSearch";
+            this.toolStripButtonSearch.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSearch.Text = "toolStripButton1";
+            this.toolStripButtonSearch.Click += new System.EventHandler(this.toolStripButtonSearch_Click);
             // 
             // splitContainer1
             // 
@@ -160,6 +190,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
+            this.splitContainer1.Panel2.Controls.Add(this.dataGridMain);
+            this.splitContainer1.Panel2.Controls.Add(this.lblCurrentDataModel);
             this.splitContainer1.Size = new System.Drawing.Size(1183, 729);
             this.splitContainer1.SplitterDistance = 256;
             this.splitContainer1.TabIndex = 4;
@@ -175,49 +207,53 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPageAuthors);
-            this.tabControl1.Controls.Add(this.tabPageHeroes);
             this.tabControl1.Controls.Add(this.tabPageTeams);
+            this.tabControl1.Controls.Add(this.tabPageHeroes);
             this.tabControl1.Controls.Add(this.tabPageMasterminds);
             this.tabControl1.Controls.Add(this.tabPageVillains);
             this.tabControl1.Controls.Add(this.tabPageHenchmen);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 203);
+            this.tabControl1.Location = new System.Drawing.Point(220, 231);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(923, 526);
+            this.tabControl1.Size = new System.Drawing.Size(703, 498);
             this.tabControl1.TabIndex = 6;
             // 
-            // tabPageAuthors
+            // tabPageTeams
             // 
-            this.tabPageAuthors.Controls.Add(this.dataGridViewAuthors);
-            this.tabPageAuthors.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAuthors.Name = "tabPageAuthors";
-            this.tabPageAuthors.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAuthors.Size = new System.Drawing.Size(915, 500);
-            this.tabPageAuthors.TabIndex = 0;
-            this.tabPageAuthors.Text = "Authors";
-            this.tabPageAuthors.UseVisualStyleBackColor = true;
+            this.tabPageTeams.Controls.Add(this.dgAuthorHeroes);
+            this.tabPageTeams.Controls.Add(this.dgAuthorTeams);
+            this.tabPageTeams.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTeams.Name = "tabPageTeams";
+            this.tabPageTeams.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTeams.Size = new System.Drawing.Size(695, 472);
+            this.tabPageTeams.TabIndex = 2;
+            this.tabPageTeams.Text = "Teams";
+            this.tabPageTeams.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewAuthors
+            // dgAuthorHeroes
             // 
-            this.dataGridViewAuthors.AllowUserToAddRows = false;
-            this.dataGridViewAuthors.AllowUserToDeleteRows = false;
-            this.dataGridViewAuthors.AllowUserToOrderColumns = true;
-            this.dataGridViewAuthors.AutoGenerateColumns = false;
-            this.dataGridViewAuthors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAuthors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn,
-            this.authorNameDataGridViewTextBoxColumn,
-            this.bGGLinkDataGridViewTextBoxColumn});
-            this.dataGridViewAuthors.DataSource = this.statAuthorBindingSource;
-            this.dataGridViewAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewAuthors.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewAuthors.Name = "dataGridViewAuthors";
-            this.dataGridViewAuthors.ReadOnly = true;
-            this.dataGridViewAuthors.Size = new System.Drawing.Size(909, 494);
-            this.dataGridViewAuthors.TabIndex = 5;
-            this.dataGridViewAuthors.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
+            this.dgAuthorHeroes.AllowUserToAddRows = false;
+            this.dgAuthorHeroes.AllowUserToDeleteRows = false;
+            this.dgAuthorHeroes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAuthorHeroes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgAuthorHeroes.Location = new System.Drawing.Point(3, 153);
+            this.dgAuthorHeroes.Name = "dgAuthorHeroes";
+            this.dgAuthorHeroes.ReadOnly = true;
+            this.dgAuthorHeroes.Size = new System.Drawing.Size(689, 316);
+            this.dgAuthorHeroes.TabIndex = 2;
+            // 
+            // dgAuthorTeams
+            // 
+            this.dgAuthorTeams.AllowUserToAddRows = false;
+            this.dgAuthorTeams.AllowUserToDeleteRows = false;
+            this.dgAuthorTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAuthorTeams.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgAuthorTeams.Location = new System.Drawing.Point(3, 3);
+            this.dgAuthorTeams.Name = "dgAuthorTeams";
+            this.dgAuthorTeams.ReadOnly = true;
+            this.dgAuthorTeams.Size = new System.Drawing.Size(689, 150);
+            this.dgAuthorTeams.TabIndex = 1;
             // 
             // tabPageHeroes
             // 
@@ -225,7 +261,7 @@
             this.tabPageHeroes.Location = new System.Drawing.Point(4, 22);
             this.tabPageHeroes.Name = "tabPageHeroes";
             this.tabPageHeroes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHeroes.Size = new System.Drawing.Size(915, 534);
+            this.tabPageHeroes.Size = new System.Drawing.Size(695, 472);
             this.tabPageHeroes.TabIndex = 1;
             this.tabPageHeroes.Text = "Heroes";
             this.tabPageHeroes.UseVisualStyleBackColor = true;
@@ -234,58 +270,15 @@
             // 
             this.dataGridViewHeroes.AllowUserToAddRows = false;
             this.dataGridViewHeroes.AllowUserToDeleteRows = false;
-            this.dataGridViewHeroes.AutoGenerateColumns = false;
             this.dataGridViewHeroes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewHeroes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn1,
-            this.heroNameDataGridViewTextBoxColumn,
-            this.bGGLinkDataGridViewTextBoxColumn1,
-            this.authorDataGridViewTextBoxColumn,
-            this.expansionNameDataGridViewTextBoxColumn,
-            this.universeDataGridViewTextBoxColumn,
-            this.yearDataGridViewTextBoxColumn,
-            this.teamNameDataGridViewTextBoxColumn,
-            this.isOfficialDataGridViewTextBoxColumn,
-            this.keyDataGridViewTextBoxColumn});
-            this.dataGridViewHeroes.DataSource = this.heroesBindingSource;
             this.dataGridViewHeroes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewHeroes.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewHeroes.Name = "dataGridViewHeroes";
             this.dataGridViewHeroes.ReadOnly = true;
-            this.dataGridViewHeroes.Size = new System.Drawing.Size(909, 528);
+            this.dataGridViewHeroes.Size = new System.Drawing.Size(689, 466);
             this.dataGridViewHeroes.TabIndex = 0;
             this.dataGridViewHeroes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewHeroes_CellClick);
             this.dataGridViewHeroes.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
-            // 
-            // tabPageTeams
-            // 
-            this.tabPageTeams.Controls.Add(this.dataGridViewTeams);
-            this.tabPageTeams.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTeams.Name = "tabPageTeams";
-            this.tabPageTeams.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTeams.Size = new System.Drawing.Size(915, 534);
-            this.tabPageTeams.TabIndex = 2;
-            this.tabPageTeams.Text = "Teams";
-            this.tabPageTeams.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewTeams
-            // 
-            this.dataGridViewTeams.AllowUserToAddRows = false;
-            this.dataGridViewTeams.AllowUserToDeleteRows = false;
-            this.dataGridViewTeams.AutoGenerateColumns = false;
-            this.dataGridViewTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTeams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn2,
-            this.teamNameDataGridViewTextBoxColumn1,
-            this.universeNameDataGridViewTextBoxColumn});
-            this.dataGridViewTeams.DataSource = this.statAffiliationBindingSource;
-            this.dataGridViewTeams.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewTeams.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewTeams.Name = "dataGridViewTeams";
-            this.dataGridViewTeams.ReadOnly = true;
-            this.dataGridViewTeams.Size = new System.Drawing.Size(909, 528);
-            this.dataGridViewTeams.TabIndex = 1;
-            this.dataGridViewTeams.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
             // 
             // tabPageMasterminds
             // 
@@ -293,7 +286,7 @@
             this.tabPageMasterminds.Location = new System.Drawing.Point(4, 22);
             this.tabPageMasterminds.Name = "tabPageMasterminds";
             this.tabPageMasterminds.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMasterminds.Size = new System.Drawing.Size(915, 534);
+            this.tabPageMasterminds.Size = new System.Drawing.Size(695, 472);
             this.tabPageMasterminds.TabIndex = 3;
             this.tabPageMasterminds.Text = "Masterminds";
             this.tabPageMasterminds.UseVisualStyleBackColor = true;
@@ -318,227 +311,10 @@
             this.dataGridViewMasterminds.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewMasterminds.Name = "dataGridViewMasterminds";
             this.dataGridViewMasterminds.ReadOnly = true;
-            this.dataGridViewMasterminds.Size = new System.Drawing.Size(909, 528);
+            this.dataGridViewMasterminds.Size = new System.Drawing.Size(689, 466);
             this.dataGridViewMasterminds.TabIndex = 1;
             this.dataGridViewMasterminds.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMasterminds_CellClick);
             this.dataGridViewMasterminds.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
-            // 
-            // tabPageVillains
-            // 
-            this.tabPageVillains.Controls.Add(this.dataGridViewVillains);
-            this.tabPageVillains.Location = new System.Drawing.Point(4, 22);
-            this.tabPageVillains.Name = "tabPageVillains";
-            this.tabPageVillains.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVillains.Size = new System.Drawing.Size(915, 534);
-            this.tabPageVillains.TabIndex = 4;
-            this.tabPageVillains.Text = "Villain Groups";
-            this.tabPageVillains.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewVillains
-            // 
-            this.dataGridViewVillains.AllowUserToAddRows = false;
-            this.dataGridViewVillains.AllowUserToDeleteRows = false;
-            this.dataGridViewVillains.AutoGenerateColumns = false;
-            this.dataGridViewVillains.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVillains.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn4,
-            this.villainGroupDataGridViewTextBoxColumn,
-            this.bGGLinkDataGridViewTextBoxColumn3,
-            this.authorDataGridViewTextBoxColumn2,
-            this.expansionNameDataGridViewTextBoxColumn2,
-            this.universeNameDataGridViewTextBoxColumn2,
-            this.yearDataGridViewTextBoxColumn2});
-            this.dataGridViewVillains.DataSource = this.villainGroupsBindingSource;
-            this.dataGridViewVillains.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewVillains.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewVillains.Name = "dataGridViewVillains";
-            this.dataGridViewVillains.ReadOnly = true;
-            this.dataGridViewVillains.Size = new System.Drawing.Size(909, 528);
-            this.dataGridViewVillains.TabIndex = 1;
-            this.dataGridViewVillains.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVillains_CellClick);
-            this.dataGridViewVillains.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
-            // 
-            // tabPageHenchmen
-            // 
-            this.tabPageHenchmen.Controls.Add(this.dataGridViewHenchmen);
-            this.tabPageHenchmen.Location = new System.Drawing.Point(4, 22);
-            this.tabPageHenchmen.Name = "tabPageHenchmen";
-            this.tabPageHenchmen.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHenchmen.Size = new System.Drawing.Size(915, 534);
-            this.tabPageHenchmen.TabIndex = 5;
-            this.tabPageHenchmen.Text = "Henchmen";
-            this.tabPageHenchmen.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewHenchmen
-            // 
-            this.dataGridViewHenchmen.AllowUserToAddRows = false;
-            this.dataGridViewHenchmen.AllowUserToDeleteRows = false;
-            this.dataGridViewHenchmen.AutoGenerateColumns = false;
-            this.dataGridViewHenchmen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewHenchmen.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.henchmenNameDataGridViewTextBoxColumn,
-            this.bGGLinkDataGridViewTextBoxColumn4,
-            this.authorDataGridViewTextBoxColumn3,
-            this.expansionNameDataGridViewTextBoxColumn3,
-            this.universeNameDataGridViewTextBoxColumn3,
-            this.yearDataGridViewTextBoxColumn3});
-            this.dataGridViewHenchmen.DataSource = this.henchmenBindingSource;
-            this.dataGridViewHenchmen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewHenchmen.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewHenchmen.Name = "dataGridViewHenchmen";
-            this.dataGridViewHenchmen.ReadOnly = true;
-            this.dataGridViewHenchmen.Size = new System.Drawing.Size(909, 528);
-            this.dataGridViewHenchmen.TabIndex = 1;
-            this.dataGridViewHenchmen.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewHenchmen_CellClick);
-            this.dataGridViewHenchmen.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
-            // 
-            // lblLastUpdated
-            // 
-            this.lblLastUpdated.AutoSize = true;
-            this.lblLastUpdated.Location = new System.Drawing.Point(399, 7);
-            this.lblLastUpdated.Name = "lblLastUpdated";
-            this.lblLastUpdated.Size = new System.Drawing.Size(74, 13);
-            this.lblLastUpdated.TabIndex = 4;
-            this.lblLastUpdated.Text = "Last Updated:";
-            // 
-            // btnSyncData
-            // 
-            this.btnSyncData.Location = new System.Drawing.Point(756, 7);
-            this.btnSyncData.Name = "btnSyncData";
-            this.btnSyncData.Size = new System.Drawing.Size(155, 23);
-            this.btnSyncData.TabIndex = 3;
-            this.btnSyncData.Text = "Get Remote Data";
-            this.btnSyncData.UseVisualStyleBackColor = true;
-            this.btnSyncData.Click += new System.EventHandler(this.btnSyncData_Click);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(3, 166);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(75, 20);
-            this.linkLabel1.TabIndex = 2;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "BGGLink";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.lblLastUpdated);
-            this.panel1.Controls.Add(this.btnSyncData);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(923, 203);
-            this.panel1.TabIndex = 7;
-            // 
-            // statAuthorBindingSource
-            // 
-            this.statAuthorBindingSource.DataSource = typeof(LegendaryData.Models.Stat_Author);
-            // 
-            // iDDataGridViewTextBoxColumn1
-            // 
-            this.iDDataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn1.Name = "iDDataGridViewTextBoxColumn1";
-            this.iDDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.iDDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // heroNameDataGridViewTextBoxColumn
-            // 
-            this.heroNameDataGridViewTextBoxColumn.DataPropertyName = "HeroName";
-            this.heroNameDataGridViewTextBoxColumn.HeaderText = "HeroName";
-            this.heroNameDataGridViewTextBoxColumn.Name = "heroNameDataGridViewTextBoxColumn";
-            this.heroNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // bGGLinkDataGridViewTextBoxColumn1
-            // 
-            this.bGGLinkDataGridViewTextBoxColumn1.DataPropertyName = "BGGLink";
-            this.bGGLinkDataGridViewTextBoxColumn1.HeaderText = "BGGLink";
-            this.bGGLinkDataGridViewTextBoxColumn1.Name = "bGGLinkDataGridViewTextBoxColumn1";
-            this.bGGLinkDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // authorDataGridViewTextBoxColumn
-            // 
-            this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
-            this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
-            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
-            this.authorDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // expansionNameDataGridViewTextBoxColumn
-            // 
-            this.expansionNameDataGridViewTextBoxColumn.DataPropertyName = "ExpansionName";
-            this.expansionNameDataGridViewTextBoxColumn.HeaderText = "ExpansionName";
-            this.expansionNameDataGridViewTextBoxColumn.Name = "expansionNameDataGridViewTextBoxColumn";
-            this.expansionNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // universeDataGridViewTextBoxColumn
-            // 
-            this.universeDataGridViewTextBoxColumn.DataPropertyName = "Universe";
-            this.universeDataGridViewTextBoxColumn.HeaderText = "Universe";
-            this.universeDataGridViewTextBoxColumn.Name = "universeDataGridViewTextBoxColumn";
-            this.universeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // yearDataGridViewTextBoxColumn
-            // 
-            this.yearDataGridViewTextBoxColumn.DataPropertyName = "Year";
-            this.yearDataGridViewTextBoxColumn.HeaderText = "Year";
-            this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
-            this.yearDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // teamNameDataGridViewTextBoxColumn
-            // 
-            this.teamNameDataGridViewTextBoxColumn.DataPropertyName = "TeamName";
-            this.teamNameDataGridViewTextBoxColumn.HeaderText = "TeamName";
-            this.teamNameDataGridViewTextBoxColumn.Name = "teamNameDataGridViewTextBoxColumn";
-            this.teamNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // isOfficialDataGridViewTextBoxColumn
-            // 
-            this.isOfficialDataGridViewTextBoxColumn.DataPropertyName = "IsOfficial";
-            this.isOfficialDataGridViewTextBoxColumn.HeaderText = "IsOfficial";
-            this.isOfficialDataGridViewTextBoxColumn.Name = "isOfficialDataGridViewTextBoxColumn";
-            this.isOfficialDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // keyDataGridViewTextBoxColumn
-            // 
-            this.keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
-            this.keyDataGridViewTextBoxColumn.HeaderText = "Key";
-            this.keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
-            this.keyDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // heroesBindingSource
-            // 
-            this.heroesBindingSource.DataSource = typeof(LegendaryData.Models.Heroes);
-            // 
-            // iDDataGridViewTextBoxColumn2
-            // 
-            this.iDDataGridViewTextBoxColumn2.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn2.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn2.Name = "iDDataGridViewTextBoxColumn2";
-            this.iDDataGridViewTextBoxColumn2.ReadOnly = true;
-            this.iDDataGridViewTextBoxColumn2.Visible = false;
-            // 
-            // teamNameDataGridViewTextBoxColumn1
-            // 
-            this.teamNameDataGridViewTextBoxColumn1.DataPropertyName = "TeamName";
-            this.teamNameDataGridViewTextBoxColumn1.HeaderText = "TeamName";
-            this.teamNameDataGridViewTextBoxColumn1.Name = "teamNameDataGridViewTextBoxColumn1";
-            this.teamNameDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // universeNameDataGridViewTextBoxColumn
-            // 
-            this.universeNameDataGridViewTextBoxColumn.DataPropertyName = "UniverseName";
-            this.universeNameDataGridViewTextBoxColumn.HeaderText = "UniverseName";
-            this.universeNameDataGridViewTextBoxColumn.Name = "universeNameDataGridViewTextBoxColumn";
-            this.universeNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // statAffiliationBindingSource
-            // 
-            this.statAffiliationBindingSource.DataSource = typeof(LegendaryData.Models.Stat_Affiliation);
             // 
             // iDDataGridViewTextBoxColumn3
             // 
@@ -601,6 +377,41 @@
             // 
             this.mastermindsBindingSource.DataSource = typeof(LegendaryData.Models.Masterminds);
             // 
+            // tabPageVillains
+            // 
+            this.tabPageVillains.Controls.Add(this.dataGridViewVillains);
+            this.tabPageVillains.Location = new System.Drawing.Point(4, 22);
+            this.tabPageVillains.Name = "tabPageVillains";
+            this.tabPageVillains.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageVillains.Size = new System.Drawing.Size(695, 472);
+            this.tabPageVillains.TabIndex = 4;
+            this.tabPageVillains.Text = "Villain Groups";
+            this.tabPageVillains.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewVillains
+            // 
+            this.dataGridViewVillains.AllowUserToAddRows = false;
+            this.dataGridViewVillains.AllowUserToDeleteRows = false;
+            this.dataGridViewVillains.AutoGenerateColumns = false;
+            this.dataGridViewVillains.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVillains.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iDDataGridViewTextBoxColumn4,
+            this.villainGroupDataGridViewTextBoxColumn,
+            this.bGGLinkDataGridViewTextBoxColumn3,
+            this.authorDataGridViewTextBoxColumn2,
+            this.expansionNameDataGridViewTextBoxColumn2,
+            this.universeNameDataGridViewTextBoxColumn2,
+            this.yearDataGridViewTextBoxColumn2});
+            this.dataGridViewVillains.DataSource = this.villainGroupsBindingSource;
+            this.dataGridViewVillains.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewVillains.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewVillains.Name = "dataGridViewVillains";
+            this.dataGridViewVillains.ReadOnly = true;
+            this.dataGridViewVillains.Size = new System.Drawing.Size(689, 466);
+            this.dataGridViewVillains.TabIndex = 1;
+            this.dataGridViewVillains.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVillains_CellClick);
+            this.dataGridViewVillains.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
+            // 
             // iDDataGridViewTextBoxColumn4
             // 
             this.iDDataGridViewTextBoxColumn4.DataPropertyName = "ID";
@@ -655,6 +466,40 @@
             // 
             this.villainGroupsBindingSource.DataSource = typeof(LegendaryData.Models.VillainGroups);
             // 
+            // tabPageHenchmen
+            // 
+            this.tabPageHenchmen.Controls.Add(this.dataGridViewHenchmen);
+            this.tabPageHenchmen.Location = new System.Drawing.Point(4, 22);
+            this.tabPageHenchmen.Name = "tabPageHenchmen";
+            this.tabPageHenchmen.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHenchmen.Size = new System.Drawing.Size(695, 472);
+            this.tabPageHenchmen.TabIndex = 5;
+            this.tabPageHenchmen.Text = "Henchmen";
+            this.tabPageHenchmen.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewHenchmen
+            // 
+            this.dataGridViewHenchmen.AllowUserToAddRows = false;
+            this.dataGridViewHenchmen.AllowUserToDeleteRows = false;
+            this.dataGridViewHenchmen.AutoGenerateColumns = false;
+            this.dataGridViewHenchmen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewHenchmen.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.henchmenNameDataGridViewTextBoxColumn,
+            this.bGGLinkDataGridViewTextBoxColumn4,
+            this.authorDataGridViewTextBoxColumn3,
+            this.expansionNameDataGridViewTextBoxColumn3,
+            this.universeNameDataGridViewTextBoxColumn3,
+            this.yearDataGridViewTextBoxColumn3});
+            this.dataGridViewHenchmen.DataSource = this.henchmenBindingSource;
+            this.dataGridViewHenchmen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewHenchmen.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewHenchmen.Name = "dataGridViewHenchmen";
+            this.dataGridViewHenchmen.ReadOnly = true;
+            this.dataGridViewHenchmen.Size = new System.Drawing.Size(689, 466);
+            this.dataGridViewHenchmen.TabIndex = 1;
+            this.dataGridViewHenchmen.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewHenchmen_CellClick);
+            this.dataGridViewHenchmen.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
+            // 
             // henchmenNameDataGridViewTextBoxColumn
             // 
             this.henchmenNameDataGridViewTextBoxColumn.DataPropertyName = "HenchmenName";
@@ -701,69 +546,136 @@
             // 
             this.henchmenBindingSource.DataSource = typeof(LegendaryData.Models.Henchmen);
             // 
-            // iDDataGridViewTextBoxColumn
+            // panel1
             // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDDataGridViewTextBoxColumn.Visible = false;
+            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 231);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(220, 498);
+            this.panel1.TabIndex = 7;
             // 
-            // authorNameDataGridViewTextBoxColumn
+            // linkLabel1
             // 
-            this.authorNameDataGridViewTextBoxColumn.DataPropertyName = "AuthorName";
-            this.authorNameDataGridViewTextBoxColumn.HeaderText = "AuthorName";
-            this.authorNameDataGridViewTextBoxColumn.Name = "authorNameDataGridViewTextBoxColumn";
-            this.authorNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(3, 227);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(75, 20);
+            this.linkLabel1.TabIndex = 2;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "BGGLink";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // bGGLinkDataGridViewTextBoxColumn
+            // dataGridMain
             // 
-            this.bGGLinkDataGridViewTextBoxColumn.DataPropertyName = "BGGLink";
-            this.bGGLinkDataGridViewTextBoxColumn.HeaderText = "BGGLink";
-            this.bGGLinkDataGridViewTextBoxColumn.MinimumWidth = 150;
-            this.bGGLinkDataGridViewTextBoxColumn.Name = "bGGLinkDataGridViewTextBoxColumn";
-            this.bGGLinkDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bGGLinkDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.bGGLinkDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.bGGLinkDataGridViewTextBoxColumn.Width = 200;
+            this.dataGridMain.AllowUserToAddRows = false;
+            this.dataGridMain.AllowUserToDeleteRows = false;
+            this.dataGridMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridMain.Location = new System.Drawing.Point(0, 24);
+            this.dataGridMain.Name = "dataGridMain";
+            this.dataGridMain.ReadOnly = true;
+            this.dataGridMain.Size = new System.Drawing.Size(923, 207);
+            this.dataGridMain.TabIndex = 7;
+            this.dataGridMain.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMain_CellClick);
+            // 
+            // lblCurrentDataModel
+            // 
+            this.lblCurrentDataModel.AutoSize = true;
+            this.lblCurrentDataModel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblCurrentDataModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentDataModel.Location = new System.Drawing.Point(0, 0);
+            this.lblCurrentDataModel.Name = "lblCurrentDataModel";
+            this.lblCurrentDataModel.Size = new System.Drawing.Size(51, 24);
+            this.lblCurrentDataModel.TabIndex = 8;
+            this.lblCurrentDataModel.Text = "Data";
+            // 
+            // lblLastUpdated
+            // 
+            this.lblLastUpdated.AutoSize = true;
+            this.lblLastUpdated.Location = new System.Drawing.Point(731, 26);
+            this.lblLastUpdated.Name = "lblLastUpdated";
+            this.lblLastUpdated.Size = new System.Drawing.Size(74, 13);
+            this.lblLastUpdated.TabIndex = 4;
+            this.lblLastUpdated.Text = "Last Updated:";
+            // 
+            // btnSyncData
+            // 
+            this.btnSyncData.Location = new System.Drawing.Point(1024, 25);
+            this.btnSyncData.Name = "btnSyncData";
+            this.btnSyncData.Size = new System.Drawing.Size(155, 23);
+            this.btnSyncData.TabIndex = 3;
+            this.btnSyncData.Text = "Get Remote Data";
+            this.btnSyncData.UseVisualStyleBackColor = true;
+            this.btnSyncData.Click += new System.EventHandler(this.btnSyncData_Click);
+            // 
+            // statAffiliationBindingSource
+            // 
+            this.statAffiliationBindingSource.DataSource = typeof(LegendaryData.Models.Stat_Affiliation);
+            // 
+            // authorViewModelBindingSource
+            // 
+            this.authorViewModelBindingSource.AllowNew = false;
+            this.authorViewModelBindingSource.DataSource = typeof(LegendaryData.Models.AuthorViewModel);
+            // 
+            // heroesBindingSource
+            // 
+            this.heroesBindingSource.DataSource = typeof(LegendaryData.Models.Heroes);
+            // 
+            // statAuthorBindingSource
+            // 
+            this.statAuthorBindingSource.DataSource = typeof(LegendaryData.Models.Stat_Author);
+            // 
+            // villainGroupsBindingSource1
+            // 
+            this.villainGroupsBindingSource1.DataSource = typeof(LegendaryData.Models.VillainGroups);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1183, 778);
+            this.Controls.Add(this.btnSyncData);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.lblLastUpdated);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.toolStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPageAuthors.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAuthors)).EndInit();
+            this.tabPageTeams.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgAuthorHeroes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAuthorTeams)).EndInit();
             this.tabPageHeroes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHeroes)).EndInit();
-            this.tabPageTeams.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeams)).EndInit();
             this.tabPageMasterminds.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMasterminds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mastermindsBindingSource)).EndInit();
             this.tabPageVillains.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVillains)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villainGroupsBindingSource)).EndInit();
             this.tabPageHenchmen.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHenchmen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.henchmenBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statAuthorBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.heroesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statAffiliationBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mastermindsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.villainGroupsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.henchmenBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.authorViewModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heroesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statAuthorBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.villainGroupsBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -779,13 +691,10 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnSyncData;
         private System.Windows.Forms.Label lblLastUpdated;
-        private System.Windows.Forms.DataGridView dataGridViewAuthors;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPageAuthors;
         private System.Windows.Forms.TabPage tabPageHeroes;
         private System.Windows.Forms.DataGridView dataGridViewHeroes;
         private System.Windows.Forms.TabPage tabPageTeams;
-        private System.Windows.Forms.DataGridView dataGridViewTeams;
         private System.Windows.Forms.TabPage tabPageMasterminds;
         private System.Windows.Forms.DataGridView dataGridViewMasterminds;
         private System.Windows.Forms.TabPage tabPageVillains;
@@ -814,20 +723,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn universeNameDataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn yearDataGridViewTextBoxColumn3;
         private System.Windows.Forms.BindingSource henchmenBindingSource;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn heroNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bGGLinkDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn authorDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn expansionNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn universeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn yearDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn teamNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn isOfficialDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn teamNameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn universeNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn mastermindNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bGGLinkDataGridViewTextBoxColumn2;
@@ -843,9 +738,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn expansionNameDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn universeNameDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn yearDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn authorNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewLinkColumn bGGLinkDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboSearch;
+        private System.Windows.Forms.ToolStripButton toolStripButtonSearch;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextSearch;
+        private System.Windows.Forms.BindingSource authorViewModelBindingSource;
+        private System.Windows.Forms.BindingSource villainGroupsBindingSource1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dataGridMain;
+        private System.Windows.Forms.Label lblCurrentDataModel;
+        private System.Windows.Forms.DataGridView dgAuthorHeroes;
+        private System.Windows.Forms.DataGridView dgAuthorTeams;
     }
 }
 

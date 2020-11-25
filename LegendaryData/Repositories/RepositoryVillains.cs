@@ -10,7 +10,15 @@ namespace LegendaryData.Repositories
 {
     public class RepositoryVillains : BaseDataManager,  IRepositoryVillains
     {
-      
+        public async Task<IQueryable<VillainGroups>> SearchByName(string name)
+        {
+            var modelList = new List<VillainGroups>();
+            using (var db = new DataContext())
+            {
+                modelList = db.Villains.Where(x => x.VillainGroup.ToLower().Contains(name)).ToList();
+            }
+            return modelList.AsQueryable();
+        }
 
         public async Task<IQueryable<VillainGroups>> GetAll()
         {

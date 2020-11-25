@@ -10,6 +10,15 @@ namespace LegendaryData.Repositories
 {
     public class RepositoryHeroes : BaseDataManager, IRepositoryHeroes
     {
+        public async Task<IQueryable<Heroes>> SearchByName(string name)
+        {
+            var modelList = new List<Heroes>();
+            using (var db = new DataContext())
+            {
+                modelList = db.Heroes.Where(x => x.HeroName.ToLower().Contains(name)).ToList();
+            }
+            return modelList.AsQueryable();
+        }
         private string GetKey(Heroes model)
         {
             return CreateMD5($"{model.HeroName}{model.Author}{model.TeamName}{model.Universe}{model.ExpansionName}{model.BGGLink}");

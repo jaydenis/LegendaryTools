@@ -10,11 +10,13 @@ namespace LegendaryData.Repositories
     {
         Task Insert(TModel model);
         Task Update(TModel model);
-        Task Update(TModel model, TModel entity);
+        //Task Update(TModel model, TModel entity);
 
         Task ClearData();
         Task<IQueryable<TModel>> GetAll();
         Task<TModel> GetOneByName(string name);
+
+        Task<IQueryable<TModel>> SearchByName(string name);
 
     }
 }

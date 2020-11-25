@@ -24,9 +24,6 @@ namespace CustomSetBuilder
         List<PictureBox> cardList = new List<PictureBox>();
         PdfDocument document;
 
-        
-        
-
         public Form2()
         {
             InitializeComponent();
@@ -45,9 +42,7 @@ namespace CustomSetBuilder
 
             btnCreatePDF.Enabled = false;
            
-        }
-
-       
+        }       
 
         public void DrawPage(PdfPage page, List<Image> currentImageList)
         {
@@ -66,15 +61,54 @@ namespace CustomSetBuilder
             int w = 180;
             int rowNumber = 0;
             int colNumber = 0;
-            int cardSpacing = Convert.ToInt32(numericCardSpacing.Value);
-            
+
+            int leftStart = (w * 3);
+
+            XPen pen = new XPen(XColors.Black, 1);
 
             foreach (var item in currentImageList)
             {
                 if (item != null)
                 {
-                    y = (h * rowNumber) + topMargin + (cardSpacing * (rowNumber+1));
-                    x = (w * colNumber) + leftMargin + (cardSpacing * (colNumber+1));                    
+                    y = (h * rowNumber) + topMargin;
+                    x = (w * colNumber) + leftMargin;
+
+                    gfx.DrawLine(pen, x, 1, x, topMargin + 10);
+                    gfx.DrawLine(pen, x, 760, x, 780);
+                    gfx.DrawLine(pen, 2, y, leftMargin + 10, y);
+                    gfx.DrawLine(pen, leftStart + 10, y, leftStart + leftMargin + 30, y);
+
+                    if (colNumber == 2)
+                    {
+                        colNumber = 0;
+                        rowNumber++;
+                    }
+                    else
+                    {
+                        colNumber++;
+                    }
+                }
+            }
+
+            gfx.DrawLine(pen, leftStart + 10, y, leftStart + leftMargin + 30, y);
+            gfx.DrawLine(pen, 180 + x, 1, 180 + x, topMargin + 10);
+            gfx.DrawLine(pen, 180 + x, 760, 180 + x, 780);
+            gfx.DrawLine(pen, 2, 250 + y, leftMargin + 10, 250 + y);
+            gfx.DrawLine(pen, leftStart + 10, 250 + y, leftStart + leftMargin + 30, 250 + y);
+
+            x = 30;
+            y = 20;
+            h = 250;
+            w = 180;
+            rowNumber = 0;
+            colNumber = 0;
+
+            foreach (var item in currentImageList)
+            {
+                if (item != null)
+                {
+                    y = (h * rowNumber) + topMargin;
+                    x = (w * colNumber) + leftMargin;
 
                     if (colNumber == 2)
                     {
@@ -91,7 +125,6 @@ namespace CustomSetBuilder
                     XImage image = XImage.FromStream(strm);
                     gfx.DrawImage(image, x, y, w, h);
                 }
-
             }
         }
 
@@ -208,7 +241,7 @@ namespace CustomSetBuilder
                         pictureBox.AllowDrop = true;
                         pictureBox.Image = new Bitmap(Convert.ToString(node.Tag));
                         pictureBox.ImageLocation = Convert.ToString(node.Tag);
-                        pictureBox.Size = new Size(200, 270);
+                        pictureBox.Size = new Size(220, 295);
                         pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         pictureBox.MouseClick += PictureBox_MouseClick;
                         pictureBox.MouseDown += PictureBox_MouseDown;
@@ -351,7 +384,7 @@ namespace CustomSetBuilder
                 PictureBox pb = new PictureBox();
                 pb.Image = picture.Image;
                 pb.ImageLocation = picture.ImageLocation;
-                pb.Size = new Size(200, 270);
+                pb.Size = new Size(220, 295);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.ContextMenuStrip = this.contextMenuStaged;
                 pb.AllowDrop = true;
@@ -389,71 +422,7 @@ namespace CustomSetBuilder
             StagingSelectBox((PictureBox)sender);
         }
 
-        private void Pb_MouseDown(object sender, MouseEventArgs e)
-        {
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    StagingSelectBox((PictureBox)sender);
-                    break;
 
-                case MouseButtons.Right:
-                    StagingSelectBox((PictureBox)sender);
-                    contextMenuStaged.Show(this, new Point(e.X, e.Y));
-                    break;
-            }
-        }
-
-        private void panelAdd1_DragDrop(object sender, DragEventArgs e)
-        {
-
-            AddXCards(1, activePictureBox);
-        }
-
-        private void panelAdd3_DragDrop(object sender, DragEventArgs e)
-        {
-            AddXCards(3, activePictureBox);
-
-        }
-
-        private void panelAdd5_DragDrop(object sender, DragEventArgs e)
-        {
-            AddXCards(5, activePictureBox);
-        }
-
-        private void panelAdd10_DragDrop(object sender, DragEventArgs e)
-        {
-            AddXCards(10, activePictureBox);
-        }
-
-        private void panelAdd1_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-            //panelAdd1.BackgroundImage = activePictureBox.Image;
-            //flowLayoutPanelStage.Controls.Add(activePictureBox);
-        }
-
-        private void panelAdd3_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-
-        private void panelAdd5_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-        
-        private void panelAdd10_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-
-        private void toolStripButtonCreatePDF_Click(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.WaitCursor;
-            GeneratePDF();
-            this.Cursor = Cursors.Default;
-        }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
@@ -535,21 +504,6 @@ namespace CustomSetBuilder
         private void x1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddXCards(1, activePictureBoxStaged);
-        }
-
-        private void x3ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddXCards(3, activePictureBoxStaged);
-        }
-
-        private void x5ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddXCards(5, activePictureBoxStaged);
-        }
-
-        private void x10ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddXCards(10, activePictureBoxStaged);
         }
 
         private void flowLayoutPanelStage_DragDrop(object sender, DragEventArgs e)

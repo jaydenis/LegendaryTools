@@ -10,6 +10,16 @@ namespace LegendaryData.Repositories
 {
     public class RepositoryMasterminds : BaseDataManager, IRepositoryMasterminds
     {
+
+        public async Task<IQueryable<Masterminds>> SearchByName(string name)
+        {
+            var modelList = new List<Masterminds>();
+            using (var db = new DataContext())
+            {
+                modelList = db.Masterminds.Where(x => x.MastermindName.ToLower().Contains(name)).ToList();
+            }
+            return modelList.AsQueryable();
+        }
         private string GetKey(Masterminds model)
         {
             return CreateMD5($"{model.MastermindName}{model.Author}{model.UniverseName}{model.BGGLink}{model.ExpansionName}");

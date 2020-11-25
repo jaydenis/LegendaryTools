@@ -39,17 +39,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.flowLayoutPanelStage = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelCopyContainer = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.labelAdd3 = new System.Windows.Forms.Label();
-            this.labelAdd1 = new System.Windows.Forms.Label();
             this.labelCardCount = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelAdd3 = new System.Windows.Forms.Panel();
-            this.panelAdd5 = new System.Windows.Forms.Panel();
-            this.panelAdd10 = new System.Windows.Forms.Panel();
-            this.panelAdd1 = new System.Windows.Forms.Panel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.contextMenuStaged = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -67,23 +57,19 @@
             this.toolStripMenuIAdd3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuIAdd5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuAdd10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericCardSpacing = new System.Windows.Forms.NumericUpDown();
             this.btnStartOver = new System.Windows.Forms.Button();
             this.btnCreatePDF = new System.Windows.Forms.Button();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.panelCopyContainer.SuspendLayout();
             this.contextMenuStaged.SuspendLayout();
             this.contextMenuPreview.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCardSpacing)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -157,9 +143,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanelStage);
-            this.splitContainer1.Panel2.Controls.Add(this.panelCopyContainer);
             this.splitContainer1.Size = new System.Drawing.Size(856, 680);
-            this.splitContainer1.SplitterDistance = 370;
+            this.splitContainer1.SplitterDistance = 419;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -171,7 +156,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(370, 680);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(419, 680);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // splitter2
@@ -191,169 +176,27 @@
             this.flowLayoutPanelStage.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.flowLayoutPanelStage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanelStage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelStage.Location = new System.Drawing.Point(107, 0);
+            this.flowLayoutPanelStage.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelStage.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanelStage.Name = "flowLayoutPanelStage";
-            this.flowLayoutPanelStage.Size = new System.Drawing.Size(376, 680);
+            this.flowLayoutPanelStage.Size = new System.Drawing.Size(434, 680);
             this.flowLayoutPanelStage.TabIndex = 1;
             this.flowLayoutPanelStage.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanelStage_DragDrop);
             this.flowLayoutPanelStage.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanelStage_DragEnter);
             this.flowLayoutPanelStage.DragOver += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanelStage_DragOver);
             // 
-            // panelCopyContainer
-            // 
-            this.panelCopyContainer.AllowDrop = true;
-            this.panelCopyContainer.BackColor = System.Drawing.Color.White;
-            this.panelCopyContainer.Controls.Add(this.label4);
-            this.panelCopyContainer.Controls.Add(this.label3);
-            this.panelCopyContainer.Controls.Add(this.labelAdd3);
-            this.panelCopyContainer.Controls.Add(this.labelAdd1);
-            this.panelCopyContainer.Controls.Add(this.labelCardCount);
-            this.panelCopyContainer.Controls.Add(this.label1);
-            this.panelCopyContainer.Controls.Add(this.panelAdd3);
-            this.panelCopyContainer.Controls.Add(this.panelAdd5);
-            this.panelCopyContainer.Controls.Add(this.panelAdd10);
-            this.panelCopyContainer.Controls.Add(this.panelAdd1);
-            this.panelCopyContainer.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCopyContainer.Location = new System.Drawing.Point(0, 0);
-            this.panelCopyContainer.Margin = new System.Windows.Forms.Padding(2);
-            this.panelCopyContainer.MinimumSize = new System.Drawing.Size(76, 558);
-            this.panelCopyContainer.Name = "panelCopyContainer";
-            this.panelCopyContainer.Size = new System.Drawing.Size(107, 680);
-            this.panelCopyContainer.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 561);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 26);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Add x10";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 419);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 26);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Add x5";
-            // 
-            // labelAdd3
-            // 
-            this.labelAdd3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAdd3.AutoSize = true;
-            this.labelAdd3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAdd3.Location = new System.Drawing.Point(8, 277);
-            this.labelAdd3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAdd3.Name = "labelAdd3";
-            this.labelAdd3.Size = new System.Drawing.Size(86, 26);
-            this.labelAdd3.TabIndex = 0;
-            this.labelAdd3.Text = "Add x3";
-            // 
-            // labelAdd1
-            // 
-            this.labelAdd1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAdd1.AutoSize = true;
-            this.labelAdd1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAdd1.Location = new System.Drawing.Point(14, 135);
-            this.labelAdd1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAdd1.Name = "labelAdd1";
-            this.labelAdd1.Size = new System.Drawing.Size(86, 26);
-            this.labelAdd1.TabIndex = 0;
-            this.labelAdd1.Text = "Add x1";
-            // 
             // labelCardCount
             // 
+            this.labelCardCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCardCount.AutoSize = true;
-            this.labelCardCount.Location = new System.Drawing.Point(22, 19);
+            this.labelCardCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardCount.Location = new System.Drawing.Point(417, 14);
             this.labelCardCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCardCount.Name = "labelCardCount";
-            this.labelCardCount.Size = new System.Drawing.Size(43, 13);
+            this.labelCardCount.Size = new System.Drawing.Size(71, 20);
             this.labelCardCount.TabIndex = 5;
             this.labelCardCount.Text = "0 Cards";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 2);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Copy Cards";
-            // 
-            // panelAdd3
-            // 
-            this.panelAdd3.AllowDrop = true;
-            this.panelAdd3.BackColor = System.Drawing.Color.SkyBlue;
-            this.panelAdd3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelAdd3.BackgroundImage")));
-            this.panelAdd3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelAdd3.Location = new System.Drawing.Point(3, 305);
-            this.panelAdd3.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAdd3.Name = "panelAdd3";
-            this.panelAdd3.Size = new System.Drawing.Size(100, 90);
-            this.panelAdd3.TabIndex = 1;
-            this.panelAdd3.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelAdd3_DragDrop);
-            this.panelAdd3.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelAdd3_DragEnter);
-            // 
-            // panelAdd5
-            // 
-            this.panelAdd5.AllowDrop = true;
-            this.panelAdd5.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panelAdd5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelAdd5.BackgroundImage")));
-            this.panelAdd5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelAdd5.Location = new System.Drawing.Point(3, 447);
-            this.panelAdd5.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAdd5.Name = "panelAdd5";
-            this.panelAdd5.Size = new System.Drawing.Size(100, 90);
-            this.panelAdd5.TabIndex = 2;
-            this.panelAdd5.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelAdd5_DragDrop);
-            this.panelAdd5.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelAdd5_DragEnter);
-            // 
-            // panelAdd10
-            // 
-            this.panelAdd10.AllowDrop = true;
-            this.panelAdd10.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.panelAdd10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelAdd10.BackgroundImage")));
-            this.panelAdd10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelAdd10.Location = new System.Drawing.Point(3, 589);
-            this.panelAdd10.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAdd10.Name = "panelAdd10";
-            this.panelAdd10.Size = new System.Drawing.Size(100, 90);
-            this.panelAdd10.TabIndex = 3;
-            this.panelAdd10.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelAdd10_DragDrop);
-            this.panelAdd10.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelAdd10_DragEnter);
-            // 
-            // panelAdd1
-            // 
-            this.panelAdd1.AllowDrop = true;
-            this.panelAdd1.BackColor = System.Drawing.Color.SteelBlue;
-            this.panelAdd1.BackgroundImage = global::CustomSetBuilder.Properties.Resources.download;
-            this.panelAdd1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelAdd1.Location = new System.Drawing.Point(3, 163);
-            this.panelAdd1.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAdd1.Name = "panelAdd1";
-            this.panelAdd1.Size = new System.Drawing.Size(100, 90);
-            this.panelAdd1.TabIndex = 0;
-            this.panelAdd1.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelAdd1_DragDrop);
-            this.panelAdd1.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelAdd1_DragEnter);
             // 
             // saveFileDialog1
             // 
@@ -369,20 +212,20 @@
             this.toolStripSeparator1,
             this.addXCardsToolStripMenuItem});
             this.contextMenuStaged.Name = "contextMenuStaged";
-            this.contextMenuStaged.Size = new System.Drawing.Size(181, 76);
+            this.contextMenuStaged.Size = new System.Drawing.Size(140, 54);
             // 
             // toolStripMenuItemDelete
             // 
             this.toolStripMenuItemDelete.Image = global::CustomSetBuilder.Properties.Resources.cancel;
             this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
-            this.toolStripMenuItemDelete.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemDelete.Size = new System.Drawing.Size(139, 22);
             this.toolStripMenuItemDelete.Text = "Delete";
             this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(136, 6);
             // 
             // addXCardsToolStripMenuItem
             // 
@@ -392,34 +235,34 @@
             this.x5ToolStripMenuItem,
             this.x10ToolStripMenuItem});
             this.addXCardsToolStripMenuItem.Name = "addXCardsToolStripMenuItem";
-            this.addXCardsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addXCardsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.addXCardsToolStripMenuItem.Text = "Add X Cards";
             // 
             // x1ToolStripMenuItem
             // 
             this.x1ToolStripMenuItem.Name = "x1ToolStripMenuItem";
-            this.x1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x1ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.x1ToolStripMenuItem.Text = "x1";
             this.x1ToolStripMenuItem.Click += new System.EventHandler(this.x1ToolStripMenuItem_Click);
             // 
             // x3ToolStripMenuItem
             // 
             this.x3ToolStripMenuItem.Name = "x3ToolStripMenuItem";
-            this.x3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x3ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.x3ToolStripMenuItem.Text = "x3";
             this.x3ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuIAdd3_Click);
             // 
             // x5ToolStripMenuItem
             // 
             this.x5ToolStripMenuItem.Name = "x5ToolStripMenuItem";
-            this.x5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x5ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.x5ToolStripMenuItem.Text = "x5";
             this.x5ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuIAdd5_Click);
             // 
             // x10ToolStripMenuItem
             // 
             this.x10ToolStripMenuItem.Name = "x10ToolStripMenuItem";
-            this.x10ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x10ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.x10ToolStripMenuItem.Text = "x10";
             this.x10ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
             // 
@@ -477,41 +320,22 @@
             this.toolStripMenuAdd10.Text = "Add x10";
             this.toolStripMenuAdd10.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(114, 6);
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.numericCardSpacing);
             this.panel2.Controls.Add(this.btnStartOver);
             this.panel2.Controls.Add(this.btnCreatePDF);
+            this.panel2.Controls.Add(this.labelCardCount);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(219, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(856, 54);
             this.panel2.TabIndex = 6;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(324, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Card Spacing (0-10)";
-            // 
-            // numericCardSpacing
-            // 
-            this.numericCardSpacing.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.numericCardSpacing.Location = new System.Drawing.Point(431, 14);
-            this.numericCardSpacing.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericCardSpacing.Name = "numericCardSpacing";
-            this.numericCardSpacing.Size = new System.Drawing.Size(48, 20);
-            this.numericCardSpacing.TabIndex = 2;
             // 
             // btnStartOver
             // 
@@ -519,9 +343,9 @@
             this.btnStartOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStartOver.Image = global::CustomSetBuilder.Properties.Resources.arrow_undo;
             this.btnStartOver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStartOver.Location = new System.Drawing.Point(4, 11);
+            this.btnStartOver.Location = new System.Drawing.Point(3, 7);
             this.btnStartOver.Name = "btnStartOver";
-            this.btnStartOver.Size = new System.Drawing.Size(115, 23);
+            this.btnStartOver.Size = new System.Drawing.Size(115, 37);
             this.btnStartOver.TabIndex = 1;
             this.btnStartOver.Text = "Start Over";
             this.btnStartOver.UseVisualStyleBackColor = false;
@@ -534,18 +358,13 @@
             this.btnCreatePDF.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCreatePDF.Image = global::CustomSetBuilder.Properties.Resources.page_white_acrobat;
             this.btnCreatePDF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCreatePDF.Location = new System.Drawing.Point(716, 11);
+            this.btnCreatePDF.Location = new System.Drawing.Point(724, 3);
             this.btnCreatePDF.Name = "btnCreatePDF";
-            this.btnCreatePDF.Size = new System.Drawing.Size(127, 23);
+            this.btnCreatePDF.Size = new System.Drawing.Size(127, 45);
             this.btnCreatePDF.TabIndex = 0;
             this.btnCreatePDF.Text = "Create PDF";
             this.btnCreatePDF.UseVisualStyleBackColor = false;
             this.btnCreatePDF.Click += new System.EventHandler(this.btnCreatePDF_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(114, 6);
             // 
             // Form2
             // 
@@ -569,13 +388,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.panelCopyContainer.ResumeLayout(false);
-            this.panelCopyContainer.PerformLayout();
             this.contextMenuStaged.ResumeLayout(false);
             this.contextMenuPreview.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCardSpacing)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -589,19 +405,9 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStage;
-        private System.Windows.Forms.Panel panelCopyContainer;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.Panel panelAdd5;
-        private System.Windows.Forms.Panel panelAdd3;
-        private System.Windows.Forms.Panel panelAdd1;
-        private System.Windows.Forms.Panel panelAdd10;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label labelAdd3;
-        private System.Windows.Forms.Label labelAdd1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelCardCount;
         private System.Windows.Forms.ContextMenuStrip contextMenuStaged;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
@@ -621,8 +427,6 @@
         private System.Windows.Forms.Button btnCreatePDF;
         private System.Windows.Forms.ToolStripMenuItem addAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericCardSpacing;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
