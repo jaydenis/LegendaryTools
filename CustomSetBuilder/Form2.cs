@@ -23,7 +23,7 @@ namespace CustomSetBuilder
         PictureBox activePictureBoxStaged;
         List<PictureBox> cardList = new List<PictureBox>();
         PdfDocument document;
-
+        bool printCutlines = false;
         public Form2()
         {
             InitializeComponent();
@@ -64,38 +64,40 @@ namespace CustomSetBuilder
 
             int leftStart = (w * 3);
 
-            XPen pen = new XPen(XColors.Black, 1);
-
-            foreach (var item in currentImageList)
+            if (chkCutlines.Checked == true)
             {
-                if (item != null)
+                XPen pen = new XPen(XColors.Black, 1);
+
+                foreach (var item in currentImageList)
                 {
-                    y = (h * rowNumber) + topMargin;
-                    x = (w * colNumber) + leftMargin;
-
-                    gfx.DrawLine(pen, x, 1, x, topMargin + 10);
-                    gfx.DrawLine(pen, x, 760, x, 780);
-                    gfx.DrawLine(pen, 2, y, leftMargin + 10, y);
-                    gfx.DrawLine(pen, leftStart + 10, y, leftStart + leftMargin + 30, y);
-
-                    if (colNumber == 2)
+                    if (item != null)
                     {
-                        colNumber = 0;
-                        rowNumber++;
-                    }
-                    else
-                    {
-                        colNumber++;
+                        y = (h * rowNumber) + topMargin;
+                        x = (w * colNumber) + leftMargin;
+
+                        gfx.DrawLine(pen, x, 1, x, topMargin + 10);
+                        gfx.DrawLine(pen, x, 760, x, 780);
+                        gfx.DrawLine(pen, 2, y, leftMargin + 10, y);
+                        gfx.DrawLine(pen, leftStart + 10, y, leftStart + leftMargin + 30, y);
+
+                        if (colNumber == 2)
+                        {
+                            colNumber = 0;
+                            rowNumber++;
+                        }
+                        else
+                        {
+                            colNumber++;
+                        }
                     }
                 }
+
+                gfx.DrawLine(pen, leftStart + 10, y, leftStart + leftMargin + 30, y);
+                gfx.DrawLine(pen, 180 + x, 1, 180 + x, topMargin + 10);
+                gfx.DrawLine(pen, 180 + x, 760, 180 + x, 780);
+                gfx.DrawLine(pen, 2, 250 + y, leftMargin + 10, 250 + y);
+                gfx.DrawLine(pen, leftStart + 10, 250 + y, leftStart + leftMargin + 30, 250 + y);
             }
-
-            gfx.DrawLine(pen, leftStart + 10, y, leftStart + leftMargin + 30, y);
-            gfx.DrawLine(pen, 180 + x, 1, 180 + x, topMargin + 10);
-            gfx.DrawLine(pen, 180 + x, 760, 180 + x, 780);
-            gfx.DrawLine(pen, 2, 250 + y, leftMargin + 10, 250 + y);
-            gfx.DrawLine(pen, leftStart + 10, 250 + y, leftStart + leftMargin + 30, 250 + y);
-
             x = 30;
             y = 20;
             h = 250;
@@ -716,6 +718,11 @@ namespace CustomSetBuilder
         private void toolStripMenuItemRotateImage_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void chkCutlines_CheckedChanged(object sender, EventArgs e)
+        {
+            printCutlines = chkCutlines.Checked;
         }
     }
 }
