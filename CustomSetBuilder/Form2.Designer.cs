@@ -61,6 +61,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnStartOver = new System.Windows.Forms.Button();
             this.btnCreatePDF = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkCutlines = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -70,11 +72,13 @@
             this.contextMenuStaged.SuspendLayout();
             this.contextMenuPreview.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.treeViewFolders);
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.btnSelectDirectory);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -96,7 +100,7 @@
             this.treeViewFolders.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 1;
-            this.treeViewFolders.Size = new System.Drawing.Size(217, 702);
+            this.treeViewFolders.Size = new System.Drawing.Size(217, 543);
             this.treeViewFolders.TabIndex = 1;
             this.treeViewFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolders_AfterSelect);
             // 
@@ -366,6 +370,30 @@
             this.btnCreatePDF.UseVisualStyleBackColor = false;
             this.btnCreatePDF.Click += new System.EventHandler(this.btnCreatePDF_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkCutlines);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 575);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(217, 159);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Options";
+            // 
+            // chkCutlines
+            // 
+            this.chkCutlines.AutoSize = true;
+            this.chkCutlines.Checked = true;
+            this.chkCutlines.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCutlines.Location = new System.Drawing.Point(7, 30);
+            this.chkCutlines.Name = "chkCutlines";
+            this.chkCutlines.Size = new System.Drawing.Size(90, 17);
+            this.chkCutlines.TabIndex = 0;
+            this.chkCutlines.Text = "Print Cut-lines";
+            this.chkCutlines.UseVisualStyleBackColor = true;
+            this.chkCutlines.CheckedChanged += new System.EventHandler(this.chkCutlines_CheckedChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,6 +420,8 @@
             this.contextMenuPreview.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -428,5 +458,7 @@
         private System.Windows.Forms.ToolStripMenuItem addAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox chkCutlines;
     }
 }
