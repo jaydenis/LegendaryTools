@@ -243,7 +243,7 @@ namespace CustomSetBuilder
                         pictureBox.AllowDrop = true;
                         pictureBox.Image = new Bitmap(Convert.ToString(node.Tag));
                         pictureBox.ImageLocation = Convert.ToString(node.Tag);
-                        pictureBox.Size = new Size(220, 295);
+                        pictureBox.Size = new Size(250, 325);
                         pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         pictureBox.MouseClick += PictureBox_MouseClick;
                         pictureBox.MouseDown += PictureBox_MouseDown;
@@ -386,7 +386,7 @@ namespace CustomSetBuilder
                 PictureBox pb = new PictureBox();
                 pb.Image = picture.Image;
                 pb.ImageLocation = picture.ImageLocation;
-                pb.Size = new Size(220, 295);
+                pb.Size = new Size(250, 325);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.ContextMenuStrip = this.contextMenuStaged;
                 pb.AllowDrop = true;
