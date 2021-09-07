@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -333,10 +334,10 @@ namespace CustomSetBuilder
             if (activePictureBox == pb)
             {
                 ControlPaint.DrawBorder(e.Graphics, pb.ClientRectangle,
-                   Color.Blue, 2, ButtonBorderStyle.Solid,  // Left
-                   Color.Blue, 2, ButtonBorderStyle.Solid,  // Top
-                   Color.Blue, 2, ButtonBorderStyle.Solid,  // Right
-                   Color.Blue, 2, ButtonBorderStyle.Solid); // Bottom
+                   Color.Red, 1, ButtonBorderStyle.Solid,  // Left
+                   Color.Red, 1, ButtonBorderStyle.Solid,  // Top
+                   Color.Red, 1, ButtonBorderStyle.Solid,  // Right
+                   Color.Red, 1, ButtonBorderStyle.Solid); // Bottom
             }
             this.Cursor = Cursors.Default;
         }
@@ -415,8 +416,8 @@ namespace CustomSetBuilder
 
         private void Pb_DoubleClick(object sender, EventArgs e)
         {
-            StagingSelectBox((PictureBox)sender);
-            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+           // StagingSelectBox((PictureBox)sender);
+           // activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
         }
 
         private void Pb_Click(object sender, EventArgs e)
@@ -525,9 +526,10 @@ namespace CustomSetBuilder
 
         private void btnStartOver_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             try
             {
-                this.Cursor = Cursors.WaitCursor;
+                
                 if (flowLayoutPanelStage.Controls.Count > 0)
                     foreach (PictureBox pb in flowLayoutPanelStage.Controls.OfType<PictureBox>())
                         pb.Dispose();
@@ -539,12 +541,13 @@ namespace CustomSetBuilder
                 activePictureBoxStaged = null;
                 btnCreatePDF.Enabled = false;
                 labelCardCount.Text = $"0 Cards";
-                this.Cursor = Cursors.Default;
+                
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void btnCreatePDF_Click(object sender, EventArgs e)
@@ -581,6 +584,8 @@ namespace CustomSetBuilder
                     StagingSwapImages(source, target);
 
                    // activePictureBoxStaged = null;
+                 
+
                     StagingSelectBox(target);
                     return;
                 }
@@ -724,5 +729,23 @@ namespace CustomSetBuilder
         {
             printCutlines = chkCutlines.Checked;
         }
+
+        private void toolStripRotateRight_Click(object sender, EventArgs e)
+        {
+            //StagingSelectBox((PictureBox)sender);
+            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            // Cause each box to repaint
+            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+        }
+
+        private void toolStripRotateLeft_Click(object sender, EventArgs e)
+        {
+            //StagingSelectBox((PictureBox)sender);
+            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            // Cause each box to repaint
+            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+        }
+
+       
     }
 }

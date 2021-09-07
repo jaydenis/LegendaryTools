@@ -129,12 +129,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Spider-Gwen-C2-1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CardBack.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
@@ -148,9 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow_switch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CardBack1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow_out.png" />

@@ -33,6 +33,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.treeViewFolders = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkCutlines = new System.Windows.Forms.CheckBox();
             this.btnSelectDirectory = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -50,6 +52,9 @@
             this.x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripRotateLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripRotateRight = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuPreview = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -61,9 +66,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnStartOver = new System.Windows.Forms.Button();
             this.btnCreatePDF = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkCutlines = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -72,7 +76,6 @@
             this.contextMenuStaged.SuspendLayout();
             this.contextMenuPreview.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -111,6 +114,30 @@
             this.imageList1.Images.SetKeyName(0, "Iconfactory Folder.ico");
             this.imageList1.Images.SetKeyName(1, "Pictures Folder.ico");
             this.imageList1.Images.SetKeyName(2, "Raster App.ico");
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkCutlines);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 575);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(217, 159);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Options";
+            // 
+            // chkCutlines
+            // 
+            this.chkCutlines.AutoSize = true;
+            this.chkCutlines.Checked = true;
+            this.chkCutlines.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCutlines.Location = new System.Drawing.Point(7, 30);
+            this.chkCutlines.Name = "chkCutlines";
+            this.chkCutlines.Size = new System.Drawing.Size(90, 17);
+            this.chkCutlines.TabIndex = 0;
+            this.chkCutlines.Text = "Print Cut-lines";
+            this.chkCutlines.UseVisualStyleBackColor = true;
+            this.chkCutlines.CheckedChanged += new System.EventHandler(this.chkCutlines_CheckedChanged);
             // 
             // btnSelectDirectory
             // 
@@ -214,9 +241,12 @@
             this.contextMenuStaged.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemDelete,
             this.toolStripSeparator1,
-            this.addXCardsToolStripMenuItem});
+            this.addXCardsToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.toolStripRotateLeft,
+            this.toolStripRotateRight});
             this.contextMenuStaged.Name = "contextMenuStaged";
-            this.contextMenuStaged.Size = new System.Drawing.Size(140, 54);
+            this.contextMenuStaged.Size = new System.Drawing.Size(140, 104);
             // 
             // toolStripMenuItemDelete
             // 
@@ -269,6 +299,27 @@
             this.x10ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.x10ToolStripMenuItem.Text = "x10";
             this.x10ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(136, 6);
+            // 
+            // toolStripRotateLeft
+            // 
+            this.toolStripRotateLeft.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRotateLeft.Image")));
+            this.toolStripRotateLeft.Name = "toolStripRotateLeft";
+            this.toolStripRotateLeft.Size = new System.Drawing.Size(139, 22);
+            this.toolStripRotateLeft.Text = "Rotate Left";
+            this.toolStripRotateLeft.Click += new System.EventHandler(this.toolStripRotateLeft_Click);
+            // 
+            // toolStripRotateRight
+            // 
+            this.toolStripRotateRight.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRotateRight.Image")));
+            this.toolStripRotateRight.Name = "toolStripRotateRight";
+            this.toolStripRotateRight.Size = new System.Drawing.Size(139, 22);
+            this.toolStripRotateRight.Text = "Rotate Right";
+            this.toolStripRotateRight.Click += new System.EventHandler(this.toolStripRotateRight_Click);
             // 
             // contextMenuPreview
             // 
@@ -370,30 +421,6 @@
             this.btnCreatePDF.UseVisualStyleBackColor = false;
             this.btnCreatePDF.Click += new System.EventHandler(this.btnCreatePDF_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.chkCutlines);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 575);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 159);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Options";
-            // 
-            // chkCutlines
-            // 
-            this.chkCutlines.AutoSize = true;
-            this.chkCutlines.Checked = true;
-            this.chkCutlines.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCutlines.Location = new System.Drawing.Point(7, 30);
-            this.chkCutlines.Name = "chkCutlines";
-            this.chkCutlines.Size = new System.Drawing.Size(90, 17);
-            this.chkCutlines.TabIndex = 0;
-            this.chkCutlines.Text = "Print Cut-lines";
-            this.chkCutlines.UseVisualStyleBackColor = true;
-            this.chkCutlines.CheckedChanged += new System.EventHandler(this.chkCutlines_CheckedChanged);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,6 +437,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -420,8 +449,6 @@
             this.contextMenuPreview.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -460,5 +487,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chkCutlines;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripRotateLeft;
+        private System.Windows.Forms.ToolStripMenuItem toolStripRotateRight;
     }
 }
