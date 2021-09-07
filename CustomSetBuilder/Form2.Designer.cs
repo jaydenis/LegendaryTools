@@ -99,11 +99,11 @@
             this.treeViewFolders.HotTracking = true;
             this.treeViewFolders.ImageIndex = 0;
             this.treeViewFolders.ImageList = this.imageList1;
-            this.treeViewFolders.Location = new System.Drawing.Point(0, 32);
+            this.treeViewFolders.Location = new System.Drawing.Point(0, 56);
             this.treeViewFolders.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewFolders.Name = "treeViewFolders";
             this.treeViewFolders.SelectedImageIndex = 1;
-            this.treeViewFolders.Size = new System.Drawing.Size(217, 543);
+            this.treeViewFolders.Size = new System.Drawing.Size(217, 519);
             this.treeViewFolders.TabIndex = 1;
             this.treeViewFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolders_AfterSelect);
             // 
@@ -111,9 +111,16 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Iconfactory Folder.ico");
-            this.imageList1.Images.SetKeyName(1, "Pictures Folder.ico");
-            this.imageList1.Images.SetKeyName(2, "Raster App.ico");
+            this.imageList1.Images.SetKeyName(0, "Generic Folder.ico");
+            this.imageList1.Images.SetKeyName(1, "Photo Booth.ico");
+            this.imageList1.Images.SetKeyName(2, "Pictures.ico");
+            this.imageList1.Images.SetKeyName(3, "Delete.ico");
+            this.imageList1.Images.SetKeyName(4, "Downloads.ico");
+            this.imageList1.Images.SetKeyName(5, "Software Update.ico");
+            this.imageList1.Images.SetKeyName(6, "Trash Full 2.ico");
+            this.imageList1.Images.SetKeyName(7, "CaptainAmerica.ico");
+            this.imageList1.Images.SetKeyName(8, "Carnage.ico");
+            this.imageList1.Images.SetKeyName(9, "Iron Man.ico");
             // 
             // groupBox1
             // 
@@ -142,10 +149,15 @@
             // btnSelectDirectory
             // 
             this.btnSelectDirectory.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSelectDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSelectDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectDirectory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSelectDirectory.ImageIndex = 0;
+            this.btnSelectDirectory.ImageList = this.imageList1;
             this.btnSelectDirectory.Location = new System.Drawing.Point(0, 0);
             this.btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelectDirectory.Name = "btnSelectDirectory";
-            this.btnSelectDirectory.Size = new System.Drawing.Size(217, 32);
+            this.btnSelectDirectory.Size = new System.Drawing.Size(217, 56);
             this.btnSelectDirectory.TabIndex = 0;
             this.btnSelectDirectory.Text = "Select Folder";
             this.btnSelectDirectory.UseVisualStyleBackColor = true;
@@ -250,7 +262,7 @@
             // 
             // toolStripMenuItemDelete
             // 
-            this.toolStripMenuItemDelete.Image = global::CustomSetBuilder.Properties.Resources.cancel;
+            this.toolStripMenuItemDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemDelete.Image")));
             this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
             this.toolStripMenuItemDelete.Size = new System.Drawing.Size(139, 22);
             this.toolStripMenuItemDelete.Text = "Delete";
@@ -268,6 +280,7 @@
             this.x3ToolStripMenuItem,
             this.x5ToolStripMenuItem,
             this.x10ToolStripMenuItem});
+            this.addXCardsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addXCardsToolStripMenuItem.Image")));
             this.addXCardsToolStripMenuItem.Name = "addXCardsToolStripMenuItem";
             this.addXCardsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.addXCardsToolStripMenuItem.Text = "Add X Cards";
@@ -275,28 +288,28 @@
             // x1ToolStripMenuItem
             // 
             this.x1ToolStripMenuItem.Name = "x1ToolStripMenuItem";
-            this.x1ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.x1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.x1ToolStripMenuItem.Text = "x1";
             this.x1ToolStripMenuItem.Click += new System.EventHandler(this.x1ToolStripMenuItem_Click);
             // 
             // x3ToolStripMenuItem
             // 
             this.x3ToolStripMenuItem.Name = "x3ToolStripMenuItem";
-            this.x3ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.x3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.x3ToolStripMenuItem.Text = "x3";
             this.x3ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuIAdd3_Click);
             // 
             // x5ToolStripMenuItem
             // 
             this.x5ToolStripMenuItem.Name = "x5ToolStripMenuItem";
-            this.x5ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.x5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.x5ToolStripMenuItem.Text = "x5";
             this.x5ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuIAdd5_Click);
             // 
             // x10ToolStripMenuItem
             // 
             this.x10ToolStripMenuItem.Name = "x10ToolStripMenuItem";
-            this.x10ToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.x10ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.x10ToolStripMenuItem.Text = "x10";
             this.x10ToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuAdd10_Click);
             // 
@@ -336,7 +349,6 @@
             // 
             // addAllToolStripMenuItem
             // 
-            this.addAllToolStripMenuItem.Image = global::CustomSetBuilder.Properties.Resources.arrow_out;
             this.addAllToolStripMenuItem.Name = "addAllToolStripMenuItem";
             this.addAllToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.addAllToolStripMenuItem.Text = "Add All";
@@ -394,13 +406,15 @@
             // 
             // btnStartOver
             // 
-            this.btnStartOver.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnStartOver.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnStartOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnStartOver.Image = global::CustomSetBuilder.Properties.Resources.arrow_undo;
+            this.btnStartOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartOver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnStartOver.ImageIndex = 5;
+            this.btnStartOver.ImageList = this.imageList1;
             this.btnStartOver.Location = new System.Drawing.Point(3, 7);
             this.btnStartOver.Name = "btnStartOver";
-            this.btnStartOver.Size = new System.Drawing.Size(115, 37);
+            this.btnStartOver.Size = new System.Drawing.Size(142, 37);
             this.btnStartOver.TabIndex = 1;
             this.btnStartOver.Text = "Start Over";
             this.btnStartOver.UseVisualStyleBackColor = false;
@@ -409,13 +423,15 @@
             // btnCreatePDF
             // 
             this.btnCreatePDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreatePDF.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnCreatePDF.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCreatePDF.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCreatePDF.Image = global::CustomSetBuilder.Properties.Resources.page_white_acrobat;
+            this.btnCreatePDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreatePDF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCreatePDF.Location = new System.Drawing.Point(724, 3);
+            this.btnCreatePDF.ImageIndex = 4;
+            this.btnCreatePDF.ImageList = this.imageList1;
+            this.btnCreatePDF.Location = new System.Drawing.Point(702, 3);
             this.btnCreatePDF.Name = "btnCreatePDF";
-            this.btnCreatePDF.Size = new System.Drawing.Size(127, 45);
+            this.btnCreatePDF.Size = new System.Drawing.Size(149, 45);
             this.btnCreatePDF.TabIndex = 0;
             this.btnCreatePDF.Text = "Create PDF";
             this.btnCreatePDF.UseVisualStyleBackColor = false;

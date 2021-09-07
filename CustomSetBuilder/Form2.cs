@@ -1,4 +1,5 @@
 ﻿
+using Kaliko.ImageLibrary;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
@@ -36,10 +37,12 @@ namespace CustomSetBuilder
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                ChooseFolder(folderBrowserDialog1.SelectedPath);
-            }
+            //if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    ChooseFolder(folderBrowserDialog1.SelectedPath);
+            //}
+
+            ChooseFolder(@"C:\Users\jayte\OneDrive\TableTopGaming\Legendery-Marvel\CustomSets");
 
             btnCreatePDF.Enabled = false;
            
@@ -180,6 +183,8 @@ namespace CustomSetBuilder
 
             treeView.Nodes.Clear();
             var rootDirectoryInfo = new DirectoryInfo(path);
+
+
             treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
 
             this.Cursor = Cursors.Default;
@@ -188,9 +193,10 @@ namespace CustomSetBuilder
         private TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
         {
             var directoryNode = new TreeNode(directoryInfo.Name);
-           
+            directoryNode.ImageIndex = 1;
             foreach (var directory in directoryInfo.GetDirectories())
             {
+                
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
             }
 
@@ -236,16 +242,23 @@ namespace CustomSetBuilder
                 cardList = new List<PictureBox>();
 
                 foreach (TreeNode node in e.Node.Nodes)
-                {
-                   
+                {                   
                     if (node.Tag != null)
                     {
-                        PictureBox pictureBox = new PictureBox();
-                        pictureBox.AllowDrop = true;
-                        pictureBox.Image = new Bitmap(Convert.ToString(node.Tag));
-                        pictureBox.ImageLocation = Convert.ToString(node.Tag);
-                        pictureBox.Size = new Size(250, 325);
-                        pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                        KalikoImage cardImage = new KalikoImage(Convert.ToString(node.Tag))
+                        {
+                            VerticalResolution = 300,
+                            HorizontalResolution = 300
+                        };
+
+                        PictureBox pictureBox = new PictureBox
+                        {
+                            AllowDrop = true,
+                            Image = cardImage.GetAsBitmap(),
+                            ImageLocation = Convert.ToString(node.Tag),
+                            Size = new Size(250, 325),
+                            SizeMode = PictureBoxSizeMode.StretchImage
+                        };
                         pictureBox.MouseClick += PictureBox_MouseClick;
                         pictureBox.MouseDown += PictureBox_MouseDown;
                         pictureBox.MouseMove += PictureBox_MouseMove;
@@ -410,6 +423,7 @@ namespace CustomSetBuilder
                 return pb;
             }catch(Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 return null;
             }
         }
@@ -654,10 +668,10 @@ namespace CustomSetBuilder
             if (activePictureBoxStaged == pb)
             {
                 ControlPaint.DrawBorder(e.Graphics, pb.ClientRectangle,
-                   Color.Blue, 3, ButtonBorderStyle.Solid,  // Left
-                   Color.Blue, 3, ButtonBorderStyle.Solid,  // Top
-                   Color.Blue, 3, ButtonBorderStyle.Solid,  // Right
-                   Color.Blue, 3, ButtonBorderStyle.Solid); // Bottom
+                   Color.Blue, 1, ButtonBorderStyle.Solid,  // Left
+                   Color.Blue, 1, ButtonBorderStyle.Solid,  // Top
+                   Color.Blue, 1, ButtonBorderStyle.Solid,  // Right
+                   Color.Blue, 1, ButtonBorderStyle.Solid); // Bottom
             }
             this.Cursor = Cursors.Default;
         }
@@ -731,19 +745,41 @@ namespace CustomSetBuilder
         }
 
         private void toolStripRotateRight_Click(object sender, EventArgs e)
-        {
-            //StagingSelectBox((PictureBox)sender);
-            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            // Cause each box to repaint
-            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+        {            
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                if (activePictureBoxStaged != null)
+                {
+                    activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    // Cause each box to repaint
+                    foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+                }
+            }catch(Exception ex)
+            {
+
+            }
+            this.Cursor = Cursors.Default;
         }
 
         private void toolStripRotateLeft_Click(object sender, EventArgs e)
         {
-            //StagingSelectBox((PictureBox)sender);
-            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            // Cause each box to repaint
-            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+          
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                if (activePictureBoxStaged != null)
+                {
+                    activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    // Cause each box to repaint
+                    foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            this.Cursor = Cursors.Default;
         }
 
        
