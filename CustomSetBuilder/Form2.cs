@@ -1,4 +1,5 @@
 ﻿
+using Kaliko.ImageLibrary;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
@@ -18,7 +19,7 @@ namespace CustomSetBuilder
 {
     public partial class Form2 : Form
     {
-        List<Image> SelectedPictures = new List<Image>();
+        Dictionary<string,KalikoImage> SelectedPictures = new Dictionary<string, KalikoImage>();
         List<string> SelectedPicturesPath = new List<string>();
         PictureBox activePictureBox;
         PictureBox activePictureBoxStaged;
@@ -37,22 +38,22 @@ namespace CustomSetBuilder
         private void Form2_Load(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                ChooseFolder(folderBrowserDialog1.SelectedPath);
+            {                
+               ChooseFolder(folderBrowserDialog1.SelectedPath);
             }
 
             btnCreatePDF.Enabled = false;
            
         }       
 
-        public void DrawPage(PdfPage page, List<Image> currentImageList)
+        public void DrawPage(PdfPage page, List<KalikoImage> currentImageList)
         {
             XGraphics gfx = XGraphics.FromPdfPage(page);
 
             DrawImageScaled(gfx, currentImageList);
         }
 
-        void DrawImageScaled(XGraphics gfx, List<Image> currentImageList)
+        void DrawImageScaled(XGraphics gfx, List<KalikoImage> currentImageList)
         {
             int leftMargin = 30;
             int topMargin = 20;
@@ -124,7 +125,7 @@ namespace CustomSetBuilder
                     }
 
                     MemoryStream strm = new MemoryStream();
-                    item.Save(strm, System.Drawing.Imaging.ImageFormat.Png);
+                    item.SavePng(strm);
                     XImage image = XImage.FromStream(strm);
                     gfx.DrawImage(image, x, y, w, h);
                 }
@@ -138,18 +139,21 @@ namespace CustomSetBuilder
                 this.Cursor = Cursors.WaitCursor;
                 document = new PdfDocument();
                 PdfPage page;
+                
 
-                var tempList = new List<Image>();
+                var tempList = new List<KalikoImage>();
                 int totalCards = SelectedPictures.Count;
                 int remainingCards = totalCards;
-                foreach (Image img in SelectedPictures)
+                foreach (KeyValuePair<string,KalikoImage> item in SelectedPictures)
                 {
-                    tempList.Add(img);
+
+                    tempList.Add(item.Value);
                     if(tempList.Count == 9)
                     {
                         page = document.AddPage();
+                       
                         DrawPage(page, tempList);
-                        tempList = new List<Image>();
+                        tempList = new List<KalikoImage>();
                         remainingCards = remainingCards - 9;
                     }
 
@@ -384,8 +388,9 @@ namespace CustomSetBuilder
         {
             try
             {
+                KalikoImage kalikoImage = new KalikoImage(picture.ImageLocation);
                 PictureBox pb = new PictureBox();
-                pb.Image = picture.Image;
+                pb.Image = kalikoImage.GetAsBitmap();
                 pb.ImageLocation = picture.ImageLocation;
                 pb.Size = new Size(250, 325);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -404,7 +409,7 @@ namespace CustomSetBuilder
 
                 pb.Name = $"picture_{i++}";
                 SelectedPicturesPath.Add(pb.ImageLocation);
-                SelectedPictures.Add(pb.Image);
+                SelectedPictures.Add(pb.Name,kalikoImage);
                 labelCardCount.Text = $"{SelectedPictures.Count} Cards";
                 btnCreatePDF.Enabled = true;
                 return pb;
@@ -416,8 +421,10 @@ namespace CustomSetBuilder
 
         private void Pb_DoubleClick(object sender, EventArgs e)
         {
-           // StagingSelectBox((PictureBox)sender);
-           // activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            StagingSelectBox((PictureBox)sender);
+            KalikoImage kalikoImage = SelectedPictures.Where(x => x.Key == activePictureBoxStaged.Name).FirstOrDefault().Value;
+            kalikoImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            activePictureBoxStaged.Image = kalikoImage.GetAsBitmap();
         }
 
         private void Pb_Click(object sender, EventArgs e)
@@ -491,7 +498,10 @@ namespace CustomSetBuilder
 
                 foreach (PictureBox p in flowLayoutPanelStage.Controls)
                 {
-                    SelectedPictures.Add(p.Image);
+                    KalikoImage kalikoImage = new KalikoImage(p.ImageLocation);
+                    int i = flowLayoutPanelStage.Controls.Count;
+                    string name = $"picture_{i++}";
+                    SelectedPictures.Add(name,kalikoImage);
                     SelectedPicturesPath.Add(p.ImageLocation);
                 }
 
@@ -732,18 +742,16 @@ namespace CustomSetBuilder
 
         private void toolStripRotateRight_Click(object sender, EventArgs e)
         {
-            //StagingSelectBox((PictureBox)sender);
-            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            // Cause each box to repaint
-            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+            KalikoImage kalikoImage = SelectedPictures.Where(x => x.Key == activePictureBoxStaged.Name).FirstOrDefault().Value;
+            kalikoImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            activePictureBoxStaged.Image = kalikoImage.GetAsBitmap();
         }
 
         private void toolStripRotateLeft_Click(object sender, EventArgs e)
         {
-            //StagingSelectBox((PictureBox)sender);
-            activePictureBoxStaged.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            // Cause each box to repaint
-            foreach (PictureBox box in flowLayoutPanelStage.Controls) box.Invalidate();
+            KalikoImage kalikoImage = SelectedPictures.Where(x => x.Key == activePictureBoxStaged.Name).FirstOrDefault().Value;
+            kalikoImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            activePictureBoxStaged.Image = kalikoImage.GetAsBitmap();
         }
 
        
