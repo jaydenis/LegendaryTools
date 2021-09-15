@@ -256,7 +256,7 @@ namespace CustomSetBuilder
                             AllowDrop = true,
                             Image = cardImage.GetAsBitmap(),
                             ImageLocation = Convert.ToString(node.Tag),
-                            Size = new Size(250, 325),
+                            Size = new Size(252, 351),
                             SizeMode = PictureBoxSizeMode.StretchImage
                         };
                         pictureBox.MouseClick += PictureBox_MouseClick;
@@ -400,7 +400,7 @@ namespace CustomSetBuilder
                 PictureBox pb = new PictureBox();
                 pb.Image = picture.Image;
                 pb.ImageLocation = picture.ImageLocation;
-                pb.Size = new Size(250, 325);
+                pb.Size = new Size(252, 351);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.ContextMenuStrip = this.contextMenuStaged;
                 pb.AllowDrop = true;
